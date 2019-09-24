@@ -1,1 +1,10 @@
-cgi-bin/
+application/cache/*
+application/logs/*
+
+!application/*/.htaccess
+
+/vendor/
+
+*.sublime-project
+
+/public_html/cgi-bin
