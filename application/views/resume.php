@@ -60,12 +60,12 @@
                 <h4>Senior Project</h4>
                 <p>
                     For my Senior Project in high school, I created a game originally made using Python and recently ported to my website at
-                    <a href="slider.html">www.itstimjohnson.com/slider.html</a>
+                    <?php echo anchor('slider', 'itstimjohnson.com/slider')?>
                 </p>
                 <h4>My Website</h4>
                 <p>
                     The rest of my website, currently a work in progress, is located at
-                    <a href="index.html">www.itstimjohnson.com</a>
+                    <?php echo anchor('/', 'itstimjohnson.com')?>
                 </p>
 
                 <h3>Education</h3>

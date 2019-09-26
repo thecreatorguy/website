@@ -31,7 +31,6 @@
             margin-left: 2em; 
             padding: 0.25em 0; 
         }
-        .email { font-weight: bold; }
         
     </style>
 </head>
@@ -67,14 +66,14 @@
             <li>I don't have a lot that's worthy of being shown yet, but the first is this website.</li>
             <li>
                 The second is a game I created for my senior project in Python, recently ported to JavaScript 
-                <a href=<?php echo base_url('slider')?>>here</a>.
+                <?php echo anchor('slider', 'here')?>.
             </li>
         </ul>
         
         <h2>Where is my resume?</h2>
-        <p>You can find my resume <a target="_blankss" href=<?php echo base_url('resume')?>>here</a>. You can easily print it directly from the webpage.</p>
+        <p>You can find my resume <?php echo anchor('resume', 'here', 'target="_blankss"')?>. You can easily print it directly from the webpage.</p>
         <h2>How can you contact me?</h2>
-        <p>The best way to contact me is through email, at <em class="email">tim@itstimjohnson.com</em></p>
+        <p>The best way to contact me is through email, at <a href="mailto:tim@itstimjohnson.com">tim@itstimjohnson.com</a></p>
     </main>
 </body>
 
