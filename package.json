@@ -1,0 +1,14 @@
+{
+  "name": "website",
+  "version": "0.1.0",
+  "description": "My website to do whatever I want with",
+  "main": "index.js",
+  "repository": "git@github.com:thecreatorguy/website.git",
+  "author": "Tim Johnson",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {},
+  "scripts": {
+    "watch": "sass --watch resources/css:public_html/assets/css"
+  }
+}

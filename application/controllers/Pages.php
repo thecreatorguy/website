@@ -5,12 +5,13 @@ class Pages extends CI_Controller
     const PAGES = [
         'home',
         'slider',
-        'resume'
+        'resume',
+        'home2',
     ];
 
     /**
      * Create the index of the website, loading the home page
-     * 
+     *
      * @return void
      */
     public function index()
@@ -20,7 +21,7 @@ class Pages extends CI_Controller
 
     /**
      * View the given page
-     * 
+     *
      * @param  string $page Title of the view to load
      * @return void
      */
@@ -31,5 +32,5 @@ class Pages extends CI_Controller
         }
         $this->load->helper('url');
         $this->load->view($page);
-    }  
+    }
 }
