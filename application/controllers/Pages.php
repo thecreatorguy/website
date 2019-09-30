@@ -6,7 +6,7 @@ class Pages extends CI_Controller
         'home',
         'slider',
         'resume',
-        'home2',
+        'home_old',
     ];
 
     /**
