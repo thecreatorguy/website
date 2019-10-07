@@ -1,0 +1,21 @@
+// Global Imports
+@import 'variables';
+@import 'reset';
+@import 'classes';
+
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
+body {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Montserrat', sans-serif;
+}
+
+@import 'header';
+
+#content-container {
+    flex: 1 1 auto;
+    background-color: $color-3;
+    padding: 1em 0 0;
+}

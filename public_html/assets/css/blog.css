@@ -1,0 +1,120 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+.v-center-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  font-family: "Montserrat", sans-serif;
+}
+
+header {
+  flex: 0 1 auto;
+  width: 100%;
+  background-color: #D8D8F6;
+  padding: 0.5em 1em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+@media only screen and (max-width: 900px) {
+  header {
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+#title {
+  font-size: 2em;
+  margin: 0 0.2em;
+  text-decoration: none;
+  color: #2D2D2D;
+}
+@media only screen and (max-width: 900px) {
+  #title {
+    margin: 0 auto 0.25em;
+  }
+}
+
+nav {
+  height: 100%;
+  margin-left: 2em;
+}
+nav ul {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+nav ul li {
+  margin: 0;
+  padding: 0;
+}
+nav a {
+  padding: 2px 0.5em;
+  text-decoration: none;
+  color: #2D2D2D;
+  transition: color 0.5s;
+}
+nav a:hover, nav a.current {
+  color: #4CB1FF;
+}
+nav li + li > a {
+  border-left: solid 1px #444;
+}
+@media only screen and (max-width: 900px) {
+  nav {
+    margin: 0 auto;
+  }
+}
+
+#content-container {
+  flex: 1 1 auto;
+  background-color: #E0FBFC;
+  padding: 1em 0 0;
+}
+
+#content-column {
+  width: 900px;
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+@media only screen and (max-width: 900px) {
+  #content-column {
+    width: 100%;
+  }
+}
+
+#header-spacer {
+  flex: 0 1 auto;
+  height: 5em;
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0.2) 20%, rgba(255, 255, 255, 0.2) 40%, rgba(255, 255, 255, 0.4) 40%, rgba(255, 255, 255, 0.4) 60%, rgba(255, 255, 255, 0.6) 60%, rgba(255, 255, 255, 0.6) 80%, rgba(255, 255, 255, 0.8) 80%);
+}
+
+main {
+  flex: 1 1 auto;
+  background-color: white;
+  padding: 1em;
+}
+
+/*li { 
+    margin-left: 2em; 
+    padding: 0.25em 0; 
+}*/
+
+/*# sourceMappingURL=blog.css.map */

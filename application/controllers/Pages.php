@@ -4,6 +4,9 @@ class Pages extends CI_Controller
 {
     const PAGES = [
         'home',
+        'blog',
+        'projects',
+        'contact',
         'slider',
         'resume',
         'home_old',
