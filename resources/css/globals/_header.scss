@@ -1,7 +1,7 @@
 header {
     flex: 0 1 auto;
     width: 100%;
-    background-color: $color-2;
+    background-color: $tertiary-color;
     padding: 0.5em 1em;
     display: flex;
     flex-direction: row;
@@ -17,7 +17,7 @@ header {
     font-size: 2em;
     margin: 0 0.2em;
     text-decoration: none;
-    color: $color-5;
+    color: $font-color;
 
     @media only screen and (max-width: $content-width) {
         margin: 0 auto 0.25em;
@@ -39,10 +39,10 @@ nav {
     a {
         padding: 2px 0.5em;
         text-decoration: none;
-        color: $color-5;
+        color: $font-color;
         transition: color 0.5s;
         &:hover, &.current {
-            color: $color-1;
+            color: $primary-color;
         }
     }
     li+li>a {

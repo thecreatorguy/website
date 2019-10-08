@@ -87,4 +87,46 @@ nav li + li > a {
   padding: 1em 0 0;
 }
 
+main {
+  margin: 6em 3em 0;
+  display: flex;
+  flex-direction: row;
+}
+@media only screen and (max-width: 900px) {
+  main {
+    flex-direction: column;
+    margin: 2em 1em 0;
+  }
+}
+main img {
+  margin-right: 1em;
+  max-width: 100%;
+  height: auto;
+}
+@media only screen and (max-width: 900px) {
+  main img {
+    margin: 0 auto;
+  }
+}
+main #text {
+  margin-top: 3em;
+  max-width: 700px;
+}
+@media only screen and (max-width: 900px) {
+  main #text {
+    margin: 3em 3em 0;
+  }
+}
+main h1 {
+  font-size: 1.2em;
+  font-weight: normal;
+}
+main h2 {
+  margin-top: 1em;
+}
+main p {
+  margin-left: 2em;
+  margin-top: 0.2em;
+}
+
 /*# sourceMappingURL=home.css.map */
