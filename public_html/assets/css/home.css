@@ -20,6 +20,7 @@ body {
   display: flex;
   flex-direction: column;
   font-family: "Montserrat", sans-serif;
+  color: #2D2D2D;
 }
 
 header {
@@ -42,7 +43,6 @@ header {
   font-size: 2em;
   margin: 0 0.2em;
   text-decoration: none;
-  color: #2D2D2D;
 }
 @media only screen and (max-width: 900px) {
   #title {
