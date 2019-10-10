@@ -6,6 +6,6 @@ application/logs/*
 /vendor/
 /node_modules/
 
-*.sublime-project
+*.sublime*
 
 /public_html/cgi-bin

@@ -15,25 +15,33 @@
 			"file": "application/views/home.php",
 			"settings":
 			{
-				"buffer_size": 1654,
+				"buffer_size": 3016,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "public_html/assets/images/home-logo.svg",
+			"file": "public_html/assets/js/slider.js",
 			"settings":
 			{
-				"buffer_size": 3941,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
+				"buffer_size": 28328,
+				"line_ending": "Windows"
 			}
 		},
 		{
 			"file": "resources/css/home.scss",
 			"settings":
 			{
-				"buffer_size": 771,
+				"buffer_size": 759,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "resources/css/globals/_header.scss",
+			"settings":
+			{
+				"buffer_size": 1079,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -93,23 +101,20 @@
 	"expanded_folders":
 	[
 		"/C/Users/tcrea/projects/website",
-		"/C/Users/tcrea/projects/website/application",
-		"/C/Users/tcrea/projects/website/application/controllers",
-		"/C/Users/tcrea/projects/website/application/views",
 		"/C/Users/tcrea/projects/website/public_html",
 		"/C/Users/tcrea/projects/website/public_html/assets",
 		"/C/Users/tcrea/projects/website/public_html/assets/images",
-		"/C/Users/tcrea/projects/website/resources",
-		"/C/Users/tcrea/projects/website/resources/css",
-		"/C/Users/tcrea/projects/website/resources/css/globals"
+		"/C/Users/tcrea/projects/website/public_html/assets/js"
 	],
 	"file_history":
 	[
+		"/C/Users/tcrea/projects/website/resources/css/home.scss",
+		"/C/Users/tcrea/projects/website/public_html/assets/images/home-logo.svg",
+		"/C/Users/tcrea/projects/website/.gitignore",
 		"/C/Users/tcrea/projects/website/application/views/pages.php",
 		"/C/Users/tcrea/projects/website/resources/css/globals/_header.scss",
 		"/C/Users/tcrea/projects/website/resources/css/globals/_variables.scss",
 		"/C/Users/tcrea/projects/website/resources/css/globals/_universal.scss",
-		"/C/Users/tcrea/projects/website/resources/css/home.scss",
 		"/C/Users/tcrea/projects/website/resources/css/blog.scss",
 		"/C/Users/tcrea/projects/website/resources/css/blog/_main.scss",
 		"/C/Users/tcrea/projects/website/resources/css/globals/_classes.scss",
@@ -128,7 +133,6 @@
 		"/C/Users/tcrea/projects/website/resources/css/website.scss",
 		"/C/Users/tcrea/projects/website/composer.json",
 		"/C/Users/tcrea/projects/website/application/config/config.php",
-		"/C/Users/tcrea/projects/website/.gitignore",
 		"/C/Users/tcrea/projects/website/application/views/resume.php",
 		"/C/composer/vendor/squizlabs/php_codesniffer/src/Standards/PSR1/ruleset.xml",
 		"/C/Users/tcrea/projects/website/phpcs.xml",
@@ -187,7 +191,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -196,15 +200,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1654,
+						"buffer_size": 3016,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								886,
-								886
+								2931,
+								2931
 							]
 						],
 						"settings":
@@ -232,24 +236,24 @@
 								"allowed_colors":
 								[
 									"hex",
-									"hwba",
-									"hsla",
-									"hexa",
-									"rgb",
-									"hwb",
-									"graya",
-									"hexa_compressed",
-									"hsl",
 									"hex_compressed",
+									"rgb",
+									"webcolors",
 									"rgba",
+									"hwba",
+									"hsl",
+									"hwb",
+									"hexa_compressed",
+									"hexa",
+									"graya",
 									"gray",
-									"webcolors"
+									"hsla"
 								],
 								"compress_hex_output": true,
 								"current_ext": ".php",
 								"current_syntax": "PHP/PHP",
 								"enabled": true,
-								"last_updated": 1570495380.59,
+								"last_updated": 1570668508.54,
 								"scan_completion_scopes":
 								[
 								],
@@ -267,27 +271,27 @@
 							"syntax": "Packages/PHP/PHP.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 270.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "public_html/assets/images/home-logo.svg",
-					"semi_transient": false,
+					"file": "public_html/assets/js/slider.js",
+					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 3941,
+						"buffer_size": 28328,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								452,
-								452
+								0,
+								0
 							]
 						],
 						"settings":
@@ -302,20 +306,20 @@
 							},
 							"color_helper.scan":
 							{
-								"current_ext": ".svg",
-								"current_syntax": "XML/XML",
+								"current_ext": ".js",
+								"current_syntax": "JavaScript/JavaScript",
 								"enabled": false,
-								"last_updated": 1570495380.59
+								"last_updated": 1570668508.54
 							},
-							"syntax": "Packages/XML/XML.sublime-syntax",
-							"tab_size": 2,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 2701.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -324,19 +328,22 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 771,
+						"buffer_size": 759,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								475,
-								475
+								697,
+								697
 							]
 						],
 						"settings":
 						{
+							"SL.21.region_keys":
+							[
+							],
 							"color_helper.box_height": 18,
 							"color_helper.color_scheme": "Monokai.sublime-color-scheme",
 							"color_helper.file_palette":
@@ -350,24 +357,24 @@
 								"allowed_colors":
 								[
 									"hex",
-									"hwba",
-									"hsla",
-									"hexa",
-									"rgb",
-									"hwb",
-									"graya",
-									"hexa_compressed",
-									"hsl",
 									"hex_compressed",
+									"rgb",
+									"webcolors",
 									"rgba",
+									"hwba",
+									"hsl",
+									"hwb",
+									"hexa_compressed",
+									"hexa",
+									"graya",
 									"gray",
-									"webcolors"
+									"hsla"
 								],
 								"compress_hex_output": true,
 								"current_ext": ".scss",
 								"current_syntax": "Sass/Syntaxes/SCSS",
 								"enabled": true,
-								"last_updated": 1570495380.59,
+								"last_updated": 1570668508.54,
 								"scan_completion_scopes":
 								[
 									"source.scss meta.property-value.css -comment -string",
@@ -380,13 +387,101 @@
 								],
 								"use_hex_argb": false
 							},
-							"syntax": "Packages/Sass/Syntaxes/SCSS.sublime-syntax"
+							"syntax": "Packages/Sass/Syntaxes/SCSS.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 78.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "resources/css/globals/_header.scss",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1079,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								848,
+								848
+							]
+						],
+						"settings":
+						{
+							"SL.22.region_keys":
+							[
+							],
+							"color_helper.box_height": 18,
+							"color_helper.color_scheme": "Monokai.sublime-color-scheme",
+							"color_helper.file_palette":
+							[
+								"#444444ff"
+							],
+							"color_helper.preview_meta":
+							{
+								"977":
+								[
+									5241541488158820234,
+									4,
+									"hex_compressed",
+									2878826870731391944,
+									1,
+									"1570671107.621891"
+								]
+							},
+							"color_helper.scan":
+							{
+								"allowed_colors":
+								[
+									"hex",
+									"hex_compressed",
+									"rgb",
+									"webcolors",
+									"rgba",
+									"hwba",
+									"hsl",
+									"hwb",
+									"hexa_compressed",
+									"hexa",
+									"graya",
+									"gray",
+									"hsla"
+								],
+								"compress_hex_output": true,
+								"current_ext": ".scss",
+								"current_syntax": "Sass/Syntaxes/SCSS",
+								"enabled": true,
+								"last_updated": 1570668508.54,
+								"scan_completion_scopes":
+								[
+									"source.scss meta.property-value.css -comment -string",
+									"source.sass meta.property-value.css -comment -string"
+								],
+								"scan_scopes":
+								[
+									"source.sass meta.property-value.css -comment -string",
+									"source.scss meta.property-value.css -comment -string"
+								],
+								"use_hex_argb": false
+							},
+							"syntax": "Packages/Sass/Syntaxes/SCSS.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 216.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
 					"type": "text"
 				}
 			]
