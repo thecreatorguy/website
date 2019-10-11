@@ -69,10 +69,10 @@ nav ul {
   flex-direction: row;
 }
 nav a {
+  color: #2D2D2D;
   font-size: 1.5em;
   padding: 2px 0.5em;
   text-decoration: none;
-  color: #2D2D2D;
   transition: color 0.5s;
 }
 nav a:hover, nav a.current {
@@ -94,6 +94,7 @@ nav li + li > a {
 
 footer {
   background-color: #2D2D2D;
+  padding: 2px 0;
   width: 100%;
 }
 footer ul {
@@ -107,8 +108,15 @@ footer ul {
 }
 footer ul li {
   display: block;
+}
+footer a {
   color: white;
-  padding: 2px 0.5em;
+  padding: 0 0.5em;
+  text-decoration: none;
+  transition: color 0.5s;
+}
+footer a:hover, footer a.current {
+  color: #4CB1FF;
 }
 
 #content-column {

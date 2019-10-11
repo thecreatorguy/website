@@ -1,5 +1,6 @@
 footer {
     background-color: $font-color;
+    padding: 2px 0;
     width: 100%;
     ul {
         display: flex;
@@ -9,8 +10,15 @@ footer {
         }
         li {
             display: block;
-            color: white;
-            padding: 2px 0.5em;
+        }
+    }
+    a {
+        color: white;
+        padding: 0 0.5em;
+        text-decoration: none;
+        transition: color 0.5s;
+        &:hover, &.current {
+            color: $primary-color;
         }
     }
 }

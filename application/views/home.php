@@ -14,10 +14,10 @@
         <?php echo anchor('/', 'hey,&nbsp;it\'s&nbsp;Tim&nbsp;Johnson', 'id="title"'); ?>
         <nav>
             <ul>
-                <li class="v-center-container"><?php echo anchor('/about', 'About', 'class="current"'); ?></li>
-                <li class="v-center-container"><?php echo anchor('/blog', 'Blog'); ?></li>
-                <li class="v-center-container"><?php echo anchor('/projects', 'Projects'); ?></li>
-                <li class="v-center-container"><?php echo anchor('/contact', 'Contact&nbsp;Me'); ?></li>
+                <li class="v-center-container"><a href="/about" class="current">About</a></li>
+                <li class="v-center-container"><a href="/blog">Blog</a></li>
+                <li class="v-center-container"><a href="/projects">Projects</a></li>
+                <li class="v-center-container"><a href="/contact">Contact&nbsp;Me</a></li>
             </ul>
         </nav>
     </header>
@@ -56,9 +56,9 @@
     </div>
     <footer>
         <ul>
-            <li>LinkedIn</li>
-            <li>Facebook</li>
-            <li>Twitter</li>
+            <li><a href="https://www.linkedin.com/in/timothy-m-johnson">LinkedIn</a></li>
+            <li><a href="https://www.facebook.com/itstimjohnson">Facebook</a></li>
+            <li><a href="https://twitter.com/itsmetimjohnson">Twitter</a></li>
         </ul>
     </footer>
 </body>

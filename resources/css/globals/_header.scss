@@ -36,10 +36,10 @@ nav {
         flex-direction: row;
     }
     a {
+        color: $font-color;
         font-size: 1.5em;
         padding: 2px 0.5em;
-        text-decoration: none;
-        color: $font-color;
+        text-decoration: none; 
         transition: color 0.5s;
         &:hover, &.current {
             color: $primary-color;
