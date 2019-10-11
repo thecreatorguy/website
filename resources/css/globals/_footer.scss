@@ -1,12 +1,14 @@
 footer {
     background-color: $font-color;
+    width: 100%;
     ul {
-        height: 100%;
         display: flex;
         flex-direction: row;
+        @media only screen and (max-width: $content-width) {
+            justify-content: center;
+        }
         li {
-            margin: 0;
-            padding: 0;
+            display: block;
             color: white;
             padding: 2px 0.5em;
         }

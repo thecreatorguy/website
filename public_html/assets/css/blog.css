@@ -34,6 +34,7 @@ header {
 }
 @media only screen and (max-width: 900px) {
   header {
+    margin-top: 3em;
     flex-direction: column;
     justify-content: center;
   }
@@ -49,11 +50,6 @@ header {
   #title {
     margin: 0 auto 0.25em;
     font-size: 2em;
-  }
-}
-@media only screen and (max-width: 400px) {
-  #title {
-    font-size: 1.5em;
   }
 }
 
@@ -97,15 +93,19 @@ nav li + li > a {
 
 footer {
   background-color: #2D2D2D;
+  width: 100%;
 }
 footer ul {
-  height: 100%;
   display: flex;
   flex-direction: row;
 }
+@media only screen and (max-width: 900px) {
+  footer ul {
+    justify-content: center;
+  }
+}
 footer ul li {
-  margin: 0;
-  padding: 0;
+  display: block;
   color: white;
   padding: 2px 0.5em;
 }
