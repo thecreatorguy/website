@@ -40,13 +40,20 @@ header {
 }
 
 #title {
-  font-size: 2em;
+  font-size: 3em;
   margin: 0 0.2em;
   text-decoration: none;
+  color: #2D2D2D;
 }
 @media only screen and (max-width: 900px) {
   #title {
     margin: 0 auto 0.25em;
+    font-size: 2em;
+  }
+}
+@media only screen and (max-width: 400px) {
+  #title {
+    font-size: 1.5em;
   }
 }
 
@@ -59,11 +66,8 @@ nav ul {
   display: flex;
   flex-direction: row;
 }
-nav ul li {
-  margin: 0;
-  padding: 0;
-}
 nav a {
+  font-size: 1.5em;
   padding: 2px 0.5em;
   text-decoration: none;
   color: #2D2D2D;
@@ -71,6 +75,11 @@ nav a {
 }
 nav a:hover, nav a.current {
   color: #4CB1FF;
+}
+@media only screen and (max-width: 900px) {
+  nav a {
+    font-size: 1em;
+  }
 }
 nav li + li > a {
   border-left: solid 1px #444;
@@ -84,24 +93,38 @@ nav li + li > a {
 #content-container {
   flex: 1 1 auto;
   background-color: #E0FBFC;
-  padding: 1em 0 0;
 }
 
-main {
-  margin: 6em 3em 3em;
+footer {
+  background-color: #2D2D2D;
+}
+footer ul {
+  height: 100%;
   display: flex;
   flex-direction: row;
 }
+footer ul li {
+  margin: 0;
+  padding: 0;
+  color: white;
+  padding: 2px 0.5em;
+}
+
+main {
+  margin: 8em 3em 3em;
+}
 @media only screen and (max-width: 900px) {
   main {
+    display: flex;
     flex-direction: column;
-    margin: 2em 1em 3em;
+    margin: 2em 1.5em 3em;
   }
 }
 main img {
-  margin-right: 1em;
+  float: left;
   max-width: 100%;
-  height: auto;
+  margin-right: 2em;
+  margin-bottom: 5em;
 }
 @media only screen and (max-width: 900px) {
   main img {
@@ -109,23 +132,30 @@ main img {
   }
 }
 main #text {
-  margin-top: 3em;
-  max-width: 700px;
+  margin-left: 2em;
 }
 @media only screen and (max-width: 900px) {
   main #text {
-    margin: 3em 3em 0;
+    margin: 3em 0em 0;
   }
 }
 main h1 {
-  font-size: 1.2em;
+  font-size: 1.5em;
   font-weight: normal;
 }
 main h2 {
   margin-top: 0.75em;
+  font-size: 1.5em;
 }
 main p {
-  margin: 0.2em 0 0.5em 2em;
+  margin: 0.2em 0 0.5em;
+  padding-left: 2em;
+  font-size: 1.25em;
+}
+@media only screen and (max-width: 900px) {
+  main p {
+    font-size: 1.1em;
+  }
 }
 
 /*# sourceMappingURL=home.css.map */

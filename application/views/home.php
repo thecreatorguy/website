@@ -23,7 +23,7 @@
     </header>
     <div id="content-container">
         <main>
-            <img src="assets/images/home-logo.svg" alt="logo" width="650px"/>
+            <img src="assets/images/home-logo.svg" alt="logo" width="650px" height="auto"/>
             <div id="text">
                 <h1>Hi, I'm Tim Johnson. Here's a quick summary of myself:</h1>
                 <h2>Who am I?</h2>
@@ -54,6 +54,13 @@
             </div>
         </main>
     </div>
+    <footer>
+        <ul>
+            <li>LinkedIn</li>
+            <li>Facebook</li>
+            <li>Twitter</li>
+        </ul>
+    </footer>
 </body>
 
 </html>

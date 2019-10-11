@@ -14,12 +14,16 @@ header {
 }
 
 #title {
-    font-size: 2em;
+    font-size: 3em;
     margin: 0 0.2em;
     text-decoration: none;
-
+    color: $font-color;
     @media only screen and (max-width: $content-width) {
         margin: 0 auto 0.25em;
+        font-size: 2em;
+    }
+    @media only screen and (max-width: 400px) {
+        font-size: 1.5em;
     }
 }
 
@@ -30,18 +34,18 @@ nav {
         height: 100%;
         display: flex;
         flex-direction: row;
-        li {
-            margin: 0;
-            padding: 0;
-        }
     }
     a {
+        font-size: 1.5em;
         padding: 2px 0.5em;
         text-decoration: none;
         color: $font-color;
         transition: color 0.5s;
         &:hover, &.current {
             color: $primary-color;
+        }
+        @media only screen and (max-width: $content-width) {
+            font-size: 1em;
         }
     }
     li+li>a {

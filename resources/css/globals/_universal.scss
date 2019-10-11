@@ -18,5 +18,6 @@ body {
 #content-container {
     flex: 1 1 auto;
     background-color: $background-color;
-    padding: 1em 0 0;
 }
+
+@import 'footer';

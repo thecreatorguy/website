@@ -40,13 +40,20 @@ header {
 }
 
 #title {
-  font-size: 2em;
+  font-size: 3em;
   margin: 0 0.2em;
   text-decoration: none;
+  color: #2D2D2D;
 }
 @media only screen and (max-width: 900px) {
   #title {
     margin: 0 auto 0.25em;
+    font-size: 2em;
+  }
+}
+@media only screen and (max-width: 400px) {
+  #title {
+    font-size: 1.5em;
   }
 }
 
@@ -59,11 +66,8 @@ nav ul {
   display: flex;
   flex-direction: row;
 }
-nav ul li {
-  margin: 0;
-  padding: 0;
-}
 nav a {
+  font-size: 1.5em;
   padding: 2px 0.5em;
   text-decoration: none;
   color: #2D2D2D;
@@ -71,6 +75,11 @@ nav a {
 }
 nav a:hover, nav a.current {
   color: #4CB1FF;
+}
+@media only screen and (max-width: 900px) {
+  nav a {
+    font-size: 1em;
+  }
 }
 nav li + li > a {
   border-left: solid 1px #444;
@@ -84,7 +93,21 @@ nav li + li > a {
 #content-container {
   flex: 1 1 auto;
   background-color: #E0FBFC;
-  padding: 1em 0 0;
+}
+
+footer {
+  background-color: #2D2D2D;
+}
+footer ul {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+footer ul li {
+  margin: 0;
+  padding: 0;
+  color: white;
+  padding: 2px 0.5em;
 }
 
 #content-column {
