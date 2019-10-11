@@ -26,6 +26,7 @@ body {
 header {
   flex: 0 1 auto;
   width: 100%;
+  height: auto;
   background-color: #D8D8F6;
   padding: 0.5em 1em;
   display: flex;
