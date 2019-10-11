@@ -9,27 +9,27 @@ header {
     justify-content: space-between;
 
     @media only screen and (max-width: $content-width) {
-        margin-top: 3em;
         display: block;
-        flex-direction: column;
-        justify-content: center;
+        text-align: center;
     }
 }
 
 #title {
+    color: $font-color;
+    display: inline-block;
     font-size: 3em;
     margin: 0 0.2em;
     text-decoration: none;
-    color: $font-color;
     @media only screen and (max-width: $content-width) {
-        margin: 0 auto 0.25em;
         font-size: 2em;
+        margin: 0 0 0.25em;
+        width: 100%;
     }
 }
 
 nav {
-    height: 100%;
-    margin-left: 2em;
+    display: inline-block;
+
     ul {
         height: 100%;
         display: flex;
@@ -50,9 +50,5 @@ nav {
     }
     li+li>a {
         border-left: solid 1px #444;
-    }
-
-    @media only screen and (max-width: $content-width) {
-        margin: 0 auto;
     }
 }

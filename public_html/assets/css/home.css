@@ -22,6 +22,11 @@ body {
   font-family: "Montserrat", sans-serif;
   color: #2D2D2D;
 }
+@media only screen and (max-width: 900px) {
+  body {
+    display: block;
+  }
+}
 
 header {
   flex: 0 1 auto;
@@ -35,29 +40,28 @@ header {
 }
 @media only screen and (max-width: 900px) {
   header {
-    margin-top: 3em;
     display: block;
-    flex-direction: column;
-    justify-content: center;
+    text-align: center;
   }
 }
 
 #title {
+  color: #2D2D2D;
+  display: inline-block;
   font-size: 3em;
   margin: 0 0.2em;
   text-decoration: none;
-  color: #2D2D2D;
 }
 @media only screen and (max-width: 900px) {
   #title {
-    margin: 0 auto 0.25em;
     font-size: 2em;
+    margin: 0 0 0.25em;
+    width: 100%;
   }
 }
 
 nav {
-  height: 100%;
-  margin-left: 2em;
+  display: inline-block;
 }
 nav ul {
   height: 100%;
@@ -81,11 +85,6 @@ nav a:hover, nav a.current {
 }
 nav li + li > a {
   border-left: solid 1px #444;
-}
-@media only screen and (max-width: 900px) {
-  nav {
-    margin: 0 auto;
-  }
 }
 
 #content-container {
@@ -113,13 +112,13 @@ footer ul li {
 }
 
 main {
-  margin: 8em 3em 3em;
+  padding: 8em 3em 3em;
 }
 @media only screen and (max-width: 900px) {
   main {
     display: flex;
     flex-direction: column;
-    margin: 2em 1.5em 3em;
+    padding: 2em 1.5em 3em;
   }
 }
 main img {

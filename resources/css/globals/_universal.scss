@@ -11,6 +11,9 @@ body {
     flex-direction: column;
     font-family: 'Montserrat', sans-serif;
     color: $font-color;
+    @media only screen and (max-width: $content-width) {
+        display: block;
+    }
 }
 
 @import 'header';
