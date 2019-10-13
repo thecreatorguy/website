@@ -1,0 +1,8 @@
+.plain-link {
+    color: $font-color;
+    text-decoration: none; 
+    transition: color 0.5s;
+    &:hover, &.current {
+        color: $primary-color;
+    }
+}

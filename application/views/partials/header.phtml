@@ -14,7 +14,7 @@
         <ul>
             <?php foreach ($links as $path => $name): ?>
             <li>
-                <a href="<?= $path ?>" <?php if ($uri === $path) echo 'class="current"' ?>>
+                <a href="<?= $path ?>" class="plain-link<?php if ($uri === $path) echo ' current' ?>">
                     <?php echo $name ?>
                 </a>
             </li>

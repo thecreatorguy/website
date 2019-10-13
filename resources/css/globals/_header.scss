@@ -39,15 +39,9 @@ nav {
         }
     }
     a {
-        color: $font-color;
         font-size: 1.5em;
         padding: 2px 0.5em;
-        text-decoration: none; 
-        transition: color 0.5s;
-        &:hover, &.current {
-            color: $primary-color;
-        }
-        @media only screen and (max-width: 1100px) {
+        @media only screen and (max-width: 1100px) { // Needed so there is no overflow
             font-size: 1.125em;
         }
         @media only screen and (max-width: $content-width) {

@@ -26,10 +26,6 @@ footer {
     .fab {
         color: white;
         font-size: 2.5em;
-        transition: color 0.5s;
-        &:hover, &.current {
-            color: $primary-color;
-        }
         @media only screen and (max-width: $content-width) {
             font-size: 2em;
         }

@@ -49,11 +49,11 @@ class Pages extends CI_Controller
         }
 
         $data = [
-            'title'  => self::PAGE_NAMES[$page],
-            'head'   => $this->partial('head', ['page_name' => self::PAGE_NAMES[$page], 'css_file' => 'page']),
+            'head'   => $this->partial('head', ['page_name' => self::PAGE_NAMES[$page], 'css_file' => $page]),
             'header' => $this->partial('header'),
             'footer' => $this->partial('footer'),
-            'page'   => $this->partial('pages/' . $page)
+            'title'  => self::PAGE_NAMES[$page],
+            'page'   => $this->partial('pages/' . $page),
         ];
         $this->load->view('page.phtml', $data);
     }

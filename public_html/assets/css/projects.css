@@ -1,4 +1,13 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
+.plain-link {
+  color: #2D2D2D;
+  text-decoration: none;
+  transition: color 0.5s;
+}
+.plain-link:hover, .plain-link.current {
+  color: #4CB1FF;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -68,14 +77,8 @@ nav ul li {
   justify-content: center;
 }
 nav a {
-  color: #2D2D2D;
   font-size: 1.5em;
   padding: 2px 0.5em;
-  text-decoration: none;
-  transition: color 0.5s;
-}
-nav a:hover, nav a.current {
-  color: #4CB1FF;
 }
 @media only screen and (max-width: 1100px) {
   nav a {
@@ -127,10 +130,6 @@ footer a {
 footer .fab {
   color: white;
   font-size: 2.5em;
-  transition: color 0.5s;
-}
-footer .fab:hover, footer .fab.current {
-  color: #4CB1FF;
 }
 @media only screen and (max-width: 900px) {
   footer .fab {
@@ -172,4 +171,4 @@ main h1 {
     padding: 0.25em 0; 
 }*/
 
-/*# sourceMappingURL=page.css.map */
+/*# sourceMappingURL=projects.css.map */

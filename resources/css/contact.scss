@@ -1,0 +1,59 @@
+@import 'globals/page';
+
+#page-content {
+    display: flex;
+    flex-direction: row;
+    padding-top: 2em;
+    @media only screen and (max-width: $content-width) {
+        align-items: center;
+        flex-direction: column;
+    }
+    @media only screen and (max-width: 450px) {
+        font-size: 0.8em;
+    }
+    &>div {
+        padding: 1em;
+        margin: 0 1em;
+        width: 400px;
+        max-width: 100%;
+        @media only screen and (max-width: $content-width) {
+            margin-bottom: 2em;
+        }
+    }
+    h2 {
+        margin-bottom: 0.25em;
+        text-align: center;
+    }
+}
+#form-container {
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    form {
+        align-items: center;
+        display: grid;
+        grid-template-columns: 5em 1fr;
+        grid-template-rows: 3em 3em 3em 1fr;
+        label {
+            justify-self: center;
+            &:nth-of-type(3) {
+                grid-column-end: span 2;
+            }
+        }
+        input {
+            border: 1px solid gray;
+            border-radius: 3px;
+            height: 2em;
+            justify-self: stretch;
+            padding: 3px;
+        }
+        textarea {
+            grid-column-end: span 2;
+            width: 100%;
+        }
+    }
+}
+#contact-info {
+    a, b {
+        font-size: 1.25em;
+    }
+}
