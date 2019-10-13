@@ -1,26 +1,10 @@
 <!DOCTYPE html>
 <html lang="en-us">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>It's Tim Johnson</title>
-    <link rel="stylesheet" type="text/css" href="assets/css/home.css">
-    <link rel="shortcut icon" href="assets/images/favicon.ico">
-</head>
+<?= $head ?>
 
 <body>
-    <header>
-        <?php echo anchor('/', 'hey,&nbsp;it\'s&nbsp;Tim&nbsp;Johnson', 'id="title"'); ?>
-        <nav>
-            <ul>
-                <li class="v-center-container"><a href="/about" class="current">About</a></li>
-                <li class="v-center-container"><a href="/blog">Blog</a></li>
-                <li class="v-center-container"><a href="/projects">Projects</a></li>
-                <li class="v-center-container"><a href="/contact">Contact&nbsp;Me</a></li>
-            </ul>
-        </nav>
-    </header>
+    <?= $header ?>
     <div id="content-container">
         <main>
             <img src="assets/images/home-logo.svg" alt="logo" width="650px" height="auto"/>
@@ -31,12 +15,12 @@
                     If I (Tim Johnson if you didn't catch that by now) were to choose three descriptions for myself,
                     I would pick software engineer/math guy, someone who watches anime and cartoons more often than 
                     live-action television, and well-adjusted adult. Some day, you might be able to find more out about
-                    me at my <?php echo anchor('/blog', 'blog') ?>.
+                    me at my <a href="/blog">blog</a>.
                 </p>
                 <h2>What do I do?</h2>
                 <p>
                     Currently my projects are few, but the gears are turning. You can find them on my 
-                    <?php echo anchor('/projects', 'projects') ?> page. In my personal free time, I like to play D&D 
+                    <a href="/projects">projects</a> page. In my personal free time, I like to play D&D 
                     (if my friends could ever find the time), meditate, and maintain a blissful ignorance of pop
                     culture and most social media platforms. 
                 </p>
@@ -53,14 +37,8 @@
                 </p>
             </div>
         </main>
+        <?= $footer ?>
     </div>
-    <footer>
-        <ul>
-            <li><a href="https://www.linkedin.com/in/timothy-m-johnson">LinkedIn</a></li>
-            <li><a href="https://www.facebook.com/itstimjohnson">Facebook</a></li>
-            <li><a href="https://twitter.com/itsmetimjohnson">Twitter</a></li>
-        </ul>
-    </footer>
 </body>
 
 </html>

@@ -1,24 +1,37 @@
 footer {
+    border-top-left-radius: 0.25em;
     background-color: $font-color;
-    padding: 2px 0;
-    width: 100%;
+    padding: 0.25em;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    transition: width 0.5s;
+    @media only screen and (max-width: $content-width) {
+        border-top-left-radius: 0;
+        position: static;
+        width: 100%;
+        text-align: right;
+    }
     ul {
-        display: flex;
+        display: inline-flex;
         flex-direction: row;
-        @media only screen and (max-width: $content-width) {
-            justify-content: center;
-        }
         li {
             display: block;
         }
     }
     a {
+        margin: 0 0.25em;
+    }
+
+    .fab {
         color: white;
-        padding: 0 0.5em;
-        text-decoration: none;
+        font-size: 2.5em;
         transition: color 0.5s;
         &:hover, &.current {
             color: $primary-color;
+        }
+        @media only screen and (max-width: $content-width) {
+            font-size: 2em;
         }
     }
 }

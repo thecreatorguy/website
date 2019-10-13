@@ -10,17 +10,11 @@ html, body {
   width: 100%;
 }
 
-.v-center-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
 body {
+  color: #2D2D2D;
   display: flex;
   flex-direction: column;
   font-family: "Montserrat", sans-serif;
-  color: #2D2D2D;
 }
 @media only screen and (max-width: 900px) {
   body {
@@ -29,14 +23,14 @@ body {
 }
 
 header {
-  flex: 0 1 auto;
-  width: 100%;
-  height: auto;
   background-color: #D8D8F6;
-  padding: 0.5em 1em;
   display: flex;
+  flex: 0 1 auto;
   flex-direction: row;
+  height: auto;
   justify-content: space-between;
+  padding: 0.5em 1em;
+  width: 100%;
 }
 @media only screen and (max-width: 900px) {
   header {
@@ -68,6 +62,11 @@ nav ul {
   display: flex;
   flex-direction: row;
 }
+nav ul li {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 nav a {
   color: #2D2D2D;
   font-size: 1.5em;
@@ -77,6 +76,11 @@ nav a {
 }
 nav a:hover, nav a.current {
   color: #4CB1FF;
+}
+@media only screen and (max-width: 1100px) {
+  nav a {
+    font-size: 1.125em;
+  }
 }
 @media only screen and (max-width: 900px) {
   nav a {
@@ -88,35 +92,50 @@ nav li + li > a {
 }
 
 #content-container {
-  flex: 1 1 auto;
   background-color: #E0FBFC;
+  flex: 1 1 auto;
+  position: relative;
 }
 
 footer {
+  border-top-left-radius: 0.25em;
   background-color: #2D2D2D;
-  padding: 2px 0;
-  width: 100%;
-}
-footer ul {
-  display: flex;
-  flex-direction: row;
+  padding: 0.25em;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  transition: width 0.5s;
 }
 @media only screen and (max-width: 900px) {
-  footer ul {
-    justify-content: center;
+  footer {
+    border-top-left-radius: 0;
+    position: static;
+    width: 100%;
+    text-align: right;
   }
+}
+footer ul {
+  display: inline-flex;
+  flex-direction: row;
 }
 footer ul li {
   display: block;
 }
 footer a {
+  margin: 0 0.25em;
+}
+footer .fab {
   color: white;
-  padding: 0 0.5em;
-  text-decoration: none;
+  font-size: 2.5em;
   transition: color 0.5s;
 }
-footer a:hover, footer a.current {
+footer .fab:hover, footer .fab.current {
   color: #4CB1FF;
+}
+@media only screen and (max-width: 900px) {
+  footer .fab {
+    font-size: 2em;
+  }
 }
 
 main {
@@ -130,10 +149,9 @@ main {
   }
 }
 main img {
-  float: left;
+  float: right;
   max-width: 100%;
-  margin-right: 2em;
-  margin-bottom: 5em;
+  margin: 0 3em 5em;
 }
 @media only screen and (max-width: 900px) {
   main img {

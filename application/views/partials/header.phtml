@@ -1,0 +1,24 @@
+<?php
+    $uri = $_SERVER['REQUEST_URI'];
+    $links = [
+        '/'         => 'About',
+        '/blog'     => 'Blog',
+        '/projects' => 'Projects',
+        '/contact'  => 'Contact&nbsp;Me',
+    ];
+?>
+
+<header>
+    <a id="title" href="/">hey,&nbsp;it's&nbsp;Tim&nbsp;Johnson</a>
+    <nav>
+        <ul>
+            <?php foreach ($links as $path => $name): ?>
+            <li>
+                <a href="<?= $path ?>" <?php if ($uri === $path) echo 'class="current"' ?>>
+                    <?php echo $name ?>
+                </a>
+            </li>
+            <?php endforeach; ?>
+        </ul>
+    </nav>
+</header>

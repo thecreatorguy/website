@@ -1,20 +1,17 @@
 @import 'globals/universal';
 
 #content-column {
-    width: $content-width;
     height: 100%;
-    margin: 0 auto;
     display: flex;
     flex-direction: column;
-
+    margin: 0 auto;
+    width: $content-width;
     @media only screen and (max-width: $content-width) {
         width: 100%;
     }
 }
 
 #header-spacer {
-    flex: 0 1 auto;
-    height: 5em;
     background-image: linear-gradient(to bottom, 
             rgba(255, 255, 255, 0), 
             rgba(255, 255, 255, 0) 20%,
@@ -26,12 +23,18 @@
             rgba(255, 255, 255, 0.6) 80%,
             rgba(255, 255, 255, 0.8) 80%,
         );
+    flex: 0 1 auto;
+    height: 5em;
 }
 
 main {
+    background-color: white;
     flex: 1 1 auto;
-    background-color: white; 
     padding: 1em;
+    h1 {
+        font-weight: normal;
+        text-align: center;
+    }
 }
 
 /*li { 

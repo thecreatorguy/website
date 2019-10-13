@@ -1,16 +1,15 @@
 // Global Imports
 @import 'variables';
 @import 'reset';
-@import 'classes';
 
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
 
 body {
+    color: $font-color;
     display: flex;
     flex-direction: column;
     font-family: 'Montserrat', sans-serif;
-    color: $font-color;
     @media only screen and (max-width: $content-width) {
         display: block;
     }
@@ -19,8 +18,9 @@ body {
 @import 'header';
 
 #content-container {
-    flex: 1 1 auto;
     background-color: $background-color;
+    flex: 1 1 auto;
+    position: relative;
 }
 
 @import 'footer';
