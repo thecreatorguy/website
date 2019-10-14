@@ -1,5 +1,5 @@
 <?php
-    $uri = $_SERVER['REQUEST_URI'];
+    $uri = explode('?', $_SERVER['REQUEST_URI'], 2)[0];
     $links = [
         '/'         => 'About',
         '/blog'     => 'Blog',

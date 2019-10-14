@@ -1,16 +1,14 @@
 footer {
-    border-top-left-radius: 0.25em;
     background-color: $font-color;
-    padding: 0.25em;
-    position: absolute;
+    border-top-left-radius: 0.25em;
     bottom: 0;
+    padding: 0.25em;
+    position: fixed;
+    text-align: right;
     right: 0;
-    transition: width 0.5s;
     @media only screen and (max-width: $content-width) {
         border-top-left-radius: 0;
-        position: static;
         width: 100%;
-        text-align: right;
     }
     ul {
         display: inline-flex;

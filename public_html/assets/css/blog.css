@@ -97,24 +97,28 @@ nav li + li > a {
 #content-container {
   background-color: #E0FBFC;
   flex: 1 1 auto;
+  margin-bottom: 3em;
   position: relative;
+}
+@media only screen and (max-width: 900px) {
+  #content-container {
+    position: static;
+  }
 }
 
 footer {
-  border-top-left-radius: 0.25em;
   background-color: #2D2D2D;
-  padding: 0.25em;
-  position: absolute;
+  border-top-left-radius: 0.25em;
   bottom: 0;
+  padding: 0.25em;
+  position: fixed;
+  text-align: right;
   right: 0;
-  transition: width 0.5s;
 }
 @media only screen and (max-width: 900px) {
   footer {
     border-top-left-radius: 0;
-    position: static;
     width: 100%;
-    text-align: right;
   }
 }
 footer ul {
@@ -165,10 +169,5 @@ main h1 {
   font-weight: normal;
   text-align: center;
 }
-
-/*li { 
-    margin-left: 2em; 
-    padding: 0.25em 0; 
-}*/
 
 /*# sourceMappingURL=blog.css.map */

@@ -1,0 +1,27 @@
+@import 'globals/page';
+
+#container {
+    margin: 0 auto;
+    width: 500px;
+    max-width: 100%;
+    h2 {
+        font-size: 1.5em;
+        font-weight: normal;
+        margin-top: 1em;
+    }
+    h3 {
+        float: right;
+        font-size: 1.2em;
+        font-weight: normal;
+        margin: 1em 0;
+    }
+    p {
+        clear: both;
+    } 
+}
+
+img {
+    display: block;
+    margin: 3em auto 1em;
+    max-width: 100%;
+}

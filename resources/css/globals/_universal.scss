@@ -21,7 +21,11 @@ body {
 #content-container {
     background-color: $background-color;
     flex: 1 1 auto;
+    margin-bottom: 3em;
     position: relative;
+    @media only screen and (max-width: $content-width) {
+        position: static;
+    }
 }
 
 @import 'footer';

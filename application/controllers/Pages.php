@@ -9,12 +9,14 @@ class Pages extends CI_Controller
 {
     // Map of pages (/page) to the name/title
     const PAGE_NAMES = [
-        'home'     => 'Home',
-        'blog'     => 'Blog',
-        'projects' => 'Projects',
-        'contact'  => 'Contact Me',
-        'slider'   => 'Slider Game',
-        'resume'   => 'Resume',
+        'home'         => 'Home',
+        'blog'         => 'Blog',
+        'projects'     => 'Projects',
+        'contact'      => 'Contact Me',
+        'confirmation' => 'Confirmation',
+        'slider'       => 'Slider Game',
+        'resume'       => 'Resume',
+
     ];
 
     // Path to where partial templates are located

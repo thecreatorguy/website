@@ -9,3 +9,5 @@ application/logs/*
 *.sublime*
 
 /public_html/cgi-bin
+
+email-password.txt

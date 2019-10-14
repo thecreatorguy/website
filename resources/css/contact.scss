@@ -8,17 +8,12 @@
         align-items: center;
         flex-direction: column;
     }
-    @media only screen and (max-width: 450px) {
+    @media only screen and (max-width: $narrow-width) {
         font-size: 0.8em;
     }
     &>div {
         padding: 1em;
-        margin: 0 1em;
-        width: 400px;
         max-width: 100%;
-        @media only screen and (max-width: $content-width) {
-            margin-bottom: 2em;
-        }
     }
     h2 {
         margin-bottom: 0.25em;
@@ -28,32 +23,77 @@
 #form-container {
     border-radius: 5px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin: 0 1em;
+    width: 600px;
+    @media only screen and (max-width: $content-width) {
+        width: 400px;
+        margin-bottom: 2em;
+    }
+    @media only screen and (max-width: $narrow-width) {
+        box-shadow: none;
+        margin: 0;
+    }
     form {
         align-items: center;
         display: grid;
         grid-template-columns: 5em 1fr;
-        grid-template-rows: 3em 3em 3em 1fr;
+        grid-template-rows: repeat(3, 3em) 1fr 2em;
         label {
             justify-self: center;
             &:nth-of-type(3) {
                 grid-column-end: span 2;
             }
         }
-        input {
+        input, textarea {
             border: 1px solid gray;
             border-radius: 3px;
-            height: 2em;
             justify-self: stretch;
             padding: 3px;
+            transition: border-color 0.5s;
+            width: 100%;
+            &:focus {
+                outline: none;
+                border-color: $primary-color;
+            }
+        }
+        input {
+            height: 2em;
         }
         textarea {
             grid-column-end: span 2;
-            width: 100%;
+            resize: none;
+        }
+        button {
+            background-color: $secondary-color;
+            border: none;
+            border-radius: 3px;
+            color: black;
+            grid-column-end: span 2;
+            padding: 6px;
+            transition: background-color 0.5s;
+            &:focus, &:hover {
+                background-color: $primary-color;
+            }
+            i {
+
+                margin-right: 0.2em;
+            }
         }
     }
 }
 #contact-info {
-    a, b {
-        font-size: 1.25em;
+    margin: 2em 2em 0;
+    @media only screen and (max-width: $content-width) {
+        margin: 0 1em;
+    }
+    dl {
+        align-items: center;
+        display: grid;
+        grid-template-columns: 4em 1fr;
+        grid-template-rows: repeat(1, 2em);
+        grid-row-gap: 0.25em;
+        dt {
+            justify-self: center;
+        }
     }
 }
