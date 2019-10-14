@@ -19,6 +19,12 @@ html, body {
   width: 100%;
 }
 
+input[type=text], textarea {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
 body {
   color: #2D2D2D;
   display: flex;
