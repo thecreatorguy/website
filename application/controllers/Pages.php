@@ -16,7 +16,6 @@ class Pages extends CI_Controller
         'confirmation' => 'Confirmation',
         'slider'       => 'Slider Game',
         'resume'       => 'Resume',
-
     ];
 
     // Path to where partial templates are located

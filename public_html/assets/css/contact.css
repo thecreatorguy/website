@@ -223,7 +223,7 @@ main h1 {
   align-items: center;
   display: grid;
   grid-template-columns: 5em 1fr;
-  grid-template-rows: repeat(3, 3em) 1fr 2em;
+  grid-template-rows: repeat(3, 3em) 1fr 3em;
 }
 #form-container form label {
   justify-self: center;
@@ -251,6 +251,7 @@ main h1 {
   resize: none;
 }
 #form-container form button {
+  align-self: end;
   background-color: #776258;
   border: none;
   border-radius: 3px;

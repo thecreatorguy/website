@@ -1,5 +1,49 @@
 @import 'globals/page';
 
-main {
-    
+.project {
+    .links {
+        margin: 0.5em 0 1em 2em;
+        @media only screen and (max-width: $content-width) {
+            margin-left: 0;
+            text-align: center;
+        }
+    }
+    a {
+        background-color: $secondary-color;
+        border-radius: 3px;
+        color: black;
+        font-size: 1.2em;
+        padding: 0.2em 0.5em;
+        text-decoration: none;
+        transition: background-color 0.5s;
+        &:hover, &:focus {
+            background-color: $primary-color;
+        }
+        &+a {
+            margin-left: 0.25em;
+        }
+    }
+    h2 {
+        font-weight: normal;
+        padding-bottom: 3px;
+        padding-left: 3em;
+        margin: 1em 2em 0.5em;
+        border-bottom: 1px solid gray;
+        @media only screen and (max-width: $content-width) {
+            padding-left: 0;
+            text-align: center;
+        }
+    }
+    p {
+        padding: 0 2em;
+        @media only screen and (max-width: $content-width) {
+            padding: 0;
+        }
+        @media only screen and (max-width: $narrow-width) {
+            font-size: 0.9em;
+        }
+        &+p {
+            margin-top: 1em;
+        }
+    }
 }
