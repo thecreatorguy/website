@@ -633,7 +633,7 @@ class SliderGame extends GameArea {
 let game;
 let levels = [];
 for (let i = 1; i <= maxLevel; i++) {
-    fetch("assets/levels/Level" + i + ".txt").then(function(response) {
+    fetch("/assets/levels/Level" + i + ".txt").then(function(response) {
         response.text().then(function(text) {
             console.log("Level " + i + " recieved.");
             levels[i] = new Level(text);
