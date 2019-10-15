@@ -14,3 +14,8 @@ input[type=text], textarea {
     -moz-appearance: none;
     appearance: none;
 }
+
+img {
+    max-width: 100%;
+    height: auto
+}

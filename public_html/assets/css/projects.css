@@ -25,6 +25,11 @@ input[type=text], textarea {
   appearance: none;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 body {
   color: #2D2D2D;
   display: flex;
@@ -185,7 +190,7 @@ main h1 {
     text-align: center;
   }
 }
-.project a {
+.project .links a {
   background-color: #776258;
   border-radius: 3px;
   color: black;
@@ -194,10 +199,10 @@ main h1 {
   text-decoration: none;
   transition: background-color 0.5s;
 }
-.project a:hover, .project a:focus {
+.project .links a:hover, .project .links a:focus {
   background-color: #4CB1FF;
 }
-.project a + a {
+.project .links a + a {
   margin-left: 0.25em;
 }
 .project h2 {
@@ -228,6 +233,34 @@ main h1 {
 }
 .project p + p {
   margin-top: 1em;
+}
+.project img {
+  background-color: #D8D8F6;
+  border-radius: 3px;
+  display: block;
+  margin: 1em 2em;
+  padding: 1em;
+}
+@media only screen and (max-width: 900px) {
+  .project img {
+    margin: 1em auto;
+  }
+}
+.project img:nth-of-type(odd) {
+  float: right;
+}
+@media only screen and (max-width: 900px) {
+  .project img:nth-of-type(odd) {
+    float: none;
+  }
+}
+.project img:nth-of-type(even) {
+  float: left;
+}
+@media only screen and (max-width: 900px) {
+  .project img:nth-of-type(even) {
+    float: none;
+  }
 }
 
 /*# sourceMappingURL=projects.css.map */
