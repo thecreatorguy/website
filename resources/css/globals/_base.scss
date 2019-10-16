@@ -1,0 +1,25 @@
+@import 'universal';
+
+body {
+    color: $font-color;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Montserrat', sans-serif;
+    @media only screen and (max-width: $content-width) {
+        display: block;
+    }
+}
+
+@import 'header';
+
+#content-container {
+    background-color: $background-color;
+    flex: 1 1 auto;
+    margin-bottom: 3em;
+    position: relative;
+    @media only screen and (max-width: $content-width) {
+        position: static;
+    }
+}
+
+@import 'footer';

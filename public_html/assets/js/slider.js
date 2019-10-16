@@ -26,60 +26,6 @@ colorMap.set("tp2b",            "rgb(124, 1, 191)");
 colorMap.set("hero",            "rgb(245, 249, 0)");   
 colorMap.set("pause",           "rgba(0, 0, 0, 0.4");
 
-/** Number of levels that exist */
-const maxLevel = 12;
-
-/** 
- * Class to deconstruct loaded txt file from server into useful level information
- */
-class Level {
-    /**
-     * Creates the level from server information. Important variables include:
-     * 
-     * title - Title of level
-     * grid - 2D array of level information, including floors, walls, lava, goal, etc.
-     * spawn - Coordinate pair of where hero is to be spawned
-     * toggleTilesState - 3 element array of booleans depicting starting state of each switch tile
-     * tp[1, 2]Locations - 2 element arrays of coordinate pairs for the two teleporter types
-     * 
-     * @param {String} text text information from server
-     */
-    constructor(text) {
-        let lines = text.split("\n");
-        let lineIter = lines[Symbol.iterator]();
-        let line = "";
-
-        this.grid = [];
-        this.tp1Locations = [];
-        this.tp2Locations = [];
-        for (let i = 0; i < 25; i++) {
-            this.grid.push([]);
-            line = lineIter.next().value;
-            for (let j = 0; j < 25; j++) {
-                let tileId = Number(line.slice(j*2, j*2+2));
-                this.grid[i].push(tileId);
-                if (tileId == 10) {
-                    this.tp1Locations.push({x: j, y: i})
-                }
-                if (tileId == 11) {
-                    this.tp2Locations.push({x: j, y: i})
-                }
-            }
-        }
-        line = lineIter.next().value;
-        this.spawn = {x: Number(line.slice(0, 2)), 
-                      y: Number(line.slice(2, 4))};
-
-        this.toggleTilesState = [];
-        for (let i = 0; i < 3; i++) {
-            line = lineIter.next().value;
-            this.toggleTilesState.push(Number(line));
-        }
-        
-        this.title = lineIter.next().value;
-    }
-}
-
 /**
  * Generic class that structures how a game is to be made and run.
  * Requires a div id "game_container" to place the canvas at the end of.
@@ -138,6 +84,7 @@ class GameArea {
 
 // Pixels to move the player by in each update of the frame
 const playerSpeed = 5;
+const maxLevel = 11;
 
 /** 
  * Specific class to run the Slider Game. The game is a puzzle game
@@ -156,17 +103,18 @@ class SliderGame extends GameArea {
      * div id "level_title" to write title to, and
      * div id "timer" to write time data to.
      */
-    constructor() {
+    constructor(levels) {
         // Slider Game is run at 50 fps, which is intense for some computers, but at fewer frames
         // runs fairly choppily. I will leave this for now, and maybe revise later
         super(500, 500, 50);
         super.setUpdateFunctions(this._sliderGameUpdate.bind(this), this._sliderRenderFrame.bind(this));
 
         // All local variables
-        this.level = 1;
+        this.levels = levels;
+        this.level = 0;
         this.levelGrid = [];
-        this.player = {x: 0, y: 0, xVel: 0, yVel: 0, dir: "none", startedSliding: false};
-        this.toggleTilesState = [];
+        this.player = {x: 0, y: 0, xVel: 0, yVel: 0, dir: 'none', startedSliding: false};
+        this.toggleTilesState = {};
         this.accumulatedTime = 0;
         this.lastDate = Date.now();
         this.startHours = new Date(0).getHours();
@@ -186,7 +134,7 @@ class SliderGame extends GameArea {
             this.unprocessedKeys.set(event.code, false);
         });
 
-        this.mouseCommand = "none";
+        this.mouseCommand = 'none';
         this.mouseDown = false;
         document.addEventListener("click", (event) => {
             let dx = event.clientX - (this.canvas.getBoundingClientRect().left + this.player.x);
@@ -210,7 +158,7 @@ class SliderGame extends GameArea {
         });
 
         // Initialize level variables
-        this._setLevel();
+        this._setLevel(this.levels[this.level], this.level);
     }
 
     /**
@@ -232,14 +180,16 @@ class SliderGame extends GameArea {
                 this.accumulatedTime = 0;
                 this.lastDate = Date.now();
                 this.startHours = new Date(0).getHours();
-                this.level = 1;
-                this._setLevel();
+                this.level = 0;
+                this._setLevel(this.levels[this.level], this.level);
                 return;
             }
         }
         else if (!this.paused) { // Otherwise, update the player logic
             if (this._updatePlayer()) {
-                this._setLevel();
+                if (this.level <= maxLevel) {
+                    this._setLevel(this.levels[this.level], this.level);
+                }
             } 
         }
     }
@@ -288,7 +238,7 @@ class SliderGame extends GameArea {
 
         // If the player is stationary and has a command waiting, start moving in that direction.
         // If there is more than one, it prioritizes left > down > right > up.
-        if (this.player.dir == "none") {
+        if (this.player.dir == 'none') {
             this.player.xVel = 0;
             this.player.yVel = 0;  
             if (this._hasCommand("left")) {
@@ -320,49 +270,45 @@ class SliderGame extends GameArea {
         // i.e. a button switches off a wall, or the player is teleported to a new location.
         if (!this.player.startedSliding && 
             (this.player.x / 20) % 1 == 0 && (this.player.y / 20) % 1 == 0 && 
-            this.player.dir != "none") {
+            this.player.dir != 'none') {
             switch (this.levelGrid[this.player.y / 20][this.player.x / 20]) {
                 // 2 is lava- returning true resets the level
                 case 2: 
                     return true;
                 // 4 is orange buttons- toggle the tile state
                 case 4: 
-                    this.toggleTilesState[0] = !this.toggleTilesState[0];
+                    this.toggleTilesState['orange'] = !this.toggleTilesState['orange'];
                     break;
                 // 6 is teal buttons- toggle the tile state
                 case 6: 
-                    this.toggleTilesState[1] = !this.toggleTilesState[1];
+                    this.toggleTilesState['teal'] = !this.toggleTilesState['teal'];
                     break;
                 // 8 is blue buttons- toggle the tile state
                 case 8: 
-                    this.toggleTilesState[2] = !this.toggleTilesState[2];
+                    this.toggleTilesState['blue'] = !this.toggleTilesState['blue'];
                     break;
                 // 10 is pink teleporters- move player to other teleporter location
                 case 10: 
-                    if (this.player.x / 20 == levels[this.level].tp1Locations[0].x &&
-                        this.player.y / 20 == levels[this.level].tp1Locations[0].y) {
-                        this.player.x = levels[this.level].tp1Locations[1].x * 20;
-                        this.player.y = levels[this.level].tp1Locations[1].y * 20;
-                    }
-                    else {
-                        this.player.x = levels[this.level].tp1Locations[0].x * 20;
-                        this.player.y = levels[this.level].tp1Locations[0].y * 20;
+                    if (this.player.x / 20 == this.levels[this.level].tpLocations['pink'][0].x &&
+                        this.player.y / 20 == this.levels[this.level].tpLocations['pink'][0].y) {
+                        this.player.x = this.levels[this.level].tpLocations['pink'][1].x * 20;
+                        this.player.y = this.levels[this.level].tpLocations['pink'][1].y * 20;
+                    } else {
+                        this.player.x = this.levels[this.level].tpLocations['pink'][0].x * 20;
+                        this.player.y = this.levels[this.level].tpLocations['pink'][0].y * 20;
                     }
                     break;
                 // 11 is purple teleporters- move player to other teleporter location
                 case 11: 
-                    if (this.player.x / 20 == levels[this.level].tp2Locations[0].x &&
-                        this.player.y / 20 == levels[this.level].tp2Locations[0].y) {
-                        this.player.x = levels[this.level].tp2Locations[1].x * 20;
-                        this.player.y = levels[this.level].tp2Locations[1].y * 20;
-                    }
-                    else {
-                        this.player.x = levels[this.level].tp2Locations[0].x * 20;
-                        this.player.y = levels[this.level].tp2Locations[0].y * 20;
+                    if (this.player.x / 20 == this.levels[this.level].tpLocations['purple'][0].x &&
+                        this.player.y / 20 == this.levels[this.level].tpLocations['purple'][0].y) {
+                        this.player.x = this.levels[this.level].tpLocations['purple'][1].x * 20;
+                        this.player.y = this.levels[this.level].tpLocations['purple'][1].y * 20;
+                    } else {
+                        this.player.x = this.levels[this.level].tpLocations['purple'][0].x * 20;
+                        this.player.y = this.levels[this.level].tpLocations['purple'][0].y * 20;
                     }
                     break;
-
-                default: break;
             }
         }
         else if (this.player.startedSliding) { 
@@ -389,16 +335,16 @@ class SliderGame extends GameArea {
 
         // If the player is moving and the location they are moving to 
         // is valid, stop; otherwise update location
-        if (this.player.dir != "none") {
+        if (this.player.dir != 'none') {
             if (xIndex >= 0 && xIndex < 25 && yIndex >= 0 && yIndex < 25) {
                 if (this.levelGrid[yIndex][xIndex] == 1 ||
-                        this.toggleTilesState[0] && this.levelGrid[yIndex][xIndex] == 5 ||
-                        this.toggleTilesState[1] && this.levelGrid[yIndex][xIndex] == 7 ||
-                        this.toggleTilesState[2] && this.levelGrid[yIndex][xIndex] == 9 ||
-                        !this.toggleTilesState[0] && this.levelGrid[yIndex][xIndex] == 12 ||
-                        !this.toggleTilesState[1] && this.levelGrid[yIndex][xIndex] == 13 ||
-                        !this.toggleTilesState[2] && this.levelGrid[yIndex][xIndex] == 14 ) {
-                    this.player.dir = "none";
+                        this.toggleTilesState['orange']  && this.levelGrid[yIndex][xIndex] == 5 ||
+                        this.toggleTilesState['teal']    && this.levelGrid[yIndex][xIndex] == 7 ||
+                        this.toggleTilesState['blue']    && this.levelGrid[yIndex][xIndex] == 9 ||
+                        !this.toggleTilesState['orange'] && this.levelGrid[yIndex][xIndex] == 12 ||
+                        !this.toggleTilesState['teal']   && this.levelGrid[yIndex][xIndex] == 13 ||
+                        !this.toggleTilesState['blue']   && this.levelGrid[yIndex][xIndex] == 14 ) {
+                    this.player.dir = 'none';
                 }
                 else {
                     this.player.x += this.player.xVel;
@@ -406,13 +352,13 @@ class SliderGame extends GameArea {
                 }
             }
             else {
-                this.player.dir = "none";
+                this.player.dir = 'none';
             }
         }
         
         // The final check is for the goal. This is done here because the goal can only be said
         // to be reached if the player is stopped on it.
-        if (this.player.dir == "none" && this.levelGrid[this.player.y / 20][this.player.x / 20] == 3) {
+        if (this.player.dir == 'none' && this.levelGrid[this.player.y / 20][this.player.x / 20] == 3) {
             this.level++;
             return true;
         }
@@ -459,7 +405,7 @@ class SliderGame extends GameArea {
                         this.context.fillRect(left + col * 20, top + row * 20 + 10, 10, 10);
                         break;
                     case 5: 
-                        if (this.toggleTilesState[0]) {
+                        if (this.toggleTilesState['orange']) {
                             this.context.fillStyle = colorMap.get("disappearing1a");
                             this.context.fillRect(left + col * 20 + 1, top + row * 20 + 1, 18, 18);
                         }
@@ -476,7 +422,7 @@ class SliderGame extends GameArea {
                         this.context.fillRect(left + col * 20, top + row * 20 + 10, 10, 10);
                         break;
                     case 7: 
-                        if (this.toggleTilesState[1]) {
+                        if (this.toggleTilesState['teal']) {
                             this.context.fillStyle = colorMap.get("disappearing2a");
                             this.context.fillRect(left + col * 20 + 1, top + row * 20 + 1, 18, 18);
                         }
@@ -493,7 +439,7 @@ class SliderGame extends GameArea {
                         this.context.fillRect(left + col * 20, top + row * 20 + 10, 10, 10);
                         break;
                     case 9: 
-                        if (this.toggleTilesState[2]) {
+                        if (this.toggleTilesState['blue']) {
                             this.context.fillStyle = colorMap.get("disappearing3a");
                             this.context.fillRect(left + col * 20 + 1, top + row * 20 + 1, 18, 18);
                         }
@@ -517,7 +463,7 @@ class SliderGame extends GameArea {
                         this.context.fillRect(left + col * 20, top + row * 20 + 10, 10, 10);
                         break;
                     case 12: 
-                        if (!this.toggleTilesState[0]) {
+                        if (!this.toggleTilesState['orange']) {
                             this.context.fillStyle = colorMap.get("disappearing1a");
                             this.context.fillRect(left + col * 20 + 1, top + row * 20 + 1, 18, 18);
                         }
@@ -527,7 +473,7 @@ class SliderGame extends GameArea {
                         }
                         break;
                     case 13:
-                        if (!this.toggleTilesState[1]) {
+                        if (!this.toggleTilesState['teal']) {
                             this.context.fillStyle = colorMap.get("disappearing2a");
                             this.context.fillRect(left + col * 20 + 1, top + row * 20 + 1, 18, 18);
                         }
@@ -537,7 +483,7 @@ class SliderGame extends GameArea {
                         }
                         break;
                     case 14:
-                        if (!this.toggleTilesState[2]) {
+                        if (!this.toggleTilesState['blue']) {
                             this.context.fillStyle = colorMap.get("disappearing3a");
                             this.context.fillRect(left + col * 20 + 1, top + row * 20 + 1, 18, 18);
                         }
@@ -563,20 +509,17 @@ class SliderGame extends GameArea {
     /**
      * Sets (or resets) all level information, including the player's location and velocity.
      */
-    _setLevel() {
-        if (this.level > maxLevel) {
-            return;
-        }
-        this.levelGrid = levels[this.level].grid;
-        this.player.x = levels[this.level].spawn.x * 20;
-        this.player.y = levels[this.level].spawn.y * 20;
+    _setLevel(level, levelNum) {
+        this.levelGrid = level.grid;
+        this.player.x = level.spawn.x * 20;
+        this.player.y = level.spawn.y * 20;
         this.player.xVel = 0;
         this.player.yVel = 0;
-        this.player.dir = "none";
-        this.toggleTilesState = levels[this.level].toggleTilesState.slice();
+        this.player.dir = 'none';
+        this.toggleTilesState = Object.assign({}, level.toggleTilesState);
 
-        this.levelNumber.textContent = "Level: " + this.level;
-        this.levelTitle.textContent = levels[this.level].title;
+        this.levelNumber.textContent = "Level: " + (levelNum + 1);
+        this.levelTitle.textContent = level.title;
     }
     
     /**
@@ -603,7 +546,7 @@ class SliderGame extends GameArea {
     _hasCommand(direction) {
         let temp = this.mouseCommand;
         if (this.mouseCommand == direction) {
-            this.mouseCommand = "none";
+            this.mouseCommand = 'none';
         }
         
         if (direction == "left") {
@@ -625,35 +568,7 @@ class SliderGame extends GameArea {
 // Main Execution Point //
 //////////////////////////
 
-/**
- * Game and levels are global so they aren't garbage collected, 
- * and levels are loaded as soon as possible. Levels also functions 
- * as a map, i.e. level 1 is stored at index 1.
- */
-let game;
-let levels = [];
-for (let i = 1; i <= maxLevel; i++) {
-    fetch("/assets/levels/Level" + i + ".txt").then(function(response) {
-        response.text().then(function(text) {
-            console.log("Level " + i + " recieved.");
-            levels[i] = new Level(text);
-        });
-    });
-}
-
-/** 
- * Function to be called on when the DOM is loaded, so that game can correctly add canvas.
- * Will periodically check to see if all levels are loaded, and when they are, the game is created.
- */
-function startGame() {
-    setTimeout(function check() {
-        if (levels.length-1 == maxLevel) {
-            game = new SliderGame();
-            game.start();
-        }
-        else {
-            setTimeout(check, 500);
-        }
-    }, 0);
-}
-document.addEventListener("DOMContentLoaded", startGame());
+document.addEventListener("DOMContentLoaded", () => {
+    let game = new SliderGame(JSON.parse(document.getElementById('level-data').innerHTML));
+    game.start();
+});

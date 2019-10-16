@@ -45,38 +45,20 @@
             }
         }
         input, textarea {
-            border: 1px solid gray;
-            border-radius: 3px;
             justify-self: stretch;
-            padding: 3px;
-            transition: border-color 0.5s;
             width: 100%;
-            &:focus {
-                outline: none;
-                border-color: $primary-color;
-            }
         }
         input {
             height: 2em;
         }
         textarea {
             grid-column-end: span 2;
-            resize: none;
         }
         button {
             align-self: end;
-            background-color: $secondary-color;
-            border: none;
-            border-radius: 3px;
-            color: black;
             grid-column-end: span 2;
             padding: 6px;
-            transition: background-color 0.5s;
-            &:focus, &:hover {
-                background-color: $primary-color;
-            }
             i {
-
                 margin-right: 0.2em;
             }
         }

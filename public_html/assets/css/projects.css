@@ -1,13 +1,4 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
-.plain-link {
-  color: #2D2D2D;
-  text-decoration: none;
-  transition: color 0.5s;
-}
-.plain-link:hover, .plain-link.current {
-  color: #4CB1FF;
-}
-
 * {
   margin: 0;
   padding: 0;
@@ -28,6 +19,42 @@ input[type=text], textarea {
 img {
   max-width: 100%;
   height: auto;
+}
+
+.plain-link {
+  color: #2D2D2D;
+  text-decoration: none;
+  transition: color 0.5s;
+}
+.plain-link:hover, .plain-link.current {
+  color: #4CB1FF;
+}
+
+button, .button {
+  background-color: #776258;
+  border: none;
+  border-radius: 3px;
+  color: black;
+  text-decoration: none;
+  transition: background-color 0.5s;
+}
+button:focus, button:hover, .button:focus, .button:hover {
+  background-color: #4CB1FF;
+}
+
+input, textarea {
+  border: 1px solid gray;
+  border-radius: 3px;
+  padding: 3px;
+  transition: border-color 0.5s;
+}
+input:focus, textarea:focus {
+  outline: none;
+  border-color: #4CB1FF;
+}
+
+textarea {
+  resize: none;
 }
 
 body {
@@ -191,16 +218,8 @@ main h1 {
   }
 }
 .project .links a {
-  background-color: #776258;
-  border-radius: 3px;
-  color: black;
   font-size: 1.2em;
   padding: 0.2em 0.5em;
-  text-decoration: none;
-  transition: background-color 0.5s;
-}
-.project .links a:hover, .project .links a:focus {
-  background-color: #4CB1FF;
 }
 .project .links a + a {
   margin-left: 0.25em;

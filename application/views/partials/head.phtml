@@ -2,7 +2,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $page_name ?> | It's Tim Johnson</title>
-    <link rel="stylesheet" type="text/css" href="assets/css/<?= $css_file ?>.css">
-    <link rel="shortcut icon" href="assets/images/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="/assets/css/<?= $css_file ?>.css">
+    <link rel="shortcut icon" href="/assets/images/favicon.ico">
     <script src="https://kit.fontawesome.com/692d0a4337.js" crossorigin="anonymous"></script>
+    <?php if (isset($scripts)): ?>
+        <?php foreach ($scripts as $script): ?>
+            <script type="text/javascript" src="/assets/js/<?= $script ?>.js"></script>
+        <?php endforeach ?>
+    <?php endif ?>
 </head>

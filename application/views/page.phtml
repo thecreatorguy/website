@@ -18,4 +18,10 @@
     
 </body>
 
+<?php if (isset($jsonData)): ?>
+    <?php foreach ($jsonData as $rowName => $rowData): ?>
+        <script id="<?= $rowName ?>" type="application/json"><?= $rowData ?></script>
+    <?php endforeach ?>
+<?php endif ?>
+
 </html>

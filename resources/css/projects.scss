@@ -8,22 +8,13 @@
             text-align: center;
         }
         a {
-            background-color: $secondary-color;
-            border-radius: 3px;
-            color: black;
             font-size: 1.2em;
             padding: 0.2em 0.5em;
-            text-decoration: none;
-            transition: background-color 0.5s;
-            &:hover, &:focus {
-                background-color: $primary-color;
-            }
             &+a {
                 margin-left: 0.25em;
             }
         }
     }
-    
     h2 {
         font-weight: normal;
         padding-bottom: 3px;

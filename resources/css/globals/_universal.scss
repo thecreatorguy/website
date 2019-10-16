@@ -1,31 +1,63 @@
-// Global Imports
 @import 'variables';
-@import 'classes';
-@import 'reset';
 
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
 
-body {
+// Universal styles (no "child of")
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+input[type=text], textarea {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto
+}
+
+.plain-link {
     color: $font-color;
-    display: flex;
-    flex-direction: column;
-    font-family: 'Montserrat', sans-serif;
-    @media only screen and (max-width: $content-width) {
-        display: block;
+    text-decoration: none; 
+    transition: color 0.5s;
+    &:hover, &.current {
+        color: $primary-color;
     }
 }
 
-@import 'header';
-
-#content-container {
-    background-color: $background-color;
-    flex: 1 1 auto;
-    margin-bottom: 3em;
-    position: relative;
-    @media only screen and (max-width: $content-width) {
-        position: static;
+button, .button {
+    background-color: $secondary-color;
+    border: none;
+    border-radius: 3px;
+    color: black;
+    text-decoration: none;
+    transition: background-color 0.5s;
+    &:focus, &:hover {
+       background-color: $primary-color;
     }
 }
 
-@import 'footer';
+input, textarea {
+    border: 1px solid gray;
+    border-radius: 3px;
+    padding: 3px;
+    transition: border-color 0.5s;
+    &:focus {
+        outline: none;
+        border-color: $primary-color;
+    }
+}
+
+textarea {
+    resize: none;
+}

@@ -29,7 +29,7 @@ class Pages extends CI_Controller
     public function index()
     {
         $data = [
-            'head'   => $this->partial('head', ['page_name' => 'Home', 'css_file' => 'home'], true),
+            'head'   => $this->partial('head', ['page_name' => 'Home', 'css_file' => 'home']),
             'header' => $this->partial('header'),
             'footer' => $this->partial('footer'),
         ];
@@ -49,13 +49,21 @@ class Pages extends CI_Controller
             show_404();
         }
 
+        $headData = ['page_name' => self::PAGE_NAMES[$page], 'css_file' => $page];
+        if ($page === 'slider') {
+            $headData['scripts'] = ['slider'];
+        }
         $data = [
-            'head'   => $this->partial('head', ['page_name' => self::PAGE_NAMES[$page], 'css_file' => $page]),
+            'head'   => $this->partial('head', $headData),
             'header' => $this->partial('header'),
             'footer' => $this->partial('footer'),
             'title'  => self::PAGE_NAMES[$page],
             'page'   => $this->partial('pages/' . $page),
         ];
+        if ($page === 'slider') {
+            $data['jsonData']['level-data'] = file_get_contents(__DIR__ . '/../../resources/data/levels.json');
+        }
+        file_put_contents(__DIR__ . '/out', json_encode($data));
         $this->load->view('page.phtml', $data);
     }
 
