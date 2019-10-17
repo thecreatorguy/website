@@ -1,0 +1,44 @@
+#game-container {
+    background-color: $tertiary-color;
+    border-radius: 3px;
+    box-sizing: content-box;
+    margin: 2em auto;
+    padding: 1em;
+    width: 500px;
+    #info-bar {
+        background-color: black;
+        color: white;
+        display: flex;
+        font-size: 1.2em;
+        justify-content: space-between;
+        padding: 0.25em 0.5em;
+    }
+    #level-container {
+        position: relative;
+        height: 500px;
+        width: 500px;
+        #level {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+        #player {
+            background-color: rgb(245, 249, 0);
+            position: absolute;
+            height: 20px;
+            width: 20px;
+            z-index: 2;
+        }
+        #pause {
+            background-color: rgba(0, 0, 0, 0.4);
+            position: absolute;
+            bottom: 0;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 3;
+        }
+    }
+
+}

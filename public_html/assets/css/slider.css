@@ -208,4 +208,48 @@ main h1 {
   text-align: center;
 }
 
+#game-container {
+  background-color: #D8D8F6;
+  border-radius: 3px;
+  box-sizing: content-box;
+  margin: 2em auto;
+  padding: 1em;
+  width: 500px;
+}
+#game-container #info-bar {
+  background-color: black;
+  color: white;
+  display: flex;
+  font-size: 1.2em;
+  justify-content: space-between;
+  padding: 0.25em 0.5em;
+}
+#game-container #level-container {
+  position: relative;
+  height: 500px;
+  width: 500px;
+}
+#game-container #level-container #level {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+#game-container #level-container #player {
+  background-color: #f5f900;
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  z-index: 2;
+}
+#game-container #level-container #pause {
+  background-color: rgba(0, 0, 0, 0.4);
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+}
+
 /*# sourceMappingURL=slider.css.map */

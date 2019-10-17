@@ -23,68 +23,11 @@ colorMap.set("tp1a",            "rgb(255, 137, 215)");
 colorMap.set("tp1b",            "rgb(237, 68, 180)");
 colorMap.set("tp2a",            "rgb(185, 56, 255)");
 colorMap.set("tp2b",            "rgb(124, 1, 191)");
-colorMap.set("hero",            "rgb(245, 249, 0)");   
-colorMap.set("pause",           "rgba(0, 0, 0, 0.4");
-
-/**
- * Generic class that structures how a game is to be made and run.
- * Requires a div id "game_container" to place the canvas at the end of.
- */
-class GameArea {
-    /**
-     * Creates the game area, which includes a canvas.
-     * 
-     * @param {Number} width width of canvas in px
-     * @param {Number} height height of canvas in px
-     * @param {Number} fps times per second to run the main loop. includes game logic as well as frames
-     */
-    constructor(width, height, fps, gameUpdateFunc, renderFrameFunc) {
-        this.canvas = document.createElement("canvas");
-        this.canvas.width = width;
-        this.canvas.height = height;
-        document.getElementById("game_container").append(this.canvas);
-        this.context = this.canvas.getContext("2d");
-        this.fps = fps;
-    }
-
-    /**
-     * Set the functions to update the game
-     * 
-     * @param {Function} gameUpdateFunc function to run at the beginning of each iteration of the main loop
-     * @param {Function} renderFrameFunc function to run after gameUpdateFunc in each iteration of the main loop
-     */
-    setUpdateFunctions(gameUpdateFunc, renderFrameFunc) {
-        this._gameUpdate = gameUpdateFunc;
-        this._renderFrame = renderFrameFunc;
-    }
-
-    /**
-     * Starts the game loop if not already started, with an interval specified by the frames per second
-     */
-    start() {
-        if (!this.interval) {
-            this.interval = setInterval(this._update.bind(this), 1000 / this.fps);
-        }
-    }
-
-    /**
-     * Regularly called function to update game components and then to render a new frame 
-     */
-    _update() {
-        // Update Game
-        this._gameUpdate();
-
-        // Render Frame
-        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.context.fillStyle = "black";
-        this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
-        this._renderFrame();
-    } 
-}
 
 // Pixels to move the player by in each update of the frame
-const playerSpeed = 5;
-const maxLevel = 11;
+const PLAYER_SPEED = 5;
+const MAX_LEVEL = 11;
+const FPS = 50;
 
 /** 
  * Specific class to run the Slider Game. The game is a puzzle game
@@ -95,100 +38,144 @@ const maxLevel = 11;
  * solid block! Early levels are designed to teach concepts, while
  * later levels are designed to be more of a challenge. Average
  * playtime for a new player is between 20 and 30 minutes.
+ * 
+ * Requires a div id "game_container" to place the game inside of.
  */
-class SliderGame extends GameArea {
+class SliderGame {
     /**
-     * Creates the Slider Game, including the canvas.
-     * Requires div id "level_number" to write level number to,
-     * div id "level_title" to write title to, and
-     * div id "timer" to write time data to.
+     * Creates the Slider Game, including the canvas
      */
-    constructor(levels) {
+    constructor(levelData) {
         // Slider Game is run at 50 fps, which is intense for some computers, but at fewer frames
         // runs fairly choppily. I will leave this for now, and maybe revise later
-        super(500, 500, 50);
-        super.setUpdateFunctions(this._sliderGameUpdate.bind(this), this._sliderRenderFrame.bind(this));
+
+        // Add game document elements
+        this._initGameElements();
 
         // All local variables
-        this.levels = levels;
-        this.level = 0;
-        this.levelGrid = [];
-        this.player = {x: 0, y: 0, xVel: 0, yVel: 0, dir: 'none', startedSliding: false};
-        this.toggleTilesState = {};
+        this.levelData = levelData;
+        this.levelNum = 11;
         this.accumulatedTime = 0;
         this.lastDate = Date.now();
         this.startHours = new Date(0).getHours();
         this.paused = false;
+        this.player = {
+            get x() {
+                return this._x;
+            },
+            set x(x) {
+                this._x = x; 
+                this.display.style.left = x + 'px';
+            },
+            get y() {
+                return this._y;
+            },
+            set y(y) {
+                this._y = y; 
+                this.display.style.top = y + 'px';
+            }, 
+            xVel: 0,
+            yVel: 0, 
+            dir: 'none', 
+            startedSliding: false,
+            display: this.playerDisplay
+        };
+        this.player.x = 0;
+        this.player.y = 0;
 
-        // References to document elements
-        this.levelNumber = document.getElementById("level_number");
-        this.levelTitle = document.getElementById("level_title");
-        this.timer = document.getElementById("timer");
-
-        // Add controls variables and event listeners
+        // Add control variables and event listeners
         this.unprocessedKeys = new Map();
-        document.addEventListener("keydown", (event) => {
-            this.unprocessedKeys.set(event.code, true);
+        document.addEventListener('keydown', (e) => {
+            e.preventDefault();
+            this.unprocessedKeys.set(e.code, true);
         });
-        document.addEventListener("keyup", (event) => {
-            this.unprocessedKeys.set(event.code, false);
-        });
-
-        this.mouseCommand = 'none';
-        this.mouseDown = false;
-        document.addEventListener("click", (event) => {
-            let dx = event.clientX - (this.canvas.getBoundingClientRect().left + this.player.x);
-            let dy = event.clientY - (this.canvas.getBoundingClientRect().top + this.player.y);
-            if (Math.abs(dx) > Math.abs(dy)) {
-                if (dx > 15 && dx < 200) {
-                    this.mouseCommand = "right";
-                }
-                else if (dx < -15 && dx > -200) {
-                    this.mouseCommand = "left";
-                }
-            }
-            else {
-                if (dy > 15 && dy < 200) {
-                    this.mouseCommand = "down";
-                }
-                else if (dy < -15 && dy > -200) {
-                    this.mouseCommand = "up";
-                }
-            }
+        document.addEventListener('keyup', (e) => {
+            e.preventDefault();
+            this.unprocessedKeys.set(e.code, false);
         });
 
         // Initialize level variables
-        this._setLevel(this.levels[this.level], this.level);
+        this._setLevel(this.levelNum);
+    }
+
+    /**
+     * Adds the DOM elements needed for the game into the game-container element
+     */
+    _initGameElements() {
+        let gameContainer = document.getElementById('game-container');
+
+        // Create the info bar that contains information that the user needs like level info
+        // and the current time, and keep track of the elements to modify later
+        let infobar = document.createElement('div');
+        infobar.id = 'info-bar';
+        infobar.append(this.levelNumberDisplay = document.createElement('div'));
+        infobar.append(this.levelTitleDisplay = document.createElement('div'));
+        infobar.append(this.timerDisplay = document.createElement('div'));
+        gameContainer.append(infobar);
+
+        let levelContainer = document.createElement('div');
+        levelContainer.id = 'level-container';
+        gameContainer.append(levelContainer);
+
+        // Next set up the canvas and context, where the game will be drawn
+        this.canvas = document.createElement('canvas');
+        this.canvas.id = 'level';
+        this.canvas.width = 500;
+        this.canvas.height = 500;
+        levelContainer.append(this.canvas);
+        this.context = this.canvas.getContext('2d');
+
+        // Put the player in the canvas- a 20px yellow square
+        this.playerDisplay = document.createElement('div');
+        this.playerDisplay.id = 'player'
+        levelContainer.append(this.playerDisplay);
+
+        // Set up pausing layer that will go overtop the player and level when paused
+        this.pauseLayer = document.createElement('div');
+        this.pauseLayer.id = 'pause';
+        this.pauseLayer.style.visibility = 'hidden';
+        levelContainer.append(this.pauseLayer);
+    }
+
+    /**
+     * Starts the game loop if not already started, with an interval specified by the frames per second
+     */
+    start() {
+        if (!this.interval) {
+            this.interval = setInterval(this._update.bind(this), 1000 / FPS);
+        }
     }
 
     /**
      * Updates the slider game components, including the paused state, 
      * time and player logic
      */
-    _sliderGameUpdate() {
+    _update() {
         // Pause or Unpause game
         if (this._keyPressed("Space")) {
             this.paused = !this.paused;
+            this.pauseLayer.style.visibility = (this.paused) ? 'visible' : 'hidden';
         }
 
-        // Update time
         this._updateTime();
         
         // If the game is won, check if the player wants to restart game
-        if (this.level > maxLevel) {
+        if (this.levelNum > MAX_LEVEL) {
+            this.pauseLayer.style.visibility = 'visible';
             if (this._keyPressed("KeyR")) {
+                this.pauseLayer.style.visibility = 'hidden';
                 this.accumulatedTime = 0;
                 this.lastDate = Date.now();
                 this.startHours = new Date(0).getHours();
-                this.level = 0;
-                this._setLevel(this.levels[this.level], this.level);
+                this.levelNum = 0;
+                this._setLevel();
                 return;
             }
         }
         else if (!this.paused) { // Otherwise, update the player logic
             if (this._updatePlayer()) {
-                if (this.level <= maxLevel) {
-                    this._setLevel(this.levels[this.level], this.level);
+                if (this.levelNum <= MAX_LEVEL) {
+                    this._setLevel();
                 }
             } 
         }
@@ -200,7 +187,7 @@ class SliderGame extends GameArea {
     _updateTime() {
         // Determine what to append to time text content, and update time if required
         let append = "";
-        if (this.level > maxLevel) {
+        if (this.levelNum > MAX_LEVEL) {
             append = " < WINNING TIME!"
         }
         else if (this.paused) {
@@ -215,12 +202,12 @@ class SliderGame extends GameArea {
         let nowDate = new Date(this.accumulatedTime);
         let twoDigitFormat = new Intl.NumberFormat('en-US', {minimumIntegerDigits: 2});
         if (nowDate.getHours() - this.startHours > 0) {
-            this.timer.textContent = `Time: ${nowDate.getHours() - this.startHours}:`+
+            this.timerDisplay.textContent = `Time: ${nowDate.getHours() - this.startHours}:`+
                                             `${twoDigitFormat.format(nowDate.getMinutes())}:` +
                                             `${twoDigitFormat.format(nowDate.getSeconds())}${append}`;
         }
         else {
-            this.timer.textContent = `Time: ${twoDigitFormat.format(nowDate.getMinutes())}:` +
+            this.timerDisplay.textContent = `Time: ${twoDigitFormat.format(nowDate.getMinutes())}:` +
                                             `${twoDigitFormat.format(nowDate.getSeconds())}${append}`;
         }
     }
@@ -241,25 +228,25 @@ class SliderGame extends GameArea {
         if (this.player.dir == 'none') {
             this.player.xVel = 0;
             this.player.yVel = 0;  
-            if (this._hasCommand("left")) {
-                this.player.dir = "left";
+            if (this._hasCommand('left')) {
+                this.player.dir = 'left';
                 this.player.startedSliding = true;
-                this.player.xVel = -playerSpeed;
+                this.player.xVel = -PLAYER_SPEED;
             }
-            else if (this._hasCommand("down")) {
-                this.player.dir = "down";
+            else if (this._hasCommand('down')) {
+                this.player.dir = 'down';
                 this.player.startedSliding = true;
-                this.player.yVel = playerSpeed;
+                this.player.yVel = PLAYER_SPEED;
             }
-            else if (this._hasCommand("right")) {
-                this.player.dir = "right";
+            else if (this._hasCommand('right')) {
+                this.player.dir = 'right';
                 this.player.startedSliding = true;
-                this.player.xVel = playerSpeed;
+                this.player.xVel = PLAYER_SPEED;
             }
-            else if (this._hasCommand("up")) {
-                this.player.dir = "up";
+            else if (this._hasCommand('up')) {
+                this.player.dir = 'up';
                 this.player.startedSliding = true;
-                this.player.yVel = -playerSpeed;
+                this.player.yVel = -PLAYER_SPEED;
             }
         }
 
@@ -271,42 +258,45 @@ class SliderGame extends GameArea {
         if (!this.player.startedSliding && 
             (this.player.x / 20) % 1 == 0 && (this.player.y / 20) % 1 == 0 && 
             this.player.dir != 'none') {
-            switch (this.levelGrid[this.player.y / 20][this.player.x / 20]) {
+            switch (this.level.grid[this.player.y / 20][this.player.x / 20]) {
                 // 2 is lava- returning true resets the level
                 case 2: 
                     return true;
-                // 4 is orange buttons- toggle the tile state
+                // 4 is orange buttons- toggle the tile state.
                 case 4: 
-                    this.toggleTilesState['orange'] = !this.toggleTilesState['orange'];
+                    this.level.toggleTilesState['orange'] = !this.level.toggleTilesState['orange'];
+                    this._renderLevel();
                     break;
                 // 6 is teal buttons- toggle the tile state
                 case 6: 
-                    this.toggleTilesState['teal'] = !this.toggleTilesState['teal'];
+                    this.level.toggleTilesState['teal'] = !this.level.toggleTilesState['teal'];
+                    this._renderLevel();
                     break;
                 // 8 is blue buttons- toggle the tile state
                 case 8: 
-                    this.toggleTilesState['blue'] = !this.toggleTilesState['blue'];
+                    this.level.toggleTilesState['blue'] = !this.level.toggleTilesState['blue'];
+                    this._renderLevel();
                     break;
                 // 10 is pink teleporters- move player to other teleporter location
                 case 10: 
-                    if (this.player.x / 20 == this.levels[this.level].tpLocations['pink'][0].x &&
-                        this.player.y / 20 == this.levels[this.level].tpLocations['pink'][0].y) {
-                        this.player.x = this.levels[this.level].tpLocations['pink'][1].x * 20;
-                        this.player.y = this.levels[this.level].tpLocations['pink'][1].y * 20;
+                    if (this.player.x / 20 == this.level.tpLocations['pink'][0].x &&
+                        this.player.y / 20 == this.level.tpLocations['pink'][0].y) {
+                        this.player.x = this.level.tpLocations['pink'][1].x * 20;
+                        this.player.y = this.level.tpLocations['pink'][1].y * 20;
                     } else {
-                        this.player.x = this.levels[this.level].tpLocations['pink'][0].x * 20;
-                        this.player.y = this.levels[this.level].tpLocations['pink'][0].y * 20;
+                        this.player.x = this.level.tpLocations['pink'][0].x * 20;
+                        this.player.y = this.level.tpLocations['pink'][0].y * 20;
                     }
                     break;
                 // 11 is purple teleporters- move player to other teleporter location
                 case 11: 
-                    if (this.player.x / 20 == this.levels[this.level].tpLocations['purple'][0].x &&
-                        this.player.y / 20 == this.levels[this.level].tpLocations['purple'][0].y) {
-                        this.player.x = this.levels[this.level].tpLocations['purple'][1].x * 20;
-                        this.player.y = this.levels[this.level].tpLocations['purple'][1].y * 20;
+                    if (this.player.x / 20 == this.level.tpLocations['purple'][0].x &&
+                        this.player.y / 20 == this.level.tpLocations['purple'][0].y) {
+                        this.player.x = this.level.tpLocations['purple'][1].x * 20;
+                        this.player.y = this.level.tpLocations['purple'][1].y * 20;
                     } else {
-                        this.player.x = this.levels[this.level].tpLocations['purple'][0].x * 20;
-                        this.player.y = this.levels[this.level].tpLocations['purple'][0].y * 20;
+                        this.player.x = this.level.tpLocations['purple'][0].x * 20;
+                        this.player.y = this.level.tpLocations['purple'][0].y * 20;
                     }
                     break;
             }
@@ -320,14 +310,14 @@ class SliderGame extends GameArea {
         // moving in the direction that it is. This allows us to stop the movement if
         // the location the hero is moving into is a solid block.
         let xIndex, yIndex;
-        if (this.player.dir == "right") {
-            xIndex = Math.floor((this.player.x + this.player.xVel + (20 - playerSpeed)) / 20);
+        if (this.player.dir == 'right') {
+            xIndex = Math.floor((this.player.x + this.player.xVel + (20 - PLAYER_SPEED)) / 20);
         }
         else {
             xIndex = Math.floor((this.player.x + this.player.xVel) / 20);
         }
-        if (this.player.dir == "down") {
-            yIndex = Math.floor((this.player.y + this.player.yVel + (20 - playerSpeed)) / 20);
+        if (this.player.dir == 'down') {
+            yIndex = Math.floor((this.player.y + this.player.yVel + (20 - PLAYER_SPEED)) / 20);
         }
         else {
             yIndex = Math.floor((this.player.y + this.player.yVel) / 20);
@@ -337,13 +327,13 @@ class SliderGame extends GameArea {
         // is valid, stop; otherwise update location
         if (this.player.dir != 'none') {
             if (xIndex >= 0 && xIndex < 25 && yIndex >= 0 && yIndex < 25) {
-                if (this.levelGrid[yIndex][xIndex] == 1 ||
-                        this.toggleTilesState['orange']  && this.levelGrid[yIndex][xIndex] == 5 ||
-                        this.toggleTilesState['teal']    && this.levelGrid[yIndex][xIndex] == 7 ||
-                        this.toggleTilesState['blue']    && this.levelGrid[yIndex][xIndex] == 9 ||
-                        !this.toggleTilesState['orange'] && this.levelGrid[yIndex][xIndex] == 12 ||
-                        !this.toggleTilesState['teal']   && this.levelGrid[yIndex][xIndex] == 13 ||
-                        !this.toggleTilesState['blue']   && this.levelGrid[yIndex][xIndex] == 14 ) {
+                if (this.level.grid[yIndex][xIndex] == 1 ||
+                        this.level.toggleTilesState['orange']  && this.level.grid[yIndex][xIndex] == 5 ||
+                        this.level.toggleTilesState['teal']    && this.level.grid[yIndex][xIndex] == 7 ||
+                        this.level.toggleTilesState['blue']    && this.level.grid[yIndex][xIndex] == 9 ||
+                        !this.level.toggleTilesState['orange'] && this.level.grid[yIndex][xIndex] == 12 ||
+                        !this.level.toggleTilesState['teal']   && this.level.grid[yIndex][xIndex] == 13 ||
+                        !this.level.toggleTilesState['blue']   && this.level.grid[yIndex][xIndex] == 14 ) {
                     this.player.dir = 'none';
                 }
                 else {
@@ -355,15 +345,15 @@ class SliderGame extends GameArea {
                 this.player.dir = 'none';
             }
         }
-        
+
         // The final check is for the goal. This is done here because the goal can only be said
         // to be reached if the player is stopped on it.
-        if (this.player.dir == 'none' && this.levelGrid[this.player.y / 20][this.player.x / 20] == 3) {
-            this.level++;
+        if (this.player.dir === 'none' && this.level.grid[this.player.y / 20][this.player.x / 20] === 3) {
+            this.levelNum++;
             return true;
         }
 
-        // If the function made it this far, then the level does not need to be reset
+        // If we've made it this far, we don't need to advance the level
         return false;
     }
 
@@ -372,7 +362,7 @@ class SliderGame extends GameArea {
      * and then the player on top of it, and then the foreground greying out if
      * the game has been won or paused.
      */
-    _sliderRenderFrame() {
+    _renderLevel() {
         // Render the background
         let left = 0;
         let top = 0;
@@ -380,7 +370,7 @@ class SliderGame extends GameArea {
             for (let col = 0; col < 25; col++) {
                 this.context.fillStyle = colorMap.get("border");
                 this.context.fillRect(left + col * 20, top + row * 20, 20, 20);
-                switch (this.levelGrid[row][col]) {
+                switch (this.level.grid[row][col]) {
                     case 0: 
                         this.context.fillStyle = colorMap.get("floor");
                         this.context.fillRect(left + col * 20 + 1, top + row * 20 + 1, 18, 18);
@@ -405,7 +395,7 @@ class SliderGame extends GameArea {
                         this.context.fillRect(left + col * 20, top + row * 20 + 10, 10, 10);
                         break;
                     case 5: 
-                        if (this.toggleTilesState['orange']) {
+                        if (this.level.toggleTilesState['orange']) {
                             this.context.fillStyle = colorMap.get("disappearing1a");
                             this.context.fillRect(left + col * 20 + 1, top + row * 20 + 1, 18, 18);
                         }
@@ -422,7 +412,7 @@ class SliderGame extends GameArea {
                         this.context.fillRect(left + col * 20, top + row * 20 + 10, 10, 10);
                         break;
                     case 7: 
-                        if (this.toggleTilesState['teal']) {
+                        if (this.level.toggleTilesState['teal']) {
                             this.context.fillStyle = colorMap.get("disappearing2a");
                             this.context.fillRect(left + col * 20 + 1, top + row * 20 + 1, 18, 18);
                         }
@@ -439,7 +429,7 @@ class SliderGame extends GameArea {
                         this.context.fillRect(left + col * 20, top + row * 20 + 10, 10, 10);
                         break;
                     case 9: 
-                        if (this.toggleTilesState['blue']) {
+                        if (this.level.toggleTilesState['blue']) {
                             this.context.fillStyle = colorMap.get("disappearing3a");
                             this.context.fillRect(left + col * 20 + 1, top + row * 20 + 1, 18, 18);
                         }
@@ -463,7 +453,7 @@ class SliderGame extends GameArea {
                         this.context.fillRect(left + col * 20, top + row * 20 + 10, 10, 10);
                         break;
                     case 12: 
-                        if (!this.toggleTilesState['orange']) {
+                        if (!this.level.toggleTilesState['orange']) {
                             this.context.fillStyle = colorMap.get("disappearing1a");
                             this.context.fillRect(left + col * 20 + 1, top + row * 20 + 1, 18, 18);
                         }
@@ -473,7 +463,7 @@ class SliderGame extends GameArea {
                         }
                         break;
                     case 13:
-                        if (!this.toggleTilesState['teal']) {
+                        if (!this.level.toggleTilesState['teal']) {
                             this.context.fillStyle = colorMap.get("disappearing2a");
                             this.context.fillRect(left + col * 20 + 1, top + row * 20 + 1, 18, 18);
                         }
@@ -483,7 +473,7 @@ class SliderGame extends GameArea {
                         }
                         break;
                     case 14:
-                        if (!this.toggleTilesState['blue']) {
+                        if (!this.level.toggleTilesState['blue']) {
                             this.context.fillStyle = colorMap.get("disappearing3a");
                             this.context.fillRect(left + col * 20 + 1, top + row * 20 + 1, 18, 18);
                         }
@@ -495,31 +485,31 @@ class SliderGame extends GameArea {
                 }
             }
         }
-        // Render the player
-        this.context.fillStyle = colorMap.get("hero");
-        this.context.fillRect(this.player.x, this.player.y, 20, 20);
-
-        // If game is paused or the game is won, grey out the game
-        if (this.paused || this.level > maxLevel) {
-            this.context.fillStyle = colorMap.get("pause");
-            this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
-        }
     }
 
     /**
      * Sets (or resets) all level information, including the player's location and velocity.
      */
-    _setLevel(level, levelNum) {
-        this.levelGrid = level.grid;
-        this.player.x = level.spawn.x * 20;
-        this.player.y = level.spawn.y * 20;
+    _setLevel() {
+        // If the current level is invalid, don't try to set the level
+        if (this.levelNum < 0 || this.levelNum > MAX_LEVEL) {
+            return;
+        }
+
+        // (Re)set the level data and canvas
+        this.level = JSON.parse(JSON.stringify(this.levelData[this.levelNum]));
+        this._renderLevel();
+
+        // (Re)set the player position and movement data
+        this.player.x = this.level.spawn.x * 20;
+        this.player.y = this.level.spawn.y * 20;
         this.player.xVel = 0;
         this.player.yVel = 0;
         this.player.dir = 'none';
-        this.toggleTilesState = Object.assign({}, level.toggleTilesState);
 
-        this.levelNumber.textContent = "Level: " + (levelNum + 1);
-        this.levelTitle.textContent = level.title;
+        // Update the level displays
+        this.levelNumberDisplay.textContent = `Level: ${this.levelNum + 1}`;
+        this.levelTitleDisplay.textContent = this.level.title;
     }
     
     /**
@@ -540,26 +530,22 @@ class SliderGame extends GameArea {
     /**
      * Checks for a command in the specified direction.
      * 
-     * @param {String} direction direction to check for a command. Should be "up", "down", "left", or "right"
+     * @param {String} direction direction to check for a command. Should be 'up', 'down', 'left', or 'right'
      * @returns {Boolean} whether or not the specified direction has a command waiting
      */
     _hasCommand(direction) {
-        let temp = this.mouseCommand;
-        if (this.mouseCommand == direction) {
-            this.mouseCommand = 'none';
-        }
         
-        if (direction == "left") {
-            return this._keyPressed("KeyA") || this._keyPressed("ArrowLeft") || temp == "left";
+        if (direction == 'left') {
+            return this._keyPressed("KeyA") || this._keyPressed("ArrowLeft");
         }
-        else if (direction == "right") {
-            return this._keyPressed("KeyD") || this._keyPressed("ArrowRight") || temp == "right";
+        else if (direction == 'right') {
+            return this._keyPressed("KeyD") || this._keyPressed("ArrowRight");
         }
-        else if (direction == "down") {
-            return this._keyPressed("KeyS") || this._keyPressed("ArrowDown") || temp == "down";
+        else if (direction == 'down') {
+            return this._keyPressed("KeyS") || this._keyPressed("ArrowDown");
         }
-        else if (direction == "up") {
-            return this._keyPressed("KeyW") || this._keyPressed("ArrowUp") || temp == "up";
+        else if (direction == 'up') {
+            return this._keyPressed("KeyW") || this._keyPressed("ArrowUp");
         }
     }
 }
