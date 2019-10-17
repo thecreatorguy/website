@@ -135,7 +135,6 @@ nav li + li > a {
 #content-container {
   background-color: #E0FBFC;
   flex: 1 1 auto;
-  margin-bottom: 3em;
   position: relative;
 }
 @media only screen and (max-width: 900px) {
@@ -197,11 +196,16 @@ footer .fab {
   flex: 0 1 auto;
   height: 5em;
 }
+@media only screen and (max-width: 900px) {
+  #header-spacer {
+    height: 2.5em;
+  }
+}
 
 main {
   background-color: white;
   flex: 1 1 auto;
-  padding: 1em;
+  padding: 1em 1em 4em;
 }
 main h1 {
   font-weight: normal;

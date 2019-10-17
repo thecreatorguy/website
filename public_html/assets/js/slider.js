@@ -54,7 +54,7 @@ class SliderGame {
 
         // All local variables
         this.levelData = levelData;
-        this.levelNum = 11;
+        this.levelNum = 0;
         this.accumulatedTime = 0;
         this.lastDate = Date.now();
         this.startHours = new Date(0).getHours();

@@ -135,7 +135,6 @@ nav li + li > a {
 #content-container {
   background-color: #E0FBFC;
   flex: 1 1 auto;
-  margin-bottom: 3em;
   position: relative;
 }
 @media only screen and (max-width: 900px) {

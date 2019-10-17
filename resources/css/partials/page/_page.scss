@@ -25,12 +25,15 @@
         );
     flex: 0 1 auto;
     height: 5em;
+    @media only screen and (max-width: $content-width) {
+        height: 2.5em;
+    }
 }
 
 main {
     background-color: white;
     flex: 1 1 auto;
-    padding: 1em;
+    padding: 1em 1em 4em;
     h1 {
         font-weight: normal;
         text-align: center;
