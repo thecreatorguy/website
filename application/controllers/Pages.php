@@ -63,7 +63,6 @@ class Pages extends CI_Controller
         if ($page === 'slider') {
             $data['jsonData']['level-data'] = file_get_contents(__DIR__ . '/../../resources/data/slider-levels.json');
         }
-        file_put_contents(__DIR__ . '/out', json_encode($data));
         $this->load->view('page.phtml', $data);
     }
 
