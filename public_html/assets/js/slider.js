@@ -187,13 +187,7 @@ class SliderGame {
     _updateTime() {
         // Determine what to append to time text content, and update time if required
         let append = "";
-        if (this.levelNum > MAX_LEVEL) {
-            append = " < WINNING TIME!"
-        }
-        else if (this.paused) {
-            append = " | PAUSED";
-        }
-        else {
+        if (this.levelNum <= MAX_LEVEL && !this.paused) {
             this.accumulatedTime += Date.now() - this.lastDate;
         }
         this.lastDate = Date.now();

@@ -2,16 +2,20 @@
     background-color: $tertiary-color;
     border-radius: 3px;
     box-sizing: content-box;
-    margin: 2em auto;
     padding: 1em;
     width: 500px;
     #info-bar {
         background-color: black;
         color: white;
-        display: flex;
+        display: grid;
         font-size: 1.2em;
-        justify-content: space-between;
+        grid-template-columns: 6em auto 6em;
+        grid-template-rows: auto;
+        justify-items: left;
         padding: 0.25em 0.5em;
+        div:nth-child(2) {
+            justify-self: center;
+        }
     }
     #level-container {
         position: relative;
