@@ -3,29 +3,34 @@
 @import 'partials/slider-game';
 
 #slider-game {
-    display: flex;
-    flex-direction: row;
     margin-top: 1em;
-    @media only screen and (max-width: $content-width) {
-        flex-direction: column;
-        margin: 1em auto 0;
-    }
     @media only screen and (max-width: $narrow-width) {
         display: none;
     }
+    #game-container {
+        margin-left: auto;
+        margin-right: auto;
+    }
     #info {
-        margin: 2em 1em 0;
+        margin: 0 auto;
+        width: 500px;
         h3 {
-            margin-bottom: 1em;
+            margin: 0.4em 0 0.1em 3.5em;
         }
         dl {
+            text-align: center;
             font-size: 0.9em;
         }
         dt {
+            display: inline;
             font-weight: bold;
         }
         dd {
+            display: inline;
             margin-bottom: 0.5em;
+        }
+        dd+dt {
+            margin-left: 0.5em;
         }
     }
 }

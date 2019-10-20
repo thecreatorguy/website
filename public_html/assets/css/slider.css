@@ -261,35 +261,38 @@ main h1 {
 }
 
 #slider-game {
-  display: flex;
-  flex-direction: row;
   margin-top: 1em;
-}
-@media only screen and (max-width: 900px) {
-  #slider-game {
-    flex-direction: column;
-    margin: 1em auto 0;
-  }
 }
 @media only screen and (max-width: 500px) {
   #slider-game {
     display: none;
   }
 }
+#slider-game #game-container {
+  margin-left: auto;
+  margin-right: auto;
+}
 #slider-game #info {
-  margin: 2em 1em 0;
+  margin: 0 auto;
+  width: 500px;
 }
 #slider-game #info h3 {
-  margin-bottom: 1em;
+  margin: 0.4em 0 0.1em 3.5em;
 }
 #slider-game #info dl {
+  text-align: center;
   font-size: 0.9em;
 }
 #slider-game #info dt {
+  display: inline;
   font-weight: bold;
 }
 #slider-game #info dd {
+  display: inline;
   margin-bottom: 0.5em;
+}
+#slider-game #info dd + dt {
+  margin-left: 0.5em;
 }
 
 #alt-content {
