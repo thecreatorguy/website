@@ -50,11 +50,26 @@ defined('BASEPATH') or exit('No direct script access allowed');
 |       my-controller/my-method -> my_controller/my_method
 */
 
-$route['default_controller']   = 'pages';
-$route['message']              = 'message/send';
-$route['projects']             = 'pages/view/projects';
-$route['projects/(:any)']      = 'pages/view/$1';
-$route['(:any)']               = 'pages/view/$1';
+// API endpoints
+$route['api/article']['GET']           = 'api/apiArticleController/index';
+$route['api/article/(:any)']['GET']    = 'api/apiArticleController/show/$1';
+$route['api/article']['POST']          = 'api/apiArticleController/store';
+$route['api/article/(:any)']['PUT']    = 'api/apiArticleController/update/$1';
+$route['api/article/(:any)']['DELETE'] = 'api/apiArticleController/destroy/$1';
+
+// Blog Routes
+$route['blog/article/(:any)'] = 'blogController/view/$1';
+$route['blog']                = 'blogController';
+
+// Project Route
+$route['projects/(:any)'] = 'pageController/view/$1';
+
+// Message sending route from contact me page
+$route['message']['POST'] = 'messageController/send';
+
+// Defaults
+$route['(:any)']               = 'pageController/view/$1';
+$route['default_controller']   = 'pageController';
 $route['index_page']           = '';
 $route['404_override']         = '';
 $route['translate_uri_dashes'] = false;

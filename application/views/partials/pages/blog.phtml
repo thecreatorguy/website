@@ -1,1 +1,4 @@
-<p>some blog content</p>
+<h1>Blog</h1>
+<?php foreach ($articles as $article): ?>
+<?= json_encode($article) ?><br/>
+<?php endforeach ?>

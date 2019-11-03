@@ -5,7 +5,7 @@
  *
  * @author  Tim Johnson <tim@itstimjohnson.com>
  */
-class Message extends CI_Controller
+class MessageController extends CI_Controller
 {
     public function send()
     {

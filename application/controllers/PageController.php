@@ -5,21 +5,17 @@
  *
  * @author  Tim Johnson <tim@itstimjohnson.com>
  */
-class Pages extends CI_Controller
+class PageController extends CI_Controller
 {
     // Map of pages (/page) to the name/title
     const PAGE_NAMES = [
         'home'         => 'Home',
-        'blog'         => 'Blog',
         'projects'     => 'Projects',
         'contact'      => 'Contact Me',
         'confirmation' => 'Confirmation',
         'slider'       => 'Slider Game',
         'resume'       => 'Resume',
     ];
-
-    // Path to where partial templates are located
-    const PARTIAL_PATH = __DIR__ . '/../views/partials';
 
     /**
      * Create the index of the website, loading the home page
@@ -57,8 +53,7 @@ class Pages extends CI_Controller
             'head'   => $this->partial('head', $headData),
             'header' => $this->partial('header'),
             'footer' => $this->partial('footer'),
-            'title'  => self::PAGE_NAMES[$page],
-            'page'   => $this->partial('pages/' . $page),
+            'page'   => $this->partial('pages/' . $page, ['title' => self::PAGE_NAMES[$page]]),
         ];
         if ($page === 'slider') {
             $data['jsonData']['level-data'] = file_get_contents(__DIR__ . '/../../resources/data/slider-levels.json');
