@@ -1,4 +1,10 @@
 <h1>Blog</h1>
-<?php foreach ($articles as $article): ?>
-<?= json_encode($article) ?><br/>
-<?php endforeach ?>
+<p>Want to hear about all of the things that I find interesting enough to talk about? You've come to the right place!</p>
+<table id="article-list">
+    <?php foreach ($articles as $article): ?>
+    <tr>
+        <td><?= DateTime::createFromFormat(DATE_ATOM, $article['release_at'])->format('D, d M y') ?></td>
+        <td><a class="plain-link" href="/blog/article/<?= str_replace(' ', '-', strtolower($article['title'])) ?>"><?= $article['title'] ?></a></td>
+    </tr>
+    <?php endforeach ?>
+</table>

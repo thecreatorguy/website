@@ -10,17 +10,17 @@
         a {
             font-size: 1.2em;
             padding: 0.2em 0.5em;
-            &+a {
-                margin-left: 0.25em;
-            }
+        }
+        a+a {
+            margin-left: 0.25em;
         }
     }
     h2 {
+        border-bottom: 1px solid gray;
         font-weight: normal;
         padding-bottom: 3px;
         padding-left: 3em;
         margin: 1em 2em 0.5em;
-        border-bottom: 1px solid gray;
         @media only screen and (max-width: $content-width) {
             padding-left: 0;
             text-align: center;

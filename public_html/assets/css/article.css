@@ -212,78 +212,55 @@ main h1 {
   text-align: center;
 }
 
-.project .links {
-  margin: 0.5em 0 1em 2em;
+main h1.title {
+  border-bottom: 1px solid gray;
+  padding-bottom: 3px;
+  padding-left: 2em;
+  margin: 0 1em 0.5em;
+  text-align: left;
 }
 @media only screen and (max-width: 900px) {
-  .project .links {
-    margin-left: 0;
-    text-align: center;
+  main h1.title {
+    font-size: 1.5em;
   }
 }
-.project .links a {
-  font-size: 1.2em;
-  padding: 0.2em 0.5em;
-}
-.project .links a + a {
-  margin-left: 0.25em;
-}
-.project h2 {
-  border-bottom: 1px solid gray;
-  font-weight: normal;
-  padding-bottom: 3px;
-  padding-left: 3em;
-  margin: 1em 2em 0.5em;
-}
-@media only screen and (max-width: 900px) {
-  .project h2 {
+@media only screen and (max-width: 500px) {
+  main h1.title {
+    font-size: 1.2em;
     padding-left: 0;
     text-align: center;
   }
 }
-.project p {
-  padding: 0 2em;
-}
-@media only screen and (max-width: 900px) {
-  .project p {
-    padding: 0;
-  }
+main #dates {
+  margin: 0 0 2em 4em;
 }
 @media only screen and (max-width: 500px) {
-  .project p {
-    font-size: 0.9em;
+  main #dates {
+    font-size: 0.8em;
+    margin-left: 0;
+    text-align: center;
   }
 }
-.project p + p {
-  margin-top: 1em;
+main #dates span + span {
+  border-left: 1px solid gray;
+  margin-left: 1em;
+  padding-left: 1em;
 }
-.project img {
-  background-color: #D8D8F6;
+main #content {
+  padding: 0 2.5em;
+  font-size: 1.1em;
+}
+@media only screen and (max-width: 500px) {
+  main #content {
+    font-size: 0.95em;
+  }
+}
+main #content .poem {
+  background-color: #DDD;
   border-radius: 3px;
-  display: block;
-  margin: 1em 2em;
-  padding: 1em;
-}
-@media only screen and (max-width: 900px) {
-  .project img {
-    margin: 1em auto;
-  }
-}
-.project img:nth-of-type(odd) {
-  float: right;
-}
-@media only screen and (max-width: 900px) {
-  .project img:nth-of-type(odd) {
-    float: none;
-  }
-}
-.project img:nth-of-type(even) {
-  float: left;
-}
-@media only screen and (max-width: 900px) {
-  .project img:nth-of-type(even) {
-    float: none;
-  }
+  padding: 0.25em 0 0.25em 2em;
+  width: 650px;
+  max-width: 100%;
 }
 
-/*# sourceMappingURL=projects.css.map */
+/*# sourceMappingURL=article.css.map */

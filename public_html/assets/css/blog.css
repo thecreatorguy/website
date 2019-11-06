@@ -212,4 +212,40 @@ main h1 {
   text-align: center;
 }
 
+main p {
+  padding: 1em;
+  border-bottom: 1px solid gray;
+}
+main #article-list {
+  border-spacing: 0;
+  padding: 1em;
+  width: 100%;
+}
+main #article-list td {
+  padding: 0.25em 1em;
+}
+main #article-list td:nth-child(2n-1) {
+  text-align: center;
+  width: 10em;
+}
+@media only screen and (max-width: 500px) {
+  main #article-list td:nth-child(2n-1) {
+    font-size: 0.75em;
+    padding: 0.25em 0.5em;
+    width: 9em;
+  }
+}
+main #article-list td:nth-child(2n) {
+  border-left: 1px solid gray;
+  font-size: 1.3em;
+}
+@media only screen and (max-width: 500px) {
+  main #article-list td:nth-child(2n) {
+    font-size: 1em;
+  }
+}
+main #article-list tr:nth-child(n+2) td {
+  border-top: 1px solid gray;
+}
+
 /*# sourceMappingURL=blog.css.map */

@@ -23,11 +23,19 @@ class BlogController extends CI_Controller
      */
     public function index()
     {
+        $articles = array_filter($this->article->all() ?? [], function ($article) {
+            return $article['release_at'] && $article['release_at'] <= date(DATE_ATOM);
+        });
+        usort($articles, function ($a, $b) {
+            return DateTime::createFromFormat(DATE_ATOM, $b['release_at'])->getTimestamp() -
+                DateTime::createFromFormat(DATE_ATOM, $a['release_at'])->getTimestamp();
+        });
+
         $data = [
             'head'   => $this->partial('head', ['page_name' => 'Blog', 'css_file' => 'blog']),
             'header' => $this->partial('header'),
             'footer' => $this->partial('footer'),
-            'page'   => $this->partial('pages/blog', ['articles' => $this->article->all() ?? []]),
+            'page'   => $this->partial('pages/blog', ['articles' => $articles]),
         ];
 
         $this->load->view('page.phtml', $data);
@@ -42,12 +50,12 @@ class BlogController extends CI_Controller
     public function view($title)
     {
         $article = $this->article->findByTitle($title);
-        if (is_null($article)) {
-            abort(404);
+        if (is_null($article) || !($article['release_at'] ?? false) || $article['release_at'] > date(DATE_ATOM)) {
+            show_404();
         }
 
         $data = [
-            'head'   => $this->partial('head', ['page_name' => 'Blog', 'css_file' => 'blog']),
+            'head'   => $this->partial('head', ['page_name' => $article['title'], 'css_file' => 'article']),
             'header' => $this->partial('header'),
             'footer' => $this->partial('footer'),
             'page'   => $this->partial('pages/article', ['article' =>  $article]),

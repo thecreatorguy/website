@@ -1,0 +1,47 @@
+@import 'partials/page/page';
+
+main {
+    h1.title {
+        border-bottom: 1px solid gray;
+        padding-bottom: 3px;
+        padding-left: 2em;
+        margin: 0 1em 0.5em;
+        text-align: left;
+        @media only screen and (max-width: $content-width) {
+            font-size: 1.5em;
+        }
+        @media only screen and (max-width: $narrow-width) {
+            font-size: 1.2em;
+            padding-left: 0;
+            text-align: center;
+        }
+    }
+
+    #dates {
+        margin: 0 0 2em 4em;
+        @media only screen and (max-width: $narrow-width) {
+            font-size: 0.8em;
+            margin-left: 0;
+            text-align: center;
+        }
+        span+span {
+            border-left: 1px solid gray;
+            margin-left: 1em;
+            padding-left: 1em;
+        }
+    }
+    #content {
+        padding: 0 2.5em;
+        font-size: 1.1em;
+        @media only screen and (max-width: $narrow-width) {
+            font-size: 0.95em;
+        }
+        .poem {
+            background-color: #DDD;
+            border-radius: 3px;
+            padding: 0.25em 0 0.25em 2em;
+            width: 650px;
+            max-width: 100%;
+        }
+    }
+}

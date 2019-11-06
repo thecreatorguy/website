@@ -56,7 +56,7 @@ class ArticleModel extends CI_Model
         // This is a shorthand for searching for a title with either a space or a hyphen-
         // there will most likely never be any ambiguity introduced by this but I can solve
         // it then if it comes up.
-        $match = str_replace('-', '?', strtolower($title));
+        $match = str_replace('-', '_', strtolower($title));
         return $this->db->from($this->table)
             ->like('title', $match, 'none', false)
             ->get()
