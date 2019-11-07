@@ -143,7 +143,7 @@ class ApiArticleController extends CI_Controller
      */
     private function authenticate()
     {
-        $authorization = $this->input->get_request_header('Authorization');
+        $authorization = $this->input->get_request_header('Auth');
         if (!$authorization) {
             $this->jsonResponse(['message' => 'Missing authorization header'], 403);
         }
