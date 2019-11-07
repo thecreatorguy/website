@@ -73,11 +73,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $active_group = 'default';
 $query_builder = true;
 
+$databaseCredentials = explode("\n", file_get_contents(__DIR__ . '/../../database-credentials.txt'));
 $db['default'] = [
     'dsn'      => '',
     'hostname' => 'localhost',
-    'username' => 'root',
-    'password' => '',
+    'username' => $databaseCredentials[0],
+    'password' => $databaseCredentials[1],
     'database' => 'timjohns_website',
     'dbdriver' => 'mysqli',
     'dbprefix' => '',

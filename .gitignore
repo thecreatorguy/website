@@ -12,3 +12,4 @@ application/logs/*
 
 email-password.txt
 api-credentials.txt
+database-credentials.txt
