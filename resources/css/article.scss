@@ -34,14 +34,21 @@ main {
         padding: 0 2.5em;
         font-size: 1.1em;
         @media only screen and (max-width: $narrow-width) {
+            padding: 0;
             font-size: 0.95em;
+        }
+        .poem, p {
+            margin-bottom: 0.5em;
         }
         .poem {
             background-color: #DDD;
             border-radius: 3px;
-            padding: 0.25em 0 0.25em 2em;
+            padding: 0.25em 0.5em 0.25em 2em;
             width: 650px;
             max-width: 100%;
+            p {
+                margin-bottom: 0;
+            }
         }
     }
 }

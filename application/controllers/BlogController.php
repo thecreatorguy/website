@@ -47,9 +47,9 @@ class BlogController extends CI_Controller
      * @param  string $title  Title of the article to load
      * @return void
      */
-    public function view($title)
+    public function view($id)
     {
-        $article = $this->article->findByTitle($title);
+        $article = $this->article->find($id);
         if (is_null($article) || !($article['release_at'] ?? false) || $article['release_at'] > date(DATE_ATOM)) {
             show_404();
         }

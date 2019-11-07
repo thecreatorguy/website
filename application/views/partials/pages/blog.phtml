@@ -4,7 +4,7 @@
     <?php foreach ($articles as $article): ?>
     <tr>
         <td><?= DateTime::createFromFormat(DATE_ATOM, $article['release_at'])->format('D, d M y') ?></td>
-        <td><a class="plain-link" href="/blog/article/<?= str_replace(' ', '-', strtolower($article['title'])) ?>"><?= $article['title'] ?></a></td>
+        <td><a class="plain-link" href="/blog/article/<?= $article['id'] ?>"><?= $article['title'] ?></a></td>
     </tr>
     <?php endforeach ?>
 </table>
