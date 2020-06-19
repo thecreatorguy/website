@@ -13,3 +13,5 @@ application/logs/*
 email-password.txt
 api-credentials.txt
 database-credentials.txt
+
+public_html/assets/js/jumpybird.js
