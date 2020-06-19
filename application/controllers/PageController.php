@@ -15,6 +15,7 @@ class PageController extends CI_Controller
         'confirmation' => 'Confirmation',
         'slider'       => 'Slider Game',
         'resume'       => 'Resume',
+        'jumpybird'    => 'Jumpy Bird AI',
     ];
 
     /**
@@ -48,6 +49,9 @@ class PageController extends CI_Controller
         $headData = ['page_name' => self::PAGE_NAMES[$page], 'css_file' => $page];
         if ($page === 'slider') {
             $headData['scripts'] = ['slider'];
+        }
+        if ($page === 'jumpybird') {
+            $headData['scripts'] = ['jumpybird'];
         }
         $data = [
             'head'   => $this->partial('head', $headData),

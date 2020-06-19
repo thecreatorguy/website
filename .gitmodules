@@ -1,0 +1,3 @@
+[submodule "modules/jumpybird-ai"]
+	path = modules/jumpybird-ai
+	url = git@github.com:thecreatorguy/jumpybird-ai.git

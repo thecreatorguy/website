@@ -1,0 +1,79 @@
+#game-container {
+    margin-left: auto;
+    margin-right: auto;
+    width: 550px;
+    canvas {
+        background-color: skyblue;
+        border: 1px solid $secondary-color;
+        border-radius: 3px;
+    }
+}
+
+#controls {
+	display: grid;
+	grid-template-columns: 2fr 3fr;
+	fieldset {
+		padding: 0.5em;
+		margin: 0.5em;
+		border-radius: 3px;
+	}
+	label {
+		margin-right: 0.2em;
+	}
+	.grid-bot {
+		grid-column-start: span 2;
+	}
+}
+
+#net-controls {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+
+	fieldset {
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+}
+
+#net-inputs {
+	display: grid;
+	grid-template-columns: 1fr 30px;
+}
+
+#training-controls {
+	display: grid;
+	grid-template-columns: 3fr 2fr;
+}
+
+#neuron-layer-inputs {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.center-grid-items {
+	& > *:nth-child(odd) {
+		justify-self: end;
+		align-self: center;
+	}
+
+	& > *:nth-child(even) {
+		margin-left: 0.25em;
+		justify-self: start;
+		align-self: center;
+	}
+}
+
+.range-and-display {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+
+	& > div:nth-child(2) {
+		margin-left: 0.5em;
+	}
+}
+
+input[type="number"] {
+	width: 100px;
+	margin-top: 2px;
+}

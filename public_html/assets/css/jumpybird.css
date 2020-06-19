@@ -1,0 +1,311 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+input[type=text], textarea {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.plain-link {
+  color: #2D2D2D;
+  text-decoration: none;
+  transition: color 0.5s;
+}
+.plain-link:hover, .plain-link.current {
+  color: #4CB1FF;
+}
+
+button, .button {
+  background-color: #776258;
+  border: none;
+  border-radius: 3px;
+  color: black;
+  text-decoration: none;
+  transition: background-color 0.5s;
+}
+button:focus, button:hover, .button:focus, .button:hover {
+  background-color: #4CB1FF;
+}
+
+input, textarea {
+  border: 1px solid gray;
+  border-radius: 3px;
+  padding: 3px;
+  transition: border-color 0.5s;
+}
+input:focus, textarea:focus {
+  outline: none;
+  border-color: #4CB1FF;
+}
+
+textarea {
+  resize: none;
+}
+
+body {
+  color: #2D2D2D;
+  display: flex;
+  flex-direction: column;
+  font-family: "Montserrat", sans-serif;
+}
+@media only screen and (max-width: 900px) {
+  body {
+    display: block;
+  }
+}
+
+header {
+  background-color: #D8D8F6;
+  display: flex;
+  flex: 0 1 auto;
+  flex-direction: row;
+  height: auto;
+  justify-content: space-between;
+  padding: 0.5em 1em;
+  width: 100%;
+}
+@media only screen and (max-width: 900px) {
+  header {
+    display: block;
+    text-align: center;
+  }
+}
+
+#title {
+  color: #2D2D2D;
+  display: inline-block;
+  font-size: 3em;
+  margin: 0 0.2em;
+  text-decoration: none;
+}
+@media only screen and (max-width: 900px) {
+  #title {
+    font-size: 2em;
+    margin: 0 0 0.25em;
+    width: 100%;
+  }
+}
+
+nav {
+  display: inline-block;
+}
+nav ul {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+nav ul li {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+nav a {
+  font-size: 1.5em;
+  padding: 2px 0.5em;
+}
+@media only screen and (max-width: 1100px) {
+  nav a {
+    font-size: 1.125em;
+  }
+}
+@media only screen and (max-width: 900px) {
+  nav a {
+    font-size: 1em;
+  }
+}
+nav li + li > a {
+  border-left: solid 1px #444;
+}
+
+#content-container {
+  background-color: #E0FBFC;
+  flex: 1 1 auto;
+  position: relative;
+}
+@media only screen and (max-width: 900px) {
+  #content-container {
+    position: static;
+  }
+}
+
+footer {
+  background-color: #2D2D2D;
+  border-top-left-radius: 0.25em;
+  bottom: 0;
+  padding: 0.25em;
+  position: fixed;
+  text-align: right;
+  right: 0;
+}
+@media only screen and (max-width: 900px) {
+  footer {
+    border-top-left-radius: 0;
+    width: 100%;
+  }
+}
+footer ul {
+  display: inline-flex;
+  flex-direction: row;
+}
+footer ul li {
+  display: block;
+}
+footer a {
+  margin: 0 0.25em;
+}
+footer .fab {
+  color: white;
+  font-size: 2.5em;
+}
+@media only screen and (max-width: 900px) {
+  footer .fab {
+    font-size: 2em;
+  }
+}
+
+#content-column {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 900px;
+}
+@media only screen and (max-width: 900px) {
+  #content-column {
+    width: 100%;
+  }
+}
+
+#header-spacer {
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0.2) 20%, rgba(255, 255, 255, 0.2) 40%, rgba(255, 255, 255, 0.4) 40%, rgba(255, 255, 255, 0.4) 60%, rgba(255, 255, 255, 0.6) 60%, rgba(255, 255, 255, 0.6) 80%, rgba(255, 255, 255, 0.8) 80%);
+  flex: 0 1 auto;
+  height: 5em;
+}
+@media only screen and (max-width: 900px) {
+  #header-spacer {
+    height: 2.5em;
+  }
+}
+
+main {
+  background-color: white;
+  flex: 1 1 auto;
+  padding: 1em 1em 4em;
+}
+main h1 {
+  font-weight: normal;
+  text-align: center;
+}
+
+#game-container {
+  margin-left: auto;
+  margin-right: auto;
+  width: 550px;
+}
+#game-container canvas {
+  background-color: skyblue;
+  border: 1px solid #776258;
+  border-radius: 3px;
+}
+
+#controls {
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+}
+#controls fieldset {
+  padding: 0.5em;
+  margin: 0.5em;
+  border-radius: 3px;
+}
+#controls label {
+  margin-right: 0.2em;
+}
+#controls .grid-bot {
+  grid-column-start: span 2;
+}
+
+#net-controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+#net-controls fieldset {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+#net-inputs {
+  display: grid;
+  grid-template-columns: 1fr 30px;
+}
+
+#training-controls {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+}
+
+#neuron-layer-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.center-grid-items > *:nth-child(odd) {
+  justify-self: end;
+  align-self: center;
+}
+.center-grid-items > *:nth-child(even) {
+  margin-left: 0.25em;
+  justify-self: start;
+  align-self: center;
+}
+
+.range-and-display {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.range-and-display > div:nth-child(2) {
+  margin-left: 0.5em;
+}
+
+input[type=number] {
+  width: 100px;
+  margin-top: 2px;
+}
+
+#jumpybird-ai {
+  margin-top: 1em;
+}
+@media only screen and (max-width: 500px) {
+  #jumpybird-ai {
+    display: none;
+  }
+}
+
+#alt-content {
+  margin: 3em;
+  display: none;
+  font-size: 0.95em;
+  font-style: italic;
+}
+@media only screen and (max-width: 500px) {
+  #alt-content {
+    display: inherit;
+  }
+}
+
+/*# sourceMappingURL=jumpybird.css.map */
