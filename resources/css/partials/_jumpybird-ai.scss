@@ -1,7 +1,7 @@
 #game-container {
     margin-left: auto;
     margin-right: auto;
-    width: 550px;
+    max-width: 550px;
     canvas {
         background-color: skyblue;
         border: 1px solid $secondary-color;
@@ -12,6 +12,10 @@
 #controls {
 	display: grid;
 	grid-template-columns: 2fr 3fr;
+	@media only screen and (max-width: $narrow-width) {
+        grid-template-columns: 1fr;
+    }
+
 	fieldset {
 		padding: 0.5em;
 		margin: 0.5em;
@@ -22,12 +26,33 @@
 	}
 	.grid-bot {
 		grid-column-start: span 2;
+		@media only screen and (max-width: $narrow-width) {
+	        grid-column-start: span 1;
+	    }
+	}
+
+}
+
+.button-list {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	margin-bottom: 0.5em;
+
+	button {
+		padding: 5px 8px;
+	}
+	button+button {
+		margin-left: 1em;
 	}
 }
 
 #net-controls {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
+	@media only screen and (max-width: $narrow-width) {
+        grid-template-columns: 1fr;
+    }
 
 	fieldset {
 		margin-top: 0;
@@ -76,4 +101,24 @@
 input[type="number"] {
 	width: 100px;
 	margin-top: 2px;
+}
+
+#info-bar {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+
+	div {
+		width: 10em;
+		margin-bottom: 3px;
+	}
+}
+
+#gen-display {
+	text-align: center;
+}
+
+hr {
+	margin-top: 0.25em;
+	margin-bottom: 0.25em;
 }

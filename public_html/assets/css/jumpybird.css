@@ -31,7 +31,7 @@ img {
 }
 
 button, .button {
-  background-color: #776258;
+  background-color: #996a36;
   border: none;
   border-radius: 3px;
   color: black;
@@ -215,17 +215,22 @@ main h1 {
 #game-container {
   margin-left: auto;
   margin-right: auto;
-  width: 550px;
+  max-width: 550px;
 }
 #game-container canvas {
   background-color: skyblue;
-  border: 1px solid #776258;
+  border: 1px solid #996a36;
   border-radius: 3px;
 }
 
 #controls {
   display: grid;
   grid-template-columns: 2fr 3fr;
+}
+@media only screen and (max-width: 500px) {
+  #controls {
+    grid-template-columns: 1fr;
+  }
 }
 #controls fieldset {
   padding: 0.5em;
@@ -238,10 +243,33 @@ main h1 {
 #controls .grid-bot {
   grid-column-start: span 2;
 }
+@media only screen and (max-width: 500px) {
+  #controls .grid-bot {
+    grid-column-start: span 1;
+  }
+}
+
+.button-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 0.5em;
+}
+.button-list button {
+  padding: 5px 8px;
+}
+.button-list button + button {
+  margin-left: 1em;
+}
 
 #net-controls {
   display: grid;
   grid-template-columns: 1fr 1fr;
+}
+@media only screen and (max-width: 500px) {
+  #net-controls {
+    grid-template-columns: 1fr;
+  }
 }
 #net-controls fieldset {
   margin-top: 0;
@@ -287,25 +315,27 @@ input[type=number] {
   margin-top: 2px;
 }
 
-#jumpybird-ai {
-  margin-top: 1em;
+#info-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
-@media only screen and (max-width: 500px) {
-  #jumpybird-ai {
-    display: none;
-  }
+#info-bar div {
+  width: 10em;
+  margin-bottom: 3px;
 }
 
-#alt-content {
-  margin: 3em;
-  display: none;
-  font-size: 0.95em;
-  font-style: italic;
+#gen-display {
+  text-align: center;
 }
-@media only screen and (max-width: 500px) {
-  #alt-content {
-    display: inherit;
-  }
+
+hr {
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+}
+
+#jumpybird-ai {
+  margin-top: 1em;
 }
 
 /*# sourceMappingURL=jumpybird.css.map */

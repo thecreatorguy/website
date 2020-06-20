@@ -1,14 +1,30 @@
 <h1><?= $title ?></h1>
 <div id="jumpybird-ai">
     <div id="game-container"></div>
+    <script>
+        function resizeCanvas(e) {
+            let container = document.getElementById('game-container');
+            let canvas = document.querySelector('#game-container canvas');
+            if (window.innerWidth > 600) {
+                canvas.style.width = '';
+            } else {
+                canvas.style.width = `${container.getBoundingClientRect().width}px`;
+            }
+        }
+        window.addEventListener('resize', resizeCanvas);
+        document.addEventListener('DOMContentLoaded', resizeCanvas);
+    </script>
     <div id="gen-display"></div>
+    <hr>
     <div id="controls">
         <fieldset>
             <legend>Simulation Controls</legend>
-            <button id="sim-start">Start</button>
-            <button id="sim-pause">Pause</button>
-            <button id="sim-resume">Resume</button>
-            <button id="sim-reset">Reset</button>
+            <div class="button-list">
+                <button id="sim-start">Start</button>
+                <button id="sim-pause">Pause</button>
+                <button id="sim-resume">Resume</button>
+                <button id="sim-reset">Reset</button>
+            </div>
             <label for="sim-render-interval">Full Render Interval:</label>
             <input id="sim-render-interval" type="number" min="1" max="1000000">
         </fieldset>
@@ -68,7 +84,4 @@
             </div>
         </fieldset>
     </div>
-</div>
-<div id="alt-content">
-    <p>Sorry, but the Slider Game can only be played on a desktop.</p>
 </div>

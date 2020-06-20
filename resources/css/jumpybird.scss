@@ -4,16 +4,4 @@
 
 #jumpybird-ai {
     margin-top: 1em;
-    @media only screen and (max-width: $narrow-width) {
-        display: none;
-    }
-}
-#alt-content {
-    margin: 3em;
-    display: none;
-    font-size: 0.95em;
-    font-style: italic;
-    @media only screen and (max-width: $narrow-width) {
-        display: inherit;
-    }
 }
