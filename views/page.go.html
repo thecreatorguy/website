@@ -1,9 +1,9 @@
 {{define "page" -}}
 <!DOCTYPE html>
 <html lang="en-us">
-{{template "head"}}
+{{template "head" .}}
 <body>
-    {{template "header"}}
+    {{template "header" .}}
     <div id="content-container">
         <div id="content-column">
             <div id="header-spacer"></div>
@@ -11,13 +11,13 @@
                 {{.RenderedPage}}
             </main>
         </div>
-        {{template "footer"}}
+        {{template "footer" .}}
     </div>
 </body>
 
-{{range .JSONData}}
-<script id="{{.Name}}" type="application/json">{{.Data}}</script>
-{{end}}
+{{- range $name, $data := .JSONData}}
+<script id="{{$name}}" type="application/json">{{$data}}</script>
+{{end -}}
 
 </html>
-{{- end}}
+{{- end -}}

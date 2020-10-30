@@ -1,3 +1,4 @@
+{{define "article" -}}
 <h1 class='title'>{{ .Title }}</h1>
 <div id="dates">
     <span><?= DateTime::createFromFormat(DATE_ATOM, $article['release_at'])->format('D, d M y') ?></span>
@@ -8,3 +9,4 @@
 <div id="content">
     <?= $article['content'] ?>
 </div>
+{{- end -}}
