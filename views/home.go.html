@@ -1,8 +1,9 @@
+{{define "home"}}
 <!DOCTYPE html>
 <html lang="en-us">
-{{ .head }}
+{{template "head" .}}
 <body>
-    <?= $header ?>
+    {{template "header" .}}
     <div id="content-container">
         <main>
             <img src="assets/images/home-logo.svg" alt="logo" width="650px" height="auto"/>
@@ -35,8 +36,8 @@
                 </p>
             </div>
         </main>
-        <?= $footer ?>
+        {{template "footer" .}}
     </div>
 </body>
-
 </html>
+{{end}}

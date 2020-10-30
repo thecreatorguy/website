@@ -1,26 +1,23 @@
+{{define "page" -}}
 <!DOCTYPE html>
 <html lang="en-us">
-
-<?= $head ?>
-
+{{template "head"}}
 <body>
-    <?= $header ?>
+    {{template "header"}}
     <div id="content-container">
         <div id="content-column">
             <div id="header-spacer"></div>
             <main>
-                <?= $page ?>
+                {{.RenderedPage}}
             </main>
         </div>
-        <?= $footer ?>
+        {{template "footer"}}
     </div>
-
 </body>
 
-<?php if (isset($jsonData)): ?>
-    <?php foreach ($jsonData as $rowName => $rowData): ?>
-        <script id="<?= $rowName ?>" type="application/json"><?= $rowData ?></script>
-    <?php endforeach ?>
-<?php endif ?>
+{{range .JSONData}}
+<script id="{{.Name}}" type="application/json">{{.Data}}</script>
+{{end}}
 
 </html>
+{{- end}}

@@ -1,0 +1,38 @@
+{{define "head"}}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{.Title}} | It's Tim Johnson</title>
+    <link rel="stylesheet" type="text/css" href="/assets/css/{{.CSSFile}}.css">
+    <link rel="shortcut icon" href="/assets/images/favicon.ico">
+    <script src="https://kit.fontawesome.com/692d0a4337.js" crossorigin="anonymous"></script>
+    {{- range .Scripts}}
+    <script type="text/javascript" src="/assets/js/{{.}}.js"></script>
+    {{end}}
+</head>
+{{- end}}
+
+{{define "header"}}
+<header>
+    <a id="title" href="/">hey,&nbsp;it's&nbsp;Tim&nbsp;Johnson</a>
+    <nav>
+        <ul>
+            {{- range $path, $name := .HeaderLinks}}
+            <li>
+                <a href="{{$path}}" class="plain-link {{- if eq $.URI $path}} current{{end}}">{{html $name}}</a>
+            </li>
+            {{- end}}
+        </ul>
+    </nav>
+</header>
+{{- end}}
+
+{{define "footer"}}
+<footer>
+    <ul>    
+        <li><a href="https://www.linkedin.com/in/timothy-m-johnson"><i class="fab fa-linkedin plain-link"></i></a></li>
+        <li><a href="https://www.facebook.com/itstimjohnson"><i class="fab fa-facebook-square plain-link"></i></a></li>
+        <li><a href="https://twitter.com/itsmetimjohnson"><i class="fab fa-twitter-square plain-link"></i></a></li>
+    </ul>
+</footer>
+{{end}}
