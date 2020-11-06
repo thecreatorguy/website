@@ -16,7 +16,7 @@ type pageInput struct {
 	JSScripts []string
 	JSONData map[string]template.JS
 	PageTemplateName string
-	PageTemplateData string
+	PageTemplateData interface{}
 }
 
 func (p pageInput) RenderPage() template.HTML {
