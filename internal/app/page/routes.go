@@ -3,9 +3,9 @@ package page
 import "github.com/gorilla/mux"
 
 func AddRoutes(r *mux.Router) {
-	r.HandleFunc("/", home)
-	
-	r.HandleFunc("/{page}", page)
-	r.HandleFunc("/blog/articles/{article}", article)
-	r.HandleFunc("/projects/{page}", page)
+	r.HandleFunc("/", renderHome)
+	r.HandleFunc("/blog", renderBlog)
+	r.HandleFunc("/{page}", renderPage)
+	r.HandleFunc("/blog/articles/{article}", renderArticle)
+	r.HandleFunc("/projects/{page}", renderProject)
 }

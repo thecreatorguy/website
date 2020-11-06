@@ -3,7 +3,6 @@ package page
 import (
 	"bytes"
 	"html/template"
-	"io/ioutil"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -28,44 +27,36 @@ var pageTitles = map[string]string{
 	"jumpybird":     "Jumpy Bird AI",
 }
 
-type BasePageTemplate struct {
+type pageInput struct {
 	URI string
 	Title string
 	CSSFile string
-	HeaderLinks map[string]string	
-	Scripts []string
+	JSScripts []string
+	JSONData map[string]template.JS
+	PageTemplateName string
+	PageTemplateData string
 }
 
-type PageTemplate struct {
-	BasePageTemplate
-	JSONData map[string]template.JS
-	RenderedPage template.HTML
+func (p pageInput) renderPage() template.HTML {
+
 }
 
 var TopLevelTemplates, PageTemplates *template.Template
-var sliderLevels template.JS
 
 func init() {
 	TopLevelTemplates = template.Must(template.ParseGlob("./views/*.go.html"))
 	PageTemplates = template.Must(template.ParseGlob("./views/pages/*.go.html"))
-
-	temp, err := ioutil.ReadFile("./data/slider-levels.json")
-	if err != nil {
-		panic(err)
-	}
-	sliderLevels = template.JS(temp)
 }
 
-func home(writer http.ResponseWriter, request *http.Request) {
-	basePageExecute(writer, TopLevelTemplates, "home", BasePageTemplate{
+func renderHome(w http.ResponseWriter, request *http.Request) {
+	render(w, "home", pageInput{
 		URI: "/", 
 		Title: "Home",
 		CSSFile: "home",
-		HeaderLinks: headerLinks,
 	})
 }
 
-func page(writer http.ResponseWriter, request *http.Request) {
+func renderPage(writer http.ResponseWriter, request *http.Request) {
 	page := mux.Vars(request)["page"]
 
 	scripts := []string{}
@@ -85,7 +76,7 @@ func page(writer http.ResponseWriter, request *http.Request) {
 		return
 	}
 
-	basePageExecute(writer, TopLevelTemplates, "page", PageTemplate{
+	render(writer, "page", PageTemplate{
 		BasePageTemplate: BasePageTemplate{
 			URI: request.URL.Path, 
 			Title: pageTitles[page],
@@ -98,14 +89,15 @@ func page(writer http.ResponseWriter, request *http.Request) {
 	})
 }
 
-func basePageExecute(writer http.ResponseWriter, tmpl *template.Template, template string, data interface{}) {
+func render(w http.ResponseWriter, template string, data interface{}) {
 	var buf bytes.Buffer
-	err := tmpl.ExecuteTemplate(&buf, template, data)
+	err := TopLevelTemplates.ExecuteTemplate(&buf, template, data)
 	if err != nil {
-		writer.WriteHeader(http.StatusInternalServerError)
+		w.WriteHeader(http.StatusInternalServerError)
 		logrus.WithError(err).Error("Failed executing template")
 		return
 	}
-	writer.WriteHeader(http.StatusOK)
-	writer.Write(buf.Bytes())
+
+	w.WriteHeader(http.StatusOK)
+	w.Write(buf.Bytes())
 }
