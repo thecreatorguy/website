@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:13
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: verysecretpassword
+    volumes:
+      - "~/docker-volumes/website-postgres:/var/lib/postgresql/data"
+
+  website:
+    image: itstimjohnson-website
+    environment:
+      POSTGRES_URI: postgres://postgres:verysecretpassword@db/postgres
+    ports:
+      - "80:8675"
+    volumes:
+      - "./assets:/assets"
+      - "./data:/data"
+      - "./views:views"
+    depends_on: db
