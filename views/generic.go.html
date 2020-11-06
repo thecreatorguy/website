@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="/assets/css/{{.CSSFile}}.css">
     <link rel="shortcut icon" href="/assets/images/favicon.ico">
     <script src="https://kit.fontawesome.com/692d0a4337.js" crossorigin="anonymous"></script>
-    {{- range .Scripts}}
+    {{- range .JSScripts}}
     <script type="text/javascript" src="/assets/js/{{.}}.js"></script>
     {{end}}
 </head>
@@ -17,11 +17,10 @@
     <a id="title" href="/">hey,&nbsp;it's&nbsp;Tim&nbsp;Johnson</a>
     <nav>
         <ul>
-            {{- range $path, $name := .HeaderLinks}}
-            <li>
-                <a href="{{$path}}" class="plain-link {{- if eq $.URI $path}} current{{end}}">{{html $name}}</a>
-            </li>
-            {{- end}}
+            <li><a href="/" class="plain-link {{- if eq $.URI "/"}} current{{end}}">About</a></li>
+            <li><a href="/blog" class="plain-link {{- if eq $.URI "/blog"}} current{{end}}">Blog</a></li>
+            <li><a href="/projects" class="plain-link {{- if eq $.URI "/projects"}} current{{end}}">Projects</a></li>
+            <li><a href="/contact" class="plain-link {{- if eq $.URI "/contact"}} current{{end}}">Contact&nbsp;Me</a></li>
         </ul>
     </nav>
 </header>

@@ -9,24 +9,6 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-const nbsp = '\u00A0'
-var headerLinks = map[string]string{
-    "/":         "About",
-    "/blog":     "Blog",
-    "/projects": "Projects",
-    "/contact":  "Contact" + string(nbsp) + "Me",
-}
-
-var pageTitles = map[string]string{
-	"home":          "Home",
-	"projects":      "Projects",
-	"contact":       "Contact Me",
-	"confirmation":  "Confirmation",
-	"slider":        "Slider Game",
-	"resume":        "Resume",
-	"jumpybird":     "Jumpy Bird AI",
-}
-
 type pageInput struct {
 	URI string
 	Title string
@@ -37,8 +19,14 @@ type pageInput struct {
 	PageTemplateData string
 }
 
-func (p pageInput) renderPage() template.HTML {
+func (p pageInput) RenderPage() template.HTML {
+	var buf bytes.Buffer
+	err := PageTemplates.ExecuteTemplate(&buf, p.PageTemplateName, p.PageTemplateData)
+	if err != nil {
+		panic(err)
+	}
 
+	return template.HTML(buf.Bytes())
 }
 
 var TopLevelTemplates, PageTemplates *template.Template
@@ -56,37 +44,32 @@ func renderHome(w http.ResponseWriter, request *http.Request) {
 	})
 }
 
-func renderPage(writer http.ResponseWriter, request *http.Request) {
-	page := mux.Vars(request)["page"]
+var pageNameToInput = map[string]pageInput{
+	"projects": {
+		Title: "Projects",
+		CSSFile: "projects",
+	},
+	"contact": {
+		Title: "Contact Me",
+		CSSFile: "contact",
+	},
+	"confirmation": {
+		Title: "Confirmation",
+		CSSFile: "confirmation",
+	},
+}
 
-	scripts := []string{}
-	jsonData := map[string]template.JS{}
-	if page == "jumpybird" || page == "slider" {
-		scripts = append(scripts, page)
-	}
-	if page == "slider" {
-		jsonData["level-data"] = sliderLevels
-	}
-
-	var buf bytes.Buffer
-	err := PageTemplates.ExecuteTemplate(&buf, page, nil)
-	if err != nil {
-		writer.WriteHeader(http.StatusInternalServerError)
-		logrus.WithError(err).Error("Failed executing template")
+func renderPage(w http.ResponseWriter, r *http.Request) {
+	page := mux.Vars(r)["page"]
+	if _, found := pageNameToInput[page]; !found {
+		write404(w)
 		return
 	}
 
-	render(writer, "page", PageTemplate{
-		BasePageTemplate: BasePageTemplate{
-			URI: request.URL.Path, 
-			Title: pageTitles[page],
-			CSSFile: page,
-			HeaderLinks: headerLinks,
-			Scripts: scripts,
-		},
-		RenderedPage: template.HTML(buf.Bytes()),
-		JSONData: jsonData,
-	})
+	input := pageNameToInput[page]
+	input.URI = r.URL.Path
+	input.PageTemplateName = page
+	render(w, "page", input)
 }
 
 func render(w http.ResponseWriter, template string, data interface{}) {
@@ -100,4 +83,9 @@ func render(w http.ResponseWriter, template string, data interface{}) {
 
 	w.WriteHeader(http.StatusOK)
 	w.Write(buf.Bytes())
+}
+
+func write404(w http.ResponseWriter) {
+	w.WriteHeader(http.StatusNotFound)
+	w.Write([]byte("404 page not found"))
 }
