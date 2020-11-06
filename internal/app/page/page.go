@@ -72,12 +72,12 @@ func renderPage(w http.ResponseWriter, r *http.Request) {
 	render(w, "page", input)
 }
 
-func render(w http.ResponseWriter, template string, data interface{}) {
+func render(w http.ResponseWriter, template string, data pageInput) {
 	var buf bytes.Buffer
 	err := TopLevelTemplates.ExecuteTemplate(&buf, template, data)
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
 		logrus.WithError(err).Error("Failed executing template")
+		write500(w)
 		return
 	}
 
@@ -88,4 +88,9 @@ func render(w http.ResponseWriter, template string, data interface{}) {
 func write404(w http.ResponseWriter) {
 	w.WriteHeader(http.StatusNotFound)
 	w.Write([]byte("404 page not found"))
+}
+
+func write500(w http.ResponseWriter) {
+	w.WriteHeader(http.StatusInternalServerError)
+	w.Write([]byte("500 internal server error"))
 }
