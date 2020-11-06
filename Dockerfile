@@ -13,7 +13,7 @@ WORKDIR /src/build
 RUN go build -o . ./...
 
 FROM alpine:3
-COPY --from=builder /go/src/build/website website
+COPY --from=builder /src/build/website website
 COPY ./assets ./assets
 COPY ./data ./data
 COPY ./views ./views

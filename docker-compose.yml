@@ -18,5 +18,6 @@ services:
     volumes:
       - "./assets:/assets"
       - "./data:/data"
-      - "./views:views"
-    depends_on: db
+      - "./views:/views"
+    depends_on: 
+      - db

@@ -1,17 +1,7 @@
-application/cache/*
-application/logs/*
-
-!application/*/.htaccess
-
-/vendor/
-/node_modules/
-
-*.sublime*
-
-/public_html/cgi-bin
-
+# Secrets
+.env
 email-password.txt
 api-credentials.txt
-database-credentials.txt
 
-public_html/assets/js/jumpybird.js
+# Modules
+assets/js/jumpybird.js

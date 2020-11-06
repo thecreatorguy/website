@@ -1,3 +1,8 @@
+initmodules:
+	git submodule init
+	git submodule update
+	cp ./modules/jumpybird/jumpybird.js ./assets/js/jumpybird.js
+
 build:
 	docker build -t itstimjohnson-website .
 

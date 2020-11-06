@@ -7,5 +7,5 @@ func AddRoutes(r *mux.Router) {
 	r.HandleFunc("/blog", renderBlog)
 	r.HandleFunc("/{page}", renderPage)
 	r.HandleFunc("/blog/articles/{article}", renderArticle)
-	r.HandleFunc("/projects/{page}", renderProject)
+	r.HandleFunc("/projects/{project}", renderProject)
 }
