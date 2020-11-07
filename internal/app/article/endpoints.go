@@ -10,6 +10,18 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
+func getArticlesEndpoint(w http.ResponseWriter, r *http.Request) {
+	as, err := GetArticles()
+	if err != nil {
+		logrus.WithError(err).Error("Failed executing template")
+		response.Write500(w)
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(&as)
+}
+
 func getArticleEndpoint(w http.ResponseWriter, r *http.Request) {
 	a, err := GetArticle(mux.Vars(r)["article"])
 	if err != nil {
