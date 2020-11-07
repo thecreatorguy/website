@@ -7,6 +7,11 @@ func Write400(w http.ResponseWriter) {
 	w.Write([]byte("400 bad request"))
 }
 
+func Write401(w http.ResponseWriter) {
+	w.WriteHeader(http.StatusUnauthorized)
+	w.Write([]byte("401 not authorized"))
+}
+
 
 func Write404(w http.ResponseWriter) {
 	w.WriteHeader(http.StatusNotFound)
