@@ -1,3 +1,4 @@
+// Package message adds a route that handles sending me (Tim) a message from the "contact me" page
 package message
 
 import (

@@ -1,3 +1,4 @@
+// Package page implements routes serving the web pages for the itstimjohnson website.
 package page
 
 import (
@@ -22,7 +23,7 @@ type pageInput struct {
 
 func (p pageInput) RenderPage() template.HTML {
 	var buf bytes.Buffer
-	err := PageTemplates.ExecuteTemplate(&buf, p.PageTemplateName, p.PageTemplateData)
+	err := pageTemplates.ExecuteTemplate(&buf, p.PageTemplateName, p.PageTemplateData)
 	if err != nil {
 		panic(err)
 	}
@@ -30,11 +31,12 @@ func (p pageInput) RenderPage() template.HTML {
 	return template.HTML(buf.Bytes())
 }
 
-var TopLevelTemplates, PageTemplates *template.Template
+var topLevelTemplates, pageTemplates *template.Template
 
+// init initializes the templates so they only have to be read once
 func init() {
-	TopLevelTemplates = template.Must(template.ParseGlob("./views/*.go.html"))
-	PageTemplates = template.Must(template.ParseGlob("./views/pages/*.go.html"))
+	topLevelTemplates = template.Must(template.ParseGlob("./views/*.go.html"))
+	pageTemplates = template.Must(template.ParseGlob("./views/pages/*.go.html"))
 }
 
 func renderHome(w http.ResponseWriter, request *http.Request) {
@@ -75,7 +77,7 @@ func renderPage(w http.ResponseWriter, r *http.Request) {
 
 func render(w http.ResponseWriter, template string, data pageInput) {
 	var buf bytes.Buffer
-	err := TopLevelTemplates.ExecuteTemplate(&buf, template, data)
+	err := topLevelTemplates.ExecuteTemplate(&buf, template, data)
 	if err != nil {
 		logrus.WithError(err).Error("Failed executing template")
 		response.Write500(w)

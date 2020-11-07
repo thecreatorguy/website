@@ -1,3 +1,4 @@
+// Package response implements any standard response patterns, for example, with errors
 package response
 
 import "net/http"
@@ -11,7 +12,6 @@ func Write401(w http.ResponseWriter) {
 	w.WriteHeader(http.StatusUnauthorized)
 	w.Write([]byte("401 not authorized"))
 }
-
 
 func Write404(w http.ResponseWriter) {
 	w.WriteHeader(http.StatusNotFound)

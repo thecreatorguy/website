@@ -1,3 +1,4 @@
+// Package app creates the web server with all routes and middleware.
 package app
 
 import (
