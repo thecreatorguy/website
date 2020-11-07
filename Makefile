@@ -10,4 +10,4 @@ run: build
 	docker-compose up -d
 
 initdb:
-	PGPASSWORD=verysecretpassword psql -h localhost -f scripts/init.sql -a
+	PGPASSWORD=verysecretpassword psql -h localhost -U postgres -f scripts/init.sql -a

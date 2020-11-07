@@ -2,13 +2,15 @@ package article
 
 import (
 	"database/sql"
+	"html/template"
+	"time"
 	"website/internal/sqlconn"
 )
 
 type Article struct {
 	URLKey string `json:"url_key"`
 	Title string `json:"title"`
-	Content string `json:"content"`
+	Content template.HTML `json:"content"`
 	ReleaseAt sql.NullTime `json:"release_at"`
 	CreatedAt sql.NullTime `json:"created_at"`
 	UpdatedAt sql.NullTime `json:"updated_at"`
@@ -44,4 +46,8 @@ func GetArticles() ([]Article, error) {
 	}
 	
 	return as, nil
+}
+
+func (a Article) IsReleased() bool {
+	return a.ReleaseAt.Valid && a.ReleaseAt.Time.Before(time.Now())
 }

@@ -40,4 +40,5 @@ func StartWebServer() {
 		MaxHeaderBytes: 1 << 20,
 	}
 	logrus.Fatal(server.ListenAndServe())
+	logrus.Info("Server ready to handle requests!")
 }

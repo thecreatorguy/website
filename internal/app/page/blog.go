@@ -5,6 +5,7 @@ import (
 	"website/internal/app/article"
 
 	"github.com/gorilla/mux"
+	"github.com/jackc/pgx"
 	"github.com/sirupsen/logrus"
 )
 
@@ -28,8 +29,16 @@ func renderBlog(w http.ResponseWriter, r *http.Request) {
 func renderArticle(w http.ResponseWriter, r *http.Request) {
 	a, err := article.GetArticle(mux.Vars(r)["article"])
 	if err != nil {
+		if err == pgx.ErrNoRows {
+			write404(w)
+			return
+		}
 		logrus.WithError(err).Error("Failed executing template")
 		write500(w)
+		return
+	}
+	if !a.IsReleased() {
+		write404(w)
 		return
 	}
 
