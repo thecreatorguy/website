@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"html/template"
 	"net/http"
+	"website/internal/app/response"
 
 	"github.com/gorilla/mux"
 	"github.com/sirupsen/logrus"
@@ -62,7 +63,7 @@ var pageNameToInput = map[string]pageInput{
 func renderPage(w http.ResponseWriter, r *http.Request) {
 	page := mux.Vars(r)["page"]
 	if _, found := pageNameToInput[page]; !found {
-		write404(w)
+		response.Write404(w)
 		return
 	}
 
@@ -77,20 +78,10 @@ func render(w http.ResponseWriter, template string, data pageInput) {
 	err := TopLevelTemplates.ExecuteTemplate(&buf, template, data)
 	if err != nil {
 		logrus.WithError(err).Error("Failed executing template")
-		write500(w)
+		response.Write500(w)
 		return
 	}
 
 	w.WriteHeader(http.StatusOK)
 	w.Write(buf.Bytes())
-}
-
-func write404(w http.ResponseWriter) {
-	w.WriteHeader(http.StatusNotFound)
-	w.Write([]byte("404 page not found"))
-}
-
-func write500(w http.ResponseWriter) {
-	w.WriteHeader(http.StatusInternalServerError)
-	w.Write([]byte("500 internal server error"))
 }

@@ -4,6 +4,7 @@ import (
 	"html/template"
 	"io/ioutil"
 	"net/http"
+	"website/internal/app/response"
 
 	"github.com/gorilla/mux"
 )
@@ -34,7 +35,7 @@ var projectNameToInput = map[string]pageInput{
 func renderProject(w http.ResponseWriter, r *http.Request) {
 	project := mux.Vars(r)["project"]
 	if _, found := projectNameToInput[project]; !found {
-		write404(w)
+		response.Write404(w)
 		return
 	}
 

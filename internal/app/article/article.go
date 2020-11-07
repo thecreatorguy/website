@@ -1,7 +1,6 @@
 package article
 
 import (
-	"database/sql"
 	"html/template"
 	"time"
 	"website/internal/sqlconn"
@@ -11,9 +10,9 @@ type Article struct {
 	URLKey string `json:"url_key"`
 	Title string `json:"title"`
 	Content template.HTML `json:"content"`
-	ReleaseAt sql.NullTime `json:"release_at"`
-	CreatedAt sql.NullTime `json:"created_at"`
-	UpdatedAt sql.NullTime `json:"updated_at"`
+	ReleaseAt sqlconn.NullTime `json:"release_at"`
+	CreatedAt sqlconn.NullTime `json:"created_at"`
+	UpdatedAt sqlconn.NullTime `json:"updated_at"`
 }
 
 func GetArticle(key string) (Article, error) {
@@ -50,4 +49,19 @@ func GetArticles() ([]Article, error) {
 
 func (a Article) IsReleased() bool {
 	return a.ReleaseAt.Valid && a.ReleaseAt.Time.Before(time.Now())
+}
+
+func (a Article) Save() error {
+	query := `
+	INSERT INTO articles (url_key, title, content, release_at, created_at, updated_at) 
+	VALUES($1, $2, $3, $4, $5, $6) 
+	ON CONFLICT (url_key) DO UPDATE 
+		SET title = $2, content = $3, release_at = $4, created_at = $5, updated_at = $6`
+	_, err := sqlconn.Pool.Exec(query, a.URLKey, a.Title, a.Content, a.ReleaseAt, a.CreatedAt, a.UpdatedAt)
+	return err
+}
+
+func (a Article) Delete() error {
+	_, err := sqlconn.Pool.Exec("DELETE FROM articles WHERE url_key = $1", a.URLKey)
+	return err
 }

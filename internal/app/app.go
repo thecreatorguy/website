@@ -4,7 +4,6 @@ import (
 	"net/http"
 	"strings"
 	"time"
-	"website/internal/app/article"
 	"website/internal/app/page"
 
 	"github.com/gorilla/mux"
@@ -12,9 +11,9 @@ import (
 )
 
 func StartWebServer() {
-	router := mux.NewRouter()
+	r := mux.NewRouter()
 
-	router.Use(func(h http.Handler) http.Handler {
+	r.Use(func(h http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			if strings.Compare("/ping", r.URL.Path) != 0 {
 				logrus.Info(r.Method + " " + r.URL.Path)
@@ -23,17 +22,17 @@ func StartWebServer() {
 		})
 	})
 
-	page.AddRoutes(router)
-	article.AddRoutes(router)
+	page.AddRoutes(r)
+	addAPIRoutes(r)
 
 	assetsPath := "/assets/"
 	assetsHandler := http.StripPrefix(assetsPath, http.FileServer(http.Dir("./assets/")))
-	router.PathPrefix(assetsPath).Handler(assetsHandler)
+	r.PathPrefix(assetsPath).Handler(assetsHandler)
 
 	
 	server := &http.Server{
 		Addr:           ":8675",
-		Handler:        router,
+		Handler:        r,
 		TLSConfig:      nil,
 		ReadTimeout:    10 * time.Second,
 		WriteTimeout:   10 * time.Second,

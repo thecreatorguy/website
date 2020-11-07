@@ -3,6 +3,7 @@ package page
 import (
 	"net/http"
 	"website/internal/app/article"
+	"website/internal/app/response"
 
 	"github.com/gorilla/mux"
 	"github.com/jackc/pgx"
@@ -13,7 +14,7 @@ func renderBlog(w http.ResponseWriter, r *http.Request) {
 	as, err := article.GetArticles()
 	if err != nil {
 		logrus.WithError(err).Error("Failed executing template")
-		write500(w)
+		response.Write500(w)
 		return
 	}
 
@@ -30,15 +31,15 @@ func renderArticle(w http.ResponseWriter, r *http.Request) {
 	a, err := article.GetArticle(mux.Vars(r)["article"])
 	if err != nil {
 		if err == pgx.ErrNoRows {
-			write404(w)
+			response.Write404(w)
 			return
 		}
 		logrus.WithError(err).Error("Failed executing template")
-		write500(w)
+		response.Write500(w)
 		return
 	}
 	if !a.IsReleased() {
-		write404(w)
+		response.Write404(w)
 		return
 	}
 
