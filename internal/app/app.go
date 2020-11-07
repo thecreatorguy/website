@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"strings"
 	"time"
+	"website/internal/app/message"
 	"website/internal/app/page"
 
 	"github.com/gorilla/mux"
@@ -23,6 +24,7 @@ func StartWebServer() {
 	})
 
 	page.AddRoutes(r)
+	message.AddRoutes(r)
 	addAPIRoutes(r)
 
 	assetsPath := "/assets/"
