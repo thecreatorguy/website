@@ -1,5 +1,0 @@
-#!/bin/bash
-
-git submodule init
-git submodule update
-cp ./modules/jumpybird-ai/jumpybird.js ./public_html/assets/js/jumpybird.js

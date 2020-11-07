@@ -11,3 +11,9 @@ run: build
 
 initdb:
 	PGPASSWORD=verysecretpassword psql -h localhost -U postgres -f scripts/init.sql -a
+
+sass:
+	sass resources/css:assets/css
+
+watch:
+	sass --watch resources/css:assets/css
