@@ -1,6 +1,33 @@
 {{define "projects" -}}
 <h1>Projects</h1>
 <div class="project">
+    <h2>Website</h2>
+    <div class="links">
+        <a href="https://github.com/thecreatorguy/website" class="button">Github <i class="fab fa-github-square"></i></a>
+    </div>
+    <p>
+        This website has gone through several iterations. First, it was simply a static webpage for hosting my projects
+        like my very first project, the slider game. I learned these skills during my first semester at RIT in my web
+        dev class, which taught me the basics like HTML and CSS.
+    </p>
+    <p>
+        The next iteration was after I started learning PHP. This was during my first internship/coop at
+        <a href="https://www.morevang.com/">More Vang</a> where the backend was primarily written in PHP, and used the 
+        Laravel framework. I decided to go a different route with my website and make it simple- I used
+        <a href="https://codeigniter.com/">CodeIgniter</a>, a very small framework. This was the iteration that created
+        the visual design (CSS becomes much easier to handle with <a href="https://sass-lang.com/">Sass</a>) and the
+        blog that sits on a SQL database, which can be updated via API routes.
+    </p>
+    <p>
+        The current iteration rewrites the PHP framework into Go, making comparatively few frontend changes. Additionally,
+        I migrated the website to Google Cloud services using the <a href="https://cloud.google.com/free">free tier of 
+        the Compute Engine</a>, removing hosting costs, which was over 6/7ths the total cost! This allowed me a much
+        greater flexibility in how I work with the backend, although it forces me to set everything up myself. To do this,
+        I used Docker to containerize my Go website, and Docker Compose to instantiate it with a persistent store Postgres
+        container as my database.
+    </p>
+</div>
+<div class="project">
     <h2>Jumpy Bird AI</h2>
     <div class="links">
         <a href="/projects/jumpybird" class="button" target="_blank">Check It Out!</a>
@@ -38,18 +65,6 @@
         During freshman year of college, I learned about graphs and breadth-first search in CS2. I thought that
         would be perfect to apply to my old project for finding the shortest solution to each of my hand-crafted
         levels. It actually found a shorter solution for my 11th level!
-    </p>
-</div>
-<div class="project">
-    <h2>Website</h2>
-    <div class="links">
-        <a href="https://github.com/thecreatorguy/website" class="button">Github <i class="fab fa-github-square"></i></a>
-    </div>
-    <p>
-        I made this website using <a href="https://codeigniter.com/">CodeIgniter</a> entirely by myself! I originally
-        purchased the domain and hosting mostly as a place to put my email and projects (only the slider game so far),
-        but I've decided that it should probably look decent now that I have more experience with web technologies.
-        In addition, I wanted to have a space to write down my interesting and cool thoughts!
     </p>
 </div>
 {{- end -}}

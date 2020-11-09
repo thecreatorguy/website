@@ -2,7 +2,7 @@
 <h1 class='title'>{{.Title}}</h1>
 <div id="dates">
     <span>{{.ReleaseAt.Time.Format "Mon, 2 Jan 06"}}</span>
-    {{if .ReleaseAt.Time.Before .UpdatedAt.Time}}>
+    {{- if .ReleaseAt.Time.Before .UpdatedAt.Time}}
     <span>Last Edited: {{.UpdatedAt.Time.Format "Mon, 2 Jan 06"}}</span>
     {{- end}}
 </div>
