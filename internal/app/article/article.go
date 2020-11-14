@@ -14,8 +14,8 @@ type Article struct {
 	Title string `json:"title"`
 	Content template.HTML `json:"content"`
 	ReleaseAt sqlconn.NullTime `json:"release_at"`
-	CreatedAt sqlconn.NullTime `json:"created_at"`
-	UpdatedAt sqlconn.NullTime `json:"updated_at"`
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // GetArticle retrieves an Article by its primary key, the URLKey
@@ -57,15 +57,24 @@ func (a Article) IsReleased() bool {
 	return a.ReleaseAt.Valid && a.ReleaseAt.Time.Before(time.Now())
 }
 
+func (a *Article) Refresh() error {
+	ret, err := GetArticle(a.URLKey)
+	*a = ret
+	return err
+}
+
 // Save saves the representation of the article in the database
-func (a Article) Save() error {
+func (a *Article) Save() error {
 	query := `
 	INSERT INTO articles (url_key, title, content, release_at, created_at, updated_at) 
-	VALUES($1, $2, $3, $4, $5, $6) 
+	VALUES($1, $2, $3, $4, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
 	ON CONFLICT (url_key) DO UPDATE 
-		SET title = $2, content = $3, release_at = $4, created_at = $5, updated_at = $6`
-	_, err := sqlconn.Pool.Exec(query, a.URLKey, a.Title, a.Content, a.ReleaseAt, a.CreatedAt, a.UpdatedAt)
-	return err
+		SET title = $2, content = $3, release_at = $4, updated_at = CURRENT_TIMESTAMP`
+	_, err := sqlconn.Pool.Exec(query, a.URLKey, a.Title, a.Content, a.ReleaseAt)
+	if err != nil {
+		return err
+	}
+	return a.Refresh()
 }
 
 // Delete deletes the article from the database
