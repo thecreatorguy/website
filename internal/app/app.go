@@ -2,7 +2,9 @@
 package app
 
 import (
+	"crypto/tls"
 	"net/http"
+	"os"
 	"strings"
 	"time"
 	"website/internal/app/message"
@@ -12,6 +14,7 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
+// StartWebServer starts the webserver for the website
 func StartWebServer() {
 	r := mux.NewRouter()
 
@@ -32,15 +35,26 @@ func StartWebServer() {
 	assetsHandler := http.StripPrefix(assetsPath, http.FileServer(http.Dir("./assets/")))
 	r.PathPrefix(assetsPath).Handler(assetsHandler)
 
-	
 	server := &http.Server{
-		Addr:           ":8675",
 		Handler:        r,
-		TLSConfig:      nil,
 		ReadTimeout:    10 * time.Second,
 		WriteTimeout:   10 * time.Second,
 		MaxHeaderBytes: 1 << 20,
 	}
-	logrus.Fatal(server.ListenAndServe())
-	logrus.Info("Server ready to handle requests!")
+	if strings.ToLower(os.Getenv("HTTPS")) != "true" {
+		server.Addr = ":8675"
+		logrus.Info("Server ready to handle requests!")
+		logrus.Fatal(server.ListenAndServe())
+	} else {
+		kpr, err := NewKeypairReloader("", "")
+		if err != nil {
+			logrus.WithError(err).Fatal("Couldn't create key pair loader")
+		}
+		server.Addr = ":8676"
+		server.TLSConfig = &tls.Config{
+			GetCertificate: kpr.GetCertificateFunc(),
+		}
+		logrus.Info("Server ready to handle requests!")
+		logrus.Fatal(server.ListenAndServeTLS("", ""))
+	}	
 }

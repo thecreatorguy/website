@@ -17,3 +17,6 @@ sass:
 
 watch:
 	sass --watch resources/css:assets/css
+
+reloadhttps:
+	docker kill --signal=SIGHUP website_website_1
