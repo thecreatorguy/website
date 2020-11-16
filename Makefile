@@ -1,3 +1,5 @@
+.PHONY: build run prodrun
+
 initmodules:
 	git submodule init
 	git submodule update
