@@ -41,12 +41,12 @@ func StartWebServer() {
 		WriteTimeout:   10 * time.Second,
 		MaxHeaderBytes: 1 << 20,
 	}
-	if strings.ToLower(os.Getenv("HTTPS")) != "true" {
+	if strings.ToLower(os.Getenv("HTTPS")) != "1" {
 		server.Addr = ":8675"
 		logrus.Info("Server ready to handle requests!")
 		logrus.Fatal(server.ListenAndServe())
 	} else {
-		kpr, err := NewKeypairReloader("", "")
+		kpr, err := NewKeypairReloader(os.Getenv("SSL_CERT_PATH"), os.Getenv("SSL_KEYFILE_PATH"))
 		if err != nil {
 			logrus.WithError(err).Fatal("Couldn't create key pair loader")
 		}
@@ -55,6 +55,6 @@ func StartWebServer() {
 			GetCertificate: kpr.GetCertificateFunc(),
 		}
 		logrus.Info("Server ready to handle requests!")
-		logrus.Fatal(server.ListenAndServeTLS("", ""))
+		logrus.Fatal(server.ListenAndServeTLS(os.Getenv("SSL_CERT_PATH"), os.Getenv("SSL_KEYFILE_PATH")))
 	}	
 }

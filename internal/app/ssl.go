@@ -33,7 +33,7 @@ func NewKeypairReloader(certPath, keyPath string) (*keypairReloader, error) {
 		for range c {
 			logrus.Printf("Received SIGHUP, reloading TLS certificate and key from %v and %v", certPath, keyPath)
 			if err := result.reload(); err != nil {
-				logrus.Printf("Keeping old TLS certificate because the new one could not be loaded: %v", err)
+				logrus.WithError(err).Warn("Keeping old TLS certificate because the new one could not be loaded")
 			}
 		}
 	}()
