@@ -3,10 +3,8 @@ package app
 
 import (
 	"crypto/tls"
-	"fmt"
 	"net/http"
 	"os"
-	"path/filepath"
 	"strings"
 	"time"
 	"website/internal/app/message"
@@ -45,25 +43,16 @@ func StartWebServer() {
 	}
 	if os.Getenv("HTTPS") != "1" {
 		server.Addr = ":8675"
-		logrus.Info("Server ready to handle requests!")
 		logrus.Fatal(server.ListenAndServe())
+		logrus.Info("Server ready to handle requests!")
 	} else {
-		var files []string
-		err := filepath.Walk("/certs", func(path string, info os.FileInfo, err error) error {
-			files = append(files, path)
-			return nil
-		})
-		if err != nil {
-			panic(err)
-		}
-		fmt.Println(files)
 		cert, err := tls.LoadX509KeyPair(os.Getenv("SSL_CERT_PATH"), os.Getenv("SSL_KEYFILE_PATH"))
 		if err != nil {
 			logrus.WithError(err).Fatal("Couldn't create ssl certificate")
 		}
 		server.Addr = ":8676"
 		server.TLSConfig = &tls.Config{Certificates: []tls.Certificate{cert}}
-		logrus.Info("Server ready to handle requests!")
 		logrus.Fatal(server.ListenAndServeTLS(os.Getenv("SSL_CERT_PATH"), os.Getenv("SSL_KEYFILE_PATH")))
+		logrus.Info("Server ready to handle requests!")
 	}	
 }

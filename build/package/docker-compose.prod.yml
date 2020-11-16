@@ -8,3 +8,5 @@ services:
       SSL_KEYFILE_PATH: /certs/live/itstimjohnson.com/privkey.pem
     volumes:
       - "/etc/letsencrypt:/certs"
+    ports:
+      - "443:8676"

@@ -16,9 +16,6 @@ services:
     environment:
       POSTGRES_URI: postgres://postgres:verysecretpassword@db/postgres
     env_file: .env
-    ports:
-      - "80:8675"
-      - "443:8676"
     volumes:
       - "../../assets:/assets"
       - "../../data:/data"
