@@ -51,6 +51,11 @@ func StartWebServer() {
 		var files []string
 		err := filepath.Walk("/certs", func(path string, info os.FileInfo, err error) error {
 			files = append(files, path)
+			f, err := os.Open(path)
+			if err != nil {
+				return err
+			}
+			f.Close()
 			return nil
 		})
 		if err != nil {
