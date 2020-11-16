@@ -274,7 +274,7 @@ main h1 {
 #form-container form input {
   height: 2em;
 }
-#form-container form textarea {
+#form-container form textarea, #form-container form .g-recaptcha {
   grid-column-end: span 2;
 }
 #form-container form button {

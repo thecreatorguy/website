@@ -55,6 +55,7 @@ var pageNameToInput = map[string]pageInput{
 	"contact": {
 		Title: "Contact Me",
 		CSSFile: "contact",
+		JSScripts: []template.HTMLAttr{"src=\"https://www.google.com/recaptcha/api.js\" async defer"},
 	},
 	"confirmation": {
 		Title: "Confirmation",

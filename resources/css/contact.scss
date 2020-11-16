@@ -51,7 +51,7 @@
         input {
             height: 2em;
         }
-        textarea {
+        textarea, .g-recaptcha {
             grid-column-end: span 2;
         }
         button {
