@@ -2,7 +2,6 @@
 package message
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -19,13 +18,15 @@ func sendMessageEndpoint(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Check recaptcha
-	var buf bytes.Buffer
-	json.NewEncoder(&buf).Encode(map[string]interface{}{
-		"secret": os.Getenv("CAPTCHA_SECRET"),
-		"response": r.Form.Get("g-recaptcha-response"),
-	})
+	// var buf bytes.Buffer
+	// json.NewEncoder(&buf).Encode(map[string]interface{}{
+		
+	// })
 	client := &http.Client{}
-	res, err := client.Post("https://www.google.com/recaptcha/api/siteverify", "application/json", &buf)
+	res, err := client.PostForm("https://www.google.com/recaptcha/api/siteverify", map[string][]string{
+		"secret": {os.Getenv("CAPTCHA_SECRET")},
+		"response": {r.Form.Get("g-recaptcha-response")},
+	})
 	if err != nil {
 		response.Write500(w)
 		return
