@@ -38,7 +38,7 @@ func sendMessageEndpoint(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if decoded["success"].(bool) != true {
-		fmt.Println(decoded["success"])
+		fmt.Println(decoded)
 		response.Write403(w)
 	}
 
