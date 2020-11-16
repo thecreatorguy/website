@@ -21,13 +21,13 @@ var projectNameToInput = map[string]pageInput{
 	"slider": {
 		Title: "Slider Game",
 		CSSFile: "slider",
-		JSScripts: []template.HTMLAttr{"src=\"assets/js/slider.js\""},
+		JSScripts: []template.HTMLAttr{"src=\"/assets/js/slider.js\""},
 		JSONData: map[string]template.JS{"level-data": readJSONFile("./data/slider-levels.json")},
 	},
 	"jumpybird": {
 		Title: "Jumpy Bird AI",
 		CSSFile: "jumpybird",
-		JSScripts: []template.HTMLAttr{"src=\"assets/js/jumpybird.js\""},
+		JSScripts: []template.HTMLAttr{"src=\"/assets/js/jumpybird.js\""},
 	},
 }
 
