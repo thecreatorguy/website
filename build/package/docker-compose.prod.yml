@@ -4,7 +4,7 @@ services:
   website:
     environment:
       HTTPS: "1"
-      SSL_CERT_PATH: /certs/fullchain.pem
-      SSL_KEYFILE_PATH: /certs/privkey.pem
+      SSL_CERT_PATH: /certs/live/itstimjohnson.com/fullchain.pem
+      SSL_KEYFILE_PATH: /certs/live/itstimjohnson.com/privkey.pem
     volumes:
-      - "/etc/letsencrypt/live/itstimjohnson.com:/certs"
+      - "/etc/letsencrypt:/certs"
