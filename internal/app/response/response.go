@@ -13,6 +13,11 @@ func Write401(w http.ResponseWriter) {
 	w.Write([]byte("401 not authorized"))
 }
 
+func Write403(w http.ResponseWriter) {
+	w.WriteHeader(http.StatusForbidden)
+	w.Write([]byte("403 forbidden"))
+}
+
 func Write404(w http.ResponseWriter) {
 	w.WriteHeader(http.StatusNotFound)
 	w.Write([]byte("404 page not found"))

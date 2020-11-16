@@ -2,18 +2,45 @@
 package message
 
 import (
+	"bytes"
+	"encoding/json"
 	"net/http"
+	"os"
+	"website/internal/app/response"
 )
 
 
 func sendMessageEndpoint(w http.ResponseWriter, r *http.Request) {
-	// TODO: add this back in but with captcha so i don't get any spam anymore
-	// err := r.ParseForm()
-	// if err != nil {
-	// 	response.Write400(w)
-	// 	return
-	// }
+	err := r.ParseForm()
+	if err != nil {
+		response.Write400(w)
+		return
+	}
 
+	// Check recaptcha
+	var buf bytes.Buffer
+	json.NewEncoder(&buf).Encode(map[string]interface{}{
+		"secret": os.Getenv("CAPTCHA_SECRET"),
+		"response": r.Form.Get("g-recaptcha-response"),
+	})
+	client := &http.Client{}
+	res, err := client.Post("https://www.google.com/recaptcha/api/siteverify", "application/json", &buf)
+	if err != nil {
+		response.Write500(w)
+		return
+	}
+	defer res.Body.Close()
+	var decoded map[string]interface{}
+	err = json.NewDecoder(res.Body).Decode(&decoded)
+	if err != nil {
+		response.Write500(w)
+		return
+	}
+	if decoded["success"].(bool) != true {
+		response.Write403(w)
+	}
+
+	// Send email message to me
 	// e := email.NewEmail()
 	// e.From = "Website Questions <questions.for.tim@itstimjohnson.com>"
 	// e.To = []string{"tim@itstimjohnson.com"}
