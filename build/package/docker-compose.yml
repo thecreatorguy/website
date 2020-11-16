@@ -20,8 +20,8 @@ services:
       - "80:8675"
       - "443:8676"
     volumes:
-      - "./assets:/assets"
-      - "./data:/data"
-      - "./views:/views"
+      - "../../assets:/assets"
+      - "../../data:/data"
+      - "../../views:/views"
     depends_on: 
       - db
