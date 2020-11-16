@@ -20,4 +20,4 @@ COPY ./views ./views
 RUN mkdir ./certs
 
 EXPOSE 8675
-ENTRYPOINT ["/website"]
+CMD ["/website"]
