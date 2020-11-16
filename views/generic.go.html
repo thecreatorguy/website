@@ -6,8 +6,8 @@
     <link rel="stylesheet" type="text/css" href="/assets/css/{{.CSSFile}}.css">
     <link rel="shortcut icon" href="/assets/images/favicon.ico">
     <script src="https://kit.fontawesome.com/692d0a4337.js" crossorigin="anonymous"></script>
-    {{- range .JSScripts}}
-    <script type="text/javascript" src="/assets/js/{{.}}.js"></script>
+    {{- range $script, $tags := .JSScripts}}
+    <script type="text/javascript" src="/assets/js/{{$script}}.js" {{$tags}}></script>
     {{end}}
 </head>
 {{- end}}

@@ -15,7 +15,7 @@ type pageInput struct {
 	URI string
 	Title string
 	CSSFile string
-	JSScripts []string
+	JSScripts map[string]string
 	JSONData map[string]template.JS
 	PageTemplateName string
 	PageTemplateData interface{}
