@@ -4,10 +4,16 @@ initmodules:
 	cp ./modules/jumpybird/jumpybird.js ./assets/js/jumpybird.js
 
 build:
-	docker build -t itstimjohnson-website .
+	docker build -t itstimjohnson-website -f ./build/package/Dockerfile .
 
 run: build
-	docker-compose up -d
+	docker-compose -p itstimjohnson-website -f ./build/package/docker-compose.yml up -d
+
+runprod: build
+	docker-compose -p itstimjohnson-website \
+		-f ./build/package/docker-compose.yml \
+		-f ./build/package/docker-compose.prod.yml \
+		up -d
 
 initdb:
 	PGPASSWORD=verysecretpassword psql -h localhost -U postgres -f scripts/init.sql -a

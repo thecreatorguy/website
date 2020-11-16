@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  website:
+    environment:
+      HTTPS: "1"
+      SSL_CERT_NAME: fullchain.pem
+      SSL_KEYFILE_NAME: privkey.pem
+    volumes:
+      - "/etc/letsencrypt/live/itstimjohnson.com:./certs"

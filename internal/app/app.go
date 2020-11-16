@@ -3,6 +3,7 @@ package app
 
 import (
 	"crypto/tls"
+	"fmt"
 	"net/http"
 	"os"
 	"strings"
@@ -41,7 +42,8 @@ func StartWebServer() {
 		WriteTimeout:   10 * time.Second,
 		MaxHeaderBytes: 1 << 20,
 	}
-	if strings.ToLower(os.Getenv("HTTPS")) != "1" {
+	if os.Getenv("HTTPS") != "1" {
+		fmt.Println("there")
 		server.Addr = ":8675"
 		logrus.Info("Server ready to handle requests!")
 		logrus.Fatal(server.ListenAndServe())
@@ -54,6 +56,7 @@ func StartWebServer() {
 		server.TLSConfig = &tls.Config{
 			GetCertificate: kpr.GetCertificateFunc(),
 		}
+		fmt.Println("here")
 		logrus.Info("Server ready to handle requests!")
 		logrus.Fatal(server.ListenAndServeTLS(os.Getenv("SSL_CERT_PATH"), os.Getenv("SSL_KEYFILE_PATH")))
 	}	
