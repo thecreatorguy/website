@@ -4,6 +4,7 @@ package message
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"os"
 	"website/internal/app/response"
@@ -37,6 +38,7 @@ func sendMessageEndpoint(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if decoded["success"].(bool) != true {
+		fmt.Println(decoded["success"])
 		response.Write403(w)
 	}
 
