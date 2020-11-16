@@ -15,6 +15,12 @@ runprod: build
 		-f ./build/package/docker-compose.prod.yml \
 		up -d
 
+prodlogs:
+	docker-compose -p itstimjohnson-website \
+		-f ./build/package/docker-compose.yml \
+		-f ./build/package/docker-compose.prod.yml \
+		logs
+
 initdb:
 	PGPASSWORD=verysecretpassword psql -h localhost -U postgres -f scripts/init.sql -a
 
