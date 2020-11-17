@@ -37,7 +37,7 @@
         align-items: center;
         display: grid;
         grid-template-columns: 5em 1fr;
-        grid-template-rows: repeat(3, 3em) 1fr 3em;
+        grid-template-rows: repeat(3, 3em) 1fr 4em 3em;
         label {
             justify-self: center;
             &:nth-of-type(3) {
