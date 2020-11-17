@@ -2,7 +2,6 @@
 package message
 
 import (
-	"crypto/tls"
 	"encoding/json"
 	"net/http"
 	"net/smtp"
@@ -39,7 +38,9 @@ func sendMessageEndpoint(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if decoded["success"].(bool) != true {
+		logrus.WithField("response", decoded).Warn("Captcha returned a failure")
 		response.Write403(w)
+		return
 	}
 
 	// Send email message to me
@@ -49,10 +50,9 @@ func sendMessageEndpoint(w http.ResponseWriter, r *http.Request) {
 	e.Cc = []string{r.Form.Get("email")}
 	e.Subject = "A Message From " + r.Form.Get("name")
 	e.Text = []byte(r.Form.Get("message"))
-	err = e.SendWithTLS(
+	err = e.Send(
 		os.Getenv("EMAIL_HOST") + ":" + os.Getenv("EMAIL_PORT"),
 		smtp.PlainAuth("", os.Getenv("EMAIL_USER"), os.Getenv("EMAIL_PASSWORD"), os.Getenv("EMAIL_HOST")),
-		&tls.Config{ServerName: os.Getenv("EMAIL_HOST")},
 	)
 	if err != nil {
 		logrus.WithError(err).Error("Failed sending email")
