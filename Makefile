@@ -32,6 +32,8 @@ sass:
 watch:
 	sass --watch resources/css:assets/css
 
-httpsredirect:
+buildredirect:
 	go build -o . cmd/https-redirect/https-redirect.go
+
+httpsredirect:
 	eval `./https-redirect`
