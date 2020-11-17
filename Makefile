@@ -32,5 +32,6 @@ sass:
 watch:
 	sass --watch resources/css:assets/css
 
-reloadhttps:
-	docker kill --signal=SIGHUP website_website_1
+httpsredirect:
+	go build -o . cmd/https-redirect/https-redirect.go
+	eval `./https-redirect`
