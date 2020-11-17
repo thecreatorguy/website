@@ -36,4 +36,4 @@ buildredirect:
 	go build -o . cmd/https-redirect/https-redirect.go
 
 httpsredirect:
-	eval `./https-redirect`
+	./https-redirect &
