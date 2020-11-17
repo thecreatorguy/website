@@ -259,7 +259,7 @@ main h1 {
   align-items: center;
   display: grid;
   grid-template-columns: 5em 1fr;
-  grid-template-rows: repeat(3, 3em) 1fr 4em 3em;
+  grid-template-rows: repeat(3, 3em) 1fr 5em 3em;
 }
 #form-container form label {
   justify-self: center;
@@ -274,8 +274,14 @@ main h1 {
 #form-container form input {
   height: 2em;
 }
-#form-container form textarea, #form-container form .g-recaptcha {
+#form-container form textarea {
   grid-column-end: span 2;
+}
+#form-container form .g-recaptcha {
+  grid-column-end: span 2;
+}
+#form-container form .g-recaptcha > div {
+  margin: 0 auto;
 }
 #form-container form button {
   align-self: end;
