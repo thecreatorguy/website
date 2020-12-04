@@ -11,7 +11,7 @@ build:
 run: build
 	docker-compose -p itstimjohnson-website -f ./build/package/docker-compose.yml up -d
 
-runprod: build
+runprod: httpsredirect
 	docker-compose -p itstimjohnson-website \
 		-f ./build/package/docker-compose.yml \
 		-f ./build/package/docker-compose.prod.yml \
