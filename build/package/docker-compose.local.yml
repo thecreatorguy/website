@@ -5,3 +5,4 @@ services:
     image: itstimjohnson-website
     ports:
       - "8675:8675"
+    mem_limit: 300m

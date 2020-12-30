@@ -11,3 +11,4 @@ services:
       - "/etc/letsencrypt:/certs"
     ports:
       - "443:8676"
+    mem_limit: 300m
