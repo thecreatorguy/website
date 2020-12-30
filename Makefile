@@ -23,6 +23,10 @@ runprod: httpsredirect
 	docker-compose -p itstimjohnson-website \
 		-f ./build/package/docker-compose.yml \
 		-f ./build/package/docker-compose.prod.yml \
+		pull
+	docker-compose -p itstimjohnson-website \
+		-f ./build/package/docker-compose.yml \
+		-f ./build/package/docker-compose.prod.yml \
 		up -d
 
 prodlogs:
