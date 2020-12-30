@@ -7,7 +7,9 @@ ENV GO111MODULE=on \
     GOPATH=/go
 
 RUN mkdir -p /src/build
-COPY . /src/build
+COPY ./cmd /src/build/cmd
+COPY ./internal /src/build/internal
+COPY go.mod go.sum /src/build
 WORKDIR /src/build
 
 RUN go build -o . ./...
