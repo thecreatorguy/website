@@ -21,5 +21,7 @@ services:
       - "../../assets:/assets"
       - "../../data:/data"
       - "../../views:/views"
+      - "../../modules/shakesearch/static:/shakesearch/static"
+      - "../../modules/shakesearch/views:/shakesearch/views"
     depends_on: 
       - db

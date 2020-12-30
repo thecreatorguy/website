@@ -1,3 +1,6 @@
 [submodule "modules/jumpybird"]
 	path = modules/jumpybird
 	url = https://github.com/thecreatorguy/jumpybird-ai
+[submodule "modules/shakesearch"]
+	path = modules/shakesearch
+	url = https://github.com/thecreatorguy/shakesearch

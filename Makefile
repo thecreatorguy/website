@@ -2,14 +2,18 @@
 
 initmodules:
 	git submodule init
-	git submodule update
+	git submodule update --recursive --remote
 	cp ./modules/jumpybird/jumpybird.js ./assets/js/jumpybird.js
-
+	cp ./modules/shakesearch/completeworks.txt ./data/completeworks_shakespeare.txt
+	
 build:
 	docker build -t itstimjohnson-website -f ./build/package/Dockerfile .
 
 run: build
-	docker-compose -p itstimjohnson-website -f ./build/package/docker-compose.yml up -d
+	docker-compose -p itstimjohnson-website \
+		-f ./build/package/docker-compose.yml \
+		-f ./build/package/docker-compose.local.yml \
+		up -d
 
 runprod: httpsredirect
 	docker-compose -p itstimjohnson-website \

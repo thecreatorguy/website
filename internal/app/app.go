@@ -3,6 +3,7 @@ package app
 
 import (
 	"crypto/tls"
+	"log"
 	"net/http"
 	"os"
 	"strings"
@@ -12,6 +13,7 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/sirupsen/logrus"
+	"github.com/thecreatorguy/shakesearch/pkg/shakesearch"
 )
 
 // StartWebServer starts the webserver for the website
@@ -34,6 +36,22 @@ func StartWebServer() {
 	assetsPath := "/assets/"
 	assetsHandler := http.StripPrefix(assetsPath, http.FileServer(http.Dir("./assets/")))
 	r.PathPrefix(assetsPath).Handler(assetsHandler)
+
+	// Shakesearch project import
+	searcher := shakesearch.Searcher{}
+	logrus.Info("Loading in the works of Shakespeare!..")
+	err := searcher.Load("./data/completeworks_shakespeare.txt")
+	if err != nil {
+		log.Fatal(err)
+	}
+	logrus.Info("Loaded!")
+	shakesearch.AddRoutes(r, searcher, 
+		"./shakesearch/views/index.go.html", 
+		"./shakesearch/static", 
+		"/projects/shakesearch", 
+		"/app",
+		"/assets",
+	)
 
 	server := &http.Server{
 		Handler:        r,
