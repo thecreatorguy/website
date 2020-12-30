@@ -15,6 +15,10 @@ run: build
 		-f ./build/package/docker-compose.local.yml \
 		up -d
 
+push: build
+	docker tag itstimjohnson-website thecreatorguy/website
+	docker push thecreatorguy/website
+
 runprod: httpsredirect
 	docker-compose -p itstimjohnson-website \
 		-f ./build/package/docker-compose.yml \
