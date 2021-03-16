@@ -7,6 +7,7 @@ func AddRoutes(r *mux.Router) {
 	r.HandleFunc("/articles", getArticlesEndpoint).Methods("GET")
 	r.HandleFunc("/articles/{article}", getArticleEndpoint).Methods("GET")
 	r.HandleFunc("/articles", createArticleEndpoint).Methods("POST")
+	r.HandleFunc("/articles", syncArticlesEndpoint).Methods("PUT")
 	r.HandleFunc("/articles/{article}", updateArticleEndpoint).Methods("PUT")
 	r.HandleFunc("/articles/{article}", deleteArticleEndpoint).Methods("DELETE")
 }

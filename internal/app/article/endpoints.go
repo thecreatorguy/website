@@ -40,6 +40,26 @@ func getArticleEndpoint(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(&a)
 }
 
+func syncArticlesEndpoint(w http.ResponseWriter, r *http.Request) {
+	var as []Article
+	err := json.NewDecoder(r.Body).Decode(&as)
+	if err != nil {
+		response.Write400(w)
+		return
+	}
+
+	err = SyncArticles(as)
+	if err != nil {
+		logrus.WithError(err).Error("Failed syncing articles")
+		response.Write500(w)
+		return
+	}
+
+	w.WriteHeader(http.StatusCreated)
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(&as)
+}
+
 func createArticleEndpoint(w http.ResponseWriter, r *http.Request) {
 	var a Article
 	err := json.NewDecoder(r.Body).Decode(&a)

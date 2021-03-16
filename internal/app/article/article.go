@@ -52,6 +52,22 @@ func GetArticles() ([]Article, error) {
 	return as, nil
 }
 
+func SyncArticles(as []Article) error {
+	_, err := sqlconn.Pool.Exec("DELETE FROM articles")
+	if err != nil {
+		return err
+	}
+
+	for _, a := range as {
+		err = a.SaveAllAttributes()
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 // IsReleased finds if an article is released or not
 func (a Article) IsReleased() bool {
 	return a.ReleaseAt.Valid && a.ReleaseAt.Time.Before(time.Now())
@@ -61,6 +77,20 @@ func (a *Article) Refresh() error {
 	ret, err := GetArticle(a.URLKey)
 	*a = ret
 	return err
+}
+
+// Save saves the representation of the article in the database
+func (a *Article) SaveAllAttributes() error {
+	query := `
+	INSERT INTO articles (url_key, title, content, release_at, created_at, updated_at) 
+	VALUES($1, $2, $3, $4, $5, $6)
+	ON CONFLICT (url_key) DO UPDATE 
+		SET title = $2, content = $3, release_at = $4, created_at= $5, updated_at = $6`
+	_, err := sqlconn.Pool.Exec(query, a.URLKey, a.Title, a.Content, a.ReleaseAt, a.CreatedAt, a.UpdatedAt)
+	if err != nil {
+		return err
+	}
+	return a.Refresh()
 }
 
 // Save saves the representation of the article in the database
