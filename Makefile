@@ -19,7 +19,7 @@ push: build
 	docker tag itstimjohnson-website thecreatorguy/website
 	docker push thecreatorguy/website
 
-runprod: httpsredirect
+runprod:
 	docker-compose -p itstimjohnson-website \
 		-f ./build/package/docker-compose.yml \
 		-f ./build/package/docker-compose.prod.yml \
