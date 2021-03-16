@@ -1,0 +1,8 @@
+version: '3.8'
+
+services:
+  website:
+    image: itstimjohnson-website
+    ports:
+      - "8675:8675"
+    mem_limit: 300m

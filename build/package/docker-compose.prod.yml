@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   website:
+    image: thecreatorguy/website
     environment:
       HTTPS: "1"
       SSL_CERT_PATH: /certs/live/itstimjohnson.com/fullchain.pem
@@ -10,3 +11,4 @@ services:
       - "/etc/letsencrypt:/certs"
     ports:
       - "443:8676"
+    mem_limit: 300m

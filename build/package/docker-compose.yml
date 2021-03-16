@@ -12,7 +12,6 @@ services:
       - "~/docker-volumes/website-postgres:/var/lib/postgresql/data"
 
   website:
-    image: itstimjohnson-website
     restart: always
     environment:
       POSTGRES_URI: postgres://postgres:verysecretpassword@db/postgres
@@ -21,5 +20,7 @@ services:
       - "../../assets:/assets"
       - "../../data:/data"
       - "../../views:/views"
+      - "../../modules/shakesearch/static:/shakesearch/static"
+      - "../../modules/shakesearch/views:/shakesearch/views"
     depends_on: 
       - db
