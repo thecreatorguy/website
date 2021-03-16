@@ -1,9 +1,44 @@
 {{define "projects" -}}
 <h1>Projects</h1>
 <div class="project">
+    <h2>Jumpy Bird AI</h2>
+    <div class="links">
+        <a href="/projects/jumpybird" class="button" target="_blank">Check It Out!</a>
+        <a href="https://github.com/thecreatorguy/jumpybird-ai" class="button">Github <i class="fab fa-github-square"></i></a>
+    </div>
+    <p>
+        I wanted to experiment with my newfound knowledge in AI from various sources like <a href="https://www.youtube.com/channel/UC0e3QhIYukixgh5VVpKHH9Q">CodeBullet on YouTube</a>
+        and my Intro to Artificial Intelligence class at RIT, and I asked myself, "what's the simplest, yet still interesting
+        project I can reasonably complete?" The result was an artificial intelligence that plays Flappy Bird- a game
+        with one output, whether or not to jump.
+    </p>
+    <p>
+        I decided to implement it with a neural network. After realizing that there is no "right answer" to the network,
+        I knew that the network needed to be trained somehow, and decided on a genetic algorithm. How many layers are
+        in the network, what inputs are used, learning rates, population size per generation, all of these attributes
+        are able to be modified before starting to see what AI training method gets to 1,000,000 points the fastest!
+    </p>
+</div>
+<div class="project">
+    <h2>Shakesearch</h2>
+    <div class="links">
+        <a href="/projects/shakesearch/app" class="button" target="_blank">Check It Out!</a>
+        <a href="https://github.com/thecreatorguy/shakesearch" class="button">Github<i class="fab fa-github-square"></i></a>
+    </div>
+    <p>
+        In my search for a career post graduation, I found a post on Reddit that asked for work on a project to see results.
+        I thought, hey, I need experience doing web frontends and backends quickly, might as well just get this one going.
+    </p>
+    <p>
+        The result is Shaksearch. It was requested to enhance a barebones Shakespeare search engine to what we thought
+        a user would like, and I think I did a pretty good job. If you check out the Github repo for this project, you
+        will see my thought process as I was doing this. (I'm looking at you, recruiters or those looking to hire ;) )
+    </p>
+</div>
+<div class="project">
     <h2>Website</h2>
     <div class="links">
-        <a href="https://github.com/thecreatorguy/website" class="button">Github <i class="fab fa-github-square"></i></a>
+        <a href="https://github.com/thecreatorguy/website" class="button">Github<i class="fab fa-github-square"></i></a>
     </div>
     <p>
         This website has gone through several iterations. First, it was simply a static webpage for hosting my projects
@@ -20,36 +55,17 @@
     </p>
     <p>
         The current iteration rewrites the PHP framework into Go, making comparatively few frontend changes. Additionally,
-        I migrated the website to Google Cloud services using the <a href="https://cloud.google.com/free">free tier of 
-        the Compute Engine</a>, removing hosting costs, which was over 6/7ths the total cost! This allowed me a much
+        I migrated the website to Google Cloud services, which worked until it didn't and I switched to AWS. This allowed me a much
         greater flexibility in how I work with the backend, although it forces me to set everything up myself. To do this,
         I used Docker to containerize my Go website, and Docker Compose to instantiate it with a persistent store Postgres
         container as my database.
     </p>
 </div>
 <div class="project">
-    <h2>Jumpy Bird AI</h2>
-    <div class="links">
-        <a href="/projects/jumpybird" class="button" target="_blank">Check It Out!</a>
-    </div>
-    <p>
-        I wanted to experiment with my newfound knowledge in AI from various sources like <a href="https://www.youtube.com/channel/UC0e3QhIYukixgh5VVpKHH9Q">CodeBullet on YouTube</a>
-        and my Intro to Artificial Intelligence class at RIT, and I asked myself, "what's the simplest, yet still interesting
-        project I can reasonably complete?" The result was an artificial intelligence that plays Flappy Bird- a game
-        with one output, whether or not to jump.
-    </p>
-    <p>
-        I decided to implement it with a neural network. After realizing that there is no "right answer" to the network,
-        I knew that the network needed to be trained somehow, and decided on a genetic algorithm. How many layers are
-        in the network, what inputs are used, learning rates, population size per generation, all of these attributes
-        are able to be modified before starting to see what AI training method gets to 1,000,000 points the fastest!
-    </p>
-</div>
-<div class="project">
     <h2>Slider Game</h2>
     <div class="links">
         <a href="/projects/slider" class="button" target="_blank">Check It Out!</a>
-        <a href="https://github.com/thecreatorguy/slider-game" class="button">Github <i class="fab fa-github-square"></i></a>
+        <a href="https://github.com/thecreatorguy/slider-game" class="button">Github<i class="fab fa-github-square"></i></a>
     </div>
     <img src="/assets/images/slider-pic.png" height="300px" width="300px"/>
     <p>
