@@ -33,6 +33,12 @@ runprod:
 		-f ./build/package/docker-compose.prod.yml \
 		up -d
 
+logs:
+	docker-compose -p itstimjohnson-website \
+		-f ./build/package/docker-compose.yml \
+		-f ./build/package/docker-compose.local.yml \
+		logs
+
 prodlogs:
 	docker-compose -p itstimjohnson-website \
 		-f ./build/package/docker-compose.yml \

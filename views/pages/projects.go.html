@@ -1,11 +1,36 @@
 {{define "projects" -}}
 <h1>Projects</h1>
 <div class="project">
+    <h2>Card Game Webserver</h2>
+    <div class="links">
+        <a href="/projects/cards" class="button" target="_blank">Check It Out!</a>
+        <a href="https://github.com/thecreatorguy/cards" class="button">Github <i class="fab fa-github-square"></i></a>
+    </div>
+    <img src="/assets/images/cards.png" class="floatright" height="300px" width="400px"/>
+    <p>
+        We were faced with a problem: in <a href="https://boardgamegeek.com/boardgame/167791/terraforming-mars">Terraforming Mars</a>,
+        you must shuffle several hundred cards together to form the deck, and more cards with each expansion. 
+        It was getting ridiculous. I wanted to make a simple simulation that would handle all of the cards for us 
+        while we played the game. This project did not go that route.
+    </p>
+    <p>
+        Instead, I simplified it to allow us to play another home favorite, Hearts. I currently have a rudimentary
+        frontend, but a fully robust backend that makes use of Websockets, goroutines and channels to have fully
+        asynchronous gameplay that allows a player to reconnect when they lose connection, while still keeping track
+        of the connections to close any threads that are no longer in use. It was quite the challenge!
+    </p>
+    <p>
+        I suspect the next improvements to this will be a stab at React for a decent front facing experience, and to
+        add more games to be able to play (maybe Terraforming Mars will make a return).
+    </p>
+</div>
+<div class="project">
     <h2>Jumpy Bird AI</h2>
     <div class="links">
         <a href="/projects/jumpybird" class="button" target="_blank">Check It Out!</a>
         <a href="https://github.com/thecreatorguy/jumpybird-ai" class="button">Github <i class="fab fa-github-square"></i></a>
     </div>
+    <img src="/assets/images/jumpybird.png" class="floatleft" height="300px" width="300px"/>
     <p>
         I wanted to experiment with my newfound knowledge in AI from various sources like <a href="https://www.youtube.com/channel/UC0e3QhIYukixgh5VVpKHH9Q">CodeBullet on YouTube</a>
         and my Intro to Artificial Intelligence class at RIT, and I asked myself, "what's the simplest, yet still interesting
@@ -17,6 +42,28 @@
         I knew that the network needed to be trained somehow, and decided on a genetic algorithm. How many layers are
         in the network, what inputs are used, learning rates, population size per generation, all of these attributes
         are able to be modified before starting to see what AI training method gets to 1,000,000 points the fastest!
+    </p>
+</div>
+<div class="project">
+    <h2>Slider Game</h2>
+    <div class="links">
+        <a href="/projects/slider" class="button" target="_blank">Check It Out!</a>
+        <a href="https://github.com/thecreatorguy/slider-game" class="button">Github<i class="fab fa-github-square"></i></a>
+    </div>
+    <img src="/assets/images/slider-pic.png" class="floatright" height="300px" width="300px"/>
+    <p>
+        Slider is a game that I originally created for my senior project in high school. My only objective was to
+        make a game, any game. And that's exactly what I did! After a short foray into C++, I decided that I should
+        probably choose something more achievable for my skill level. I made a small game using a grid and a character
+        that moves in straight lines, sliding until reaching a solid object, and passing between and over obstacles
+        like lava, switches, and teleporters to make the puzzle game a little challenging. The original game was
+        created in Python 2.12 and with a graphics library called PyGame. Unfortunately, this made the game difficult
+        to show to my friends and family. For this reason I chose to port the game to the web using Javascript.
+    </p>
+    <p>
+        During freshman year of college, I learned about graphs and breadth-first search in CS2. I thought that
+        would be perfect to apply to my old project for finding the shortest solution to each of my hand-crafted
+        levels. It actually found a shorter solution for my 11th level!
     </p>
 </div>
 <div class="project">
@@ -32,12 +79,13 @@
     <p>
         The result is Shaksearch. It was requested to enhance a barebones Shakespeare search engine to what we thought
         a user would like, and I think I did a pretty good job. If you check out the Github repo for this project, you
-        will see my thought process as I was doing this. (I'm looking at you, recruiters or those looking to hire ;) )
+        will see my thought process as I was doing this.
     </p>
 </div>
 <div class="project">
     <h2>Website</h2>
     <div class="links">
+        <a href="#" class="button">Check It Out!</a>
         <a href="https://github.com/thecreatorguy/website" class="button">Github<i class="fab fa-github-square"></i></a>
     </div>
     <p>
@@ -59,28 +107,6 @@
         greater flexibility in how I work with the backend, although it forces me to set everything up myself. To do this,
         I used Docker to containerize my Go website, and Docker Compose to instantiate it with a persistent store Postgres
         container as my database.
-    </p>
-</div>
-<div class="project">
-    <h2>Slider Game</h2>
-    <div class="links">
-        <a href="/projects/slider" class="button" target="_blank">Check It Out!</a>
-        <a href="https://github.com/thecreatorguy/slider-game" class="button">Github<i class="fab fa-github-square"></i></a>
-    </div>
-    <img src="/assets/images/slider-pic.png" height="300px" width="300px"/>
-    <p>
-        Slider is a game that I originally created for my senior project in high school. My only objective was to
-        make a game, any game. And that's exactly what I did! After a short foray into C++, I decided that I should
-        probably choose something more achievable for my skill level. I made a small game using a grid and a character
-        that moves in straight lines, sliding until reaching a solid object, and passing between and over obstacles
-        like lava, switches, and teleporters to make the puzzle game a little challenging. The original game was
-        created in Python 2.12 and with a graphics library called PyGame. Unfortunately, this made the game difficult
-        to show to my friends and family. For this reason I chose to port the game to the web using Javascript.
-    </p>
-    <p>
-        During freshman year of college, I learned about graphs and breadth-first search in CS2. I thought that
-        would be perfect to apply to my old project for finding the shortest solution to each of my hand-crafted
-        levels. It actually found a shorter solution for my 11th level!
     </p>
 </div>
 {{- end -}}

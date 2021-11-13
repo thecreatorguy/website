@@ -13,7 +13,7 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/sirupsen/logrus"
-	"github.com/thecreatorguy/cards/pkg/web"
+	cards "github.com/thecreatorguy/cards/pkg/web"
 	"github.com/thecreatorguy/shakesearch/pkg/shakesearch"
 )
 
@@ -53,9 +53,9 @@ func StartWebServer() {
 		"/app",
 		"/assets",
 	)
-
-	web.AddRoutes(r)
-
+	
+	cards.AddRoutes(r, "/projects/cards")
+	
 	server := &http.Server{
 		Handler:        r,
 		ReadTimeout:    10 * time.Second,

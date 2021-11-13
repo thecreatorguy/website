@@ -4,6 +4,3 @@
 [submodule "modules/shakesearch"]
 	path = modules/shakesearch
 	url = https://github.com/thecreatorguy/shakesearch
-[submodule "modules/cards"]
-	path = modules/cards
-	url = https://github.com/thecreatorguy/cards

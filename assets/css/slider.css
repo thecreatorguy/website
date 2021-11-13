@@ -57,6 +57,14 @@ textarea {
   resize: none;
 }
 
+.floatleft {
+  float: left;
+}
+
+.floatright {
+  float: right;
+}
+
 body {
   color: #2D2D2D;
   display: flex;

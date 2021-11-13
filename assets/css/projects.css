@@ -57,6 +57,14 @@ textarea {
   resize: none;
 }
 
+.floatleft {
+  float: left;
+}
+
+.floatright {
+  float: right;
+}
+
 body {
   color: #2D2D2D;
   display: flex;
@@ -267,21 +275,6 @@ main h1 {
 @media only screen and (max-width: 900px) {
   .project img {
     margin: 1em auto;
-  }
-}
-.project img:nth-of-type(odd) {
-  float: right;
-}
-@media only screen and (max-width: 900px) {
-  .project img:nth-of-type(odd) {
-    float: none;
-  }
-}
-.project img:nth-of-type(even) {
-  float: left;
-}
-@media only screen and (max-width: 900px) {
-  .project img:nth-of-type(even) {
     float: none;
   }
 }

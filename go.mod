@@ -13,6 +13,7 @@ require (
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/shopspring/decimal v1.2.0 // indirect
 	github.com/sirupsen/logrus v1.7.0
+	github.com/thecreatorguy/cards v0.0.1
 	github.com/thecreatorguy/shakesearch v0.0.6
 	golang.org/x/crypto v0.0.0-20201221181555-eec23a3978ad // indirect
 	golang.org/x/text v0.3.4 // indirect

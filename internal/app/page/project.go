@@ -1,6 +1,7 @@
 package page
 
 import (
+	"fmt"
 	"html/template"
 	"io/ioutil"
 	"net/http"
@@ -31,16 +32,23 @@ var projectNameToInput = map[string]pageInput{
 	},
 }
 
+var projectNameToRedirect = map[string]string{
+	"cards": "waitingroom",
+}
+
 
 func renderProject(w http.ResponseWriter, r *http.Request) {
 	project := mux.Vars(r)["project"]
-	if _, found := projectNameToInput[project]; !found {
-		response.Write404(w)
+	if input, ok := projectNameToInput[project]; ok {
+		input.URI = r.URL.Path
+		input.PageTemplateName = project
+		render(w, "page", input)
+		return
+	}
+	if redirect, ok := projectNameToRedirect[project]; ok {
+		http.Redirect(w, r, fmt.Sprintf("/projects/%s/%s", project, redirect), http.StatusSeeOther)
 		return
 	}
 
-	input := projectNameToInput[project]
-	input.URI = r.URL.Path
-	input.PageTemplateName = project
-	render(w, "page", input)
+	response.Write404(w)
 }

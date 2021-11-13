@@ -46,18 +46,7 @@
         padding: 1em;
         @media only screen and (max-width: $content-width) {
             margin: 1em auto;
-        }
-        &:nth-of-type(odd) {
-            float: right;
-            @media only screen and (max-width: $content-width) {
-                float: none;
-            }
-        }
-        &:nth-of-type(even) {
-            float: left;
-            @media only screen and (max-width: $content-width) {
-                float: none;
-            }
+            float: none;
         }
     }
 }
