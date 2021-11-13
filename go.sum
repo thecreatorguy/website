@@ -54,6 +54,8 @@ github.com/thecreatorguy/cards v0.0.2-0.20211113223049-f4ce1c1c01d7 h1:JLcOlvaG+
 github.com/thecreatorguy/cards v0.0.2-0.20211113223049-f4ce1c1c01d7/go.mod h1:UZK5rozROLBaXH/4LUNaastK4Cb370UETx64Oz6YJyY=
 github.com/thecreatorguy/cards v0.1.0 h1:8occgEVjmX5Hxdcu7LynjHe9ubVtQzY3uUmBKEpNlqM=
 github.com/thecreatorguy/cards v0.1.0/go.mod h1:UZK5rozROLBaXH/4LUNaastK4Cb370UETx64Oz6YJyY=
+github.com/thecreatorguy/cards v0.1.1 h1:N3qMg9eFUsoZr5imJi2uPx28OUfR80IoDJtdE0wR8Ak=
+github.com/thecreatorguy/cards v0.1.1/go.mod h1:UZK5rozROLBaXH/4LUNaastK4Cb370UETx64Oz6YJyY=
 golang.org/x/crypto v0.0.0-20190308221718-c2843e01d9a2/go.mod h1:djNgcEr1/C05ACkg1iLfiJU5Ep61QUkGW8qpdssI0+w=
 golang.org/x/crypto v0.0.0-20201221181555-eec23a3978ad h1:DN0cp81fZ3njFcrLCytUHRSUkqBjfTo4Tx9RJTWs0EY=
 golang.org/x/crypto v0.0.0-20201221181555-eec23a3978ad/go.mod h1:jdWPYTVW3xRLrWPugEBEK3UY2ZEsg3UU495nc5E+M+I=
