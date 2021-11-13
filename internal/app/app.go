@@ -13,6 +13,7 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/sirupsen/logrus"
+	"github.com/thecreatorguy/cards/pkg/web"
 	"github.com/thecreatorguy/shakesearch/pkg/shakesearch"
 )
 
@@ -52,6 +53,8 @@ func StartWebServer() {
 		"/app",
 		"/assets",
 	)
+
+	web.AddRoutes(r)
 
 	server := &http.Server{
 		Handler:        r,
