@@ -1,6 +1,6 @@
 module website
 
-go 1.15
+go 1.16
 
 require (
 	github.com/cockroachdb/apd v1.1.0 // indirect
