@@ -36,7 +36,7 @@ func StartWebServer() {
 	assetsHandler := http.StripPrefix(assetsPath, http.FileServer(http.Dir("./assets/")))
 	r.PathPrefix(assetsPath).Handler(assetsHandler)
 	
-	cards.AddRoutes(r, "/projects/cards")
+	cards.AddRoutes(r, "/projects/cards", "/assets/images")
 	
 	server := &http.Server{
 		Handler:        r,
