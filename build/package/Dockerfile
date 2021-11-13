@@ -19,8 +19,6 @@ COPY --from=builder /src/build/website website
 COPY ./assets ./assets
 COPY ./data ./data
 COPY ./views ./views
-COPY ./modules/shakesearch/static ./shakesearch/static
-COPY ./modules/shakesearch/views ./shakesearch/views
 RUN mkdir ./certs
 
 EXPOSE 8675
