@@ -47,7 +47,12 @@ module "vpc" {
 }
 
 data "aws_ami" "website" {
-  
+  most_recent = true
+  owners      = ["self"]
+  filter {
+    name   = "name"
+    values = ["ubuntu-20.04-website-*"]
+  }
 }
 
 resource "aws_key_pair" "desktop" {
@@ -79,4 +84,18 @@ module "instance" {
   key_name               = aws_key_pair.desktop.key_name
   vpc_security_group_ids = [module.sg.security_group_id]
   subnet_id              = module.vpc.public_subnets[0]
+
+  user_data = file("${path.module}/startup.sh")
+}
+
+data "aws_eip" "website" {
+  filter {
+    name   = "tag:Name"
+    values = ["website"]
+  }
+}
+
+resource "aws_eip_association" "website" {
+  instance_id   = module.instance.id
+  allocation_id = data.aws_eip.website.id
 }

@@ -1,7 +1,7 @@
 
 source "amazon-ebs" "website" {
-  ami_name = "ubuntu-16.04-website-{{timestamp}}"
-  ami_description = "ubuntu base 16.04"
+  ami_name = "ubuntu-20.04-website-{{timestamp}}"
+  ami_description = "Website image based on ubuntu 20.04 LTS"
 
   region = "us-east-1"
   
@@ -40,8 +40,7 @@ build {
 
   provisioner "shell" {
     inline = [
-      "ls",
-      "test"
+      "/home/ubuntu/provision.sh"
     ]
   }
 }
