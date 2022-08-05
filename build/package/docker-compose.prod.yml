@@ -12,3 +12,7 @@ services:
     ports:
       - "443:8676"
     mem_limit: 300m
+
+  httpsredirect:
+    image: thecreatorguy/httpsredirect
+    restart: always
