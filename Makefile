@@ -1,4 +1,4 @@
-.PHONY: build run prodrun
+.PHONY: build run runprod
 
 initmodules:
 	git submodule init
@@ -7,7 +7,8 @@ initmodules:
 	cp ./modules/shakesearch/completeworks.txt ./data/completeworks_shakespeare.txt
 	
 build:
-	docker build -t itstimjohnson-website -f ./build/package/Dockerfile .
+	docker build -t itstimjohnson-website -f ./build/package/website.Dockerfile .
+	docker build -t itstimjohnson-httpsredirect -f ./build/package/httpsredirect.Dockerfile .
 
 run: build
 	docker-compose -p itstimjohnson-website \
@@ -18,20 +19,8 @@ run: build
 push: build
 	docker tag itstimjohnson-website thecreatorguy/website
 	docker push thecreatorguy/website
-
-runprod:
-	docker-compose -p itstimjohnson-website \
-		-f ./build/package/docker-compose.yml \
-		-f ./build/package/docker-compose.prod.yml \
-		down
-	docker-compose -p itstimjohnson-website \
-		-f ./build/package/docker-compose.yml \
-		-f ./build/package/docker-compose.prod.yml \
-		pull
-	docker-compose -p itstimjohnson-website \
-		-f ./build/package/docker-compose.yml \
-		-f ./build/package/docker-compose.prod.yml \
-		up -d
+	docker tag itstimjohnson-httpsredirect thecreatorguy/httpsredirect
+	docker push thecreatorguy/httpsredirect
 
 logs:
 	docker-compose -p itstimjohnson-website \
@@ -39,8 +28,26 @@ logs:
 		-f ./build/package/docker-compose.local.yml \
 		logs
 
+stopprod:
+	docker compose -p itstimjohnson-website \
+		-f ./build/package/docker-compose.yml \
+		-f ./build/package/docker-compose.prod.yml \
+		down
+
+pullprod: stopprod
+	docker compose -p itstimjohnson-website \
+		-f ./build/package/docker-compose.yml \
+		-f ./build/package/docker-compose.prod.yml \
+		pull
+
+runprod: pullprod
+	docker compose -p itstimjohnson-website \
+		-f ./build/package/docker-compose.yml \
+		-f ./build/package/docker-compose.prod.yml \
+		up -d
+
 prodlogs:
-	docker-compose -p itstimjohnson-website \
+	docker compose -p itstimjohnson-website \
 		-f ./build/package/docker-compose.yml \
 		-f ./build/package/docker-compose.prod.yml \
 		logs
@@ -53,9 +60,3 @@ sass:
 
 watch:
 	sass --watch resources/css:assets/css
-
-buildredirect:
-	go build -o . cmd/https-redirect/https-redirect.go
-
-httpsredirect:
-	./https-redirect &
