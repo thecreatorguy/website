@@ -73,6 +73,20 @@ module "sg" {
   egress_rules        = ["all-all"]
 }
 
+module "iam" {
+  source  = "terraform-aws-modules/iam/aws//modules/iam-assumable-role"
+
+  trusted_role_services = ["ec2.amazonaws.com"]
+
+  create_role = true
+  create_instance_profile = true
+
+  role_name         = "website"
+  role_requires_mfa = false
+
+  custom_role_policy_arns = ["arn:aws:iam::aws:policy/SecretsManagerReadWrite"]
+}
+
 module "instance" {
   source  = "terraform-aws-modules/ec2-instance/aws"
   version = "~> 3.0"
@@ -84,6 +98,7 @@ module "instance" {
   key_name               = aws_key_pair.desktop.key_name
   vpc_security_group_ids = [module.sg.security_group_id]
   subnet_id              = module.vpc.public_subnets[0]
+  iam_instance_profile   = module.iam.iam_instance_profile_name
 
   user_data = file("${path.module}/startup.sh")
 }

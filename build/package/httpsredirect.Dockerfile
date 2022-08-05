@@ -15,7 +15,7 @@ WORKDIR /src/build
 RUN go build -o . ./...
 
 FROM alpine:3
-COPY --from=builder /src/build/httpsredirect httpsredirect
+COPY --from=builder /src/build/https-redirect https-redirect
 
 EXPOSE 8675
-CMD ["/httpsredirect"]
+CMD ["/https-redirect"]

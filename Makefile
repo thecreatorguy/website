@@ -29,25 +29,25 @@ logs:
 		logs
 
 stopprod:
-	docker-compose -p itstimjohnson-website \
+	docker compose -p itstimjohnson-website \
 		-f ./build/package/docker-compose.yml \
 		-f ./build/package/docker-compose.prod.yml \
 		down
 
 pullprod: stopprod
-	docker-compose -p itstimjohnson-website \
+	docker compose -p itstimjohnson-website \
 		-f ./build/package/docker-compose.yml \
 		-f ./build/package/docker-compose.prod.yml \
 		pull
 
 runprod: pullprod
-	docker-compose -p itstimjohnson-website \
+	docker compose -p itstimjohnson-website \
 		-f ./build/package/docker-compose.yml \
 		-f ./build/package/docker-compose.prod.yml \
 		up -d
 
 prodlogs:
-	docker-compose -p itstimjohnson-website \
+	docker compose -p itstimjohnson-website \
 		-f ./build/package/docker-compose.yml \
 		-f ./build/package/docker-compose.prod.yml \
 		logs
