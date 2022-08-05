@@ -22,3 +22,7 @@ services:
       - "../../views:/views"
     depends_on: 
       - db
+  
+  httpsredirect:
+    image: 
+    restart: always
