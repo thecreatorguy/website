@@ -16,6 +16,6 @@ require (
 	github.com/stretchr/testify v1.4.0 // indirect
 	github.com/thecreatorguy/cards v0.1.1
 	golang.org/x/crypto v0.0.0-20201221181555-eec23a3978ad // indirect
-	golang.org/x/sys v0.0.0-20200202164722-d101bd2416d5 // indirect
+	golang.org/x/sys v0.1.0 // indirect
 	golang.org/x/text v0.3.4 // indirect
 )
