@@ -4,7 +4,7 @@ initmodules:
 	git submodule init
 	git submodule update --recursive --remote
 	cp ./modules/jumpybird/jumpybird.js ./assets/js/jumpybird.js
-	cp ./modules/shakesearch/completeworks.txt ./data/completeworks_shakespeare.txt
+	# cp ./modules/shakesearch/completeworks.txt ./data/completeworks_shakespeare.txt
 	
 build:
 	docker build -t itstimjohnson-website -f ./build/package/website.Dockerfile .

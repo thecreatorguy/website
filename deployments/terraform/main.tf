@@ -100,7 +100,10 @@ module "instance" {
   subnet_id              = module.vpc.public_subnets[0]
   iam_instance_profile   = module.iam.iam_instance_profile_name
 
-  user_data = file("${path.module}/startup.sh")
+  user_data = <<START
+sudo /home/ubuntu/init_cert.sh
+sudo -u ubuntu /home/ubuntu/start_website.sh
+START
 }
 
 data "aws_eip" "website" {
