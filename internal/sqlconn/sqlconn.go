@@ -5,7 +5,9 @@ import (
 	"os"
 	"strings"
 
-	_ "github.com/ncruces/go-sqlite3"
+	
+	_ "github.com/ncruces/go-sqlite3/embed"
+	_ "github.com/ncruces/go-sqlite3/driver"
 )
 
 var DB *sql.DB

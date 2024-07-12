@@ -15,6 +15,12 @@ run: build
 		-f ./build/package/docker-compose.local.yml \
 		up -d
 
+stop:
+	docker-compose -p itstimjohnson-website \
+		-f ./build/package/docker-compose.yml \
+		-f ./build/package/docker-compose.local.yml \
+		stop
+
 push: build
 	docker tag itstimjohnson-website thecreatorguy/website
 	docker push thecreatorguy/website
@@ -48,9 +54,6 @@ prodlogs:
 		-f ./build/package/docker-compose.yml \
 		-f ./build/package/docker-compose.prod.yml \
 		logs
-
-initdb:
-	PGPASSWORD=verysecretpassword psql -h localhost -U postgres -f scripts/init.sql -a
 
 sass:
 	sass resources/css:assets/css

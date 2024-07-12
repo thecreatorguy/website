@@ -4,7 +4,7 @@ services:
   website:
     restart: always
     env_file: .env
-    env:
+    environment:
       SQLITE_INIT_FILE: /scripts/init.sql
     volumes:
       - "../../assets:/assets:ro"

@@ -13,8 +13,8 @@ services:
       - website
     image: nginx
     volumes:
-      ../../configs/nginx.conf:/usr/share/nginx/html:ro
-      /etc/letsencrypt:/etc/letsencrypt:ro
+      - ../../configs/nginx.conf:/etc/nginx/nginx.conf:ro
+      - /etc/letsencrypt:/etc/letsencrypt:ro
     ports:
       - "80:80"
       - "433:433"
