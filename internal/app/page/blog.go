@@ -1,12 +1,12 @@
 package page
 
 import (
+	"database/sql"
 	"net/http"
 	"website/internal/app/article"
 	"website/internal/app/response"
 
 	"github.com/gorilla/mux"
-	"github.com/jackc/pgx"
 	"github.com/sirupsen/logrus"
 )
 
@@ -30,7 +30,7 @@ func renderBlog(w http.ResponseWriter, r *http.Request) {
 func renderArticle(w http.ResponseWriter, r *http.Request) {
 	a, err := article.GetArticle(mux.Vars(r)["article"])
 	if err != nil {
-		if err == pgx.ErrNoRows {
+		if err == sql.ErrNoRows {
 			response.Write404(w)
 			return
 		}

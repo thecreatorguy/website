@@ -20,7 +20,7 @@ type Article struct {
 
 // GetArticle retrieves an Article by its primary key, the URLKey
 func GetArticle(key string) (Article, error) {
-	row := sqlconn.Pool.QueryRow("SELECT * FROM articles WHERE url_key = $1", key)
+	row := sqlconn.DB.QueryRow("SELECT * FROM articles WHERE url_key = $1", key)
 
 	a := Article{}
 	err := row.Scan(&a.URLKey, &a.Title, &a.Content, &a.ReleaseAt, &a.CreatedAt, &a.UpdatedAt)
@@ -33,7 +33,7 @@ func GetArticle(key string) (Article, error) {
 
 // GetArticles retrieves all articles that exist, sorted by most recently released
 func GetArticles() ([]Article, error) {
-	rows, err := sqlconn.Pool.Query("SELECT * FROM articles ORDER BY release_at DESC")
+	rows, err := sqlconn.DB.Query("SELECT * FROM articles ORDER BY release_at DESC")
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ func GetArticles() ([]Article, error) {
 }
 
 func SyncArticles(as []Article) error {
-	_, err := sqlconn.Pool.Exec("DELETE FROM articles")
+	_, err := sqlconn.DB.Exec("DELETE FROM articles")
 	if err != nil {
 		return err
 	}
@@ -86,7 +86,7 @@ func (a *Article) SaveAllAttributes() error {
 	VALUES($1, $2, $3, $4, $5, $6)
 	ON CONFLICT (url_key) DO UPDATE 
 		SET title = $2, content = $3, release_at = $4, created_at= $5, updated_at = $6`
-	_, err := sqlconn.Pool.Exec(query, a.URLKey, a.Title, a.Content, a.ReleaseAt, a.CreatedAt, a.UpdatedAt)
+	_, err := sqlconn.DB.Exec(query, a.URLKey, a.Title, a.Content, a.ReleaseAt, a.CreatedAt, a.UpdatedAt)
 	if err != nil {
 		return err
 	}
@@ -100,7 +100,7 @@ func (a *Article) Save() error {
 	VALUES($1, $2, $3, $4, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
 	ON CONFLICT (url_key) DO UPDATE 
 		SET title = $2, content = $3, release_at = $4, updated_at = CURRENT_TIMESTAMP`
-	_, err := sqlconn.Pool.Exec(query, a.URLKey, a.Title, a.Content, a.ReleaseAt)
+	_, err := sqlconn.DB.Exec(query, a.URLKey, a.Title, a.Content, a.ReleaseAt)
 	if err != nil {
 		return err
 	}
@@ -109,6 +109,6 @@ func (a *Article) Save() error {
 
 // Delete deletes the article from the database
 func (a Article) Delete() error {
-	_, err := sqlconn.Pool.Exec("DELETE FROM articles WHERE url_key = $1", a.URLKey)
+	_, err := sqlconn.DB.Exec("DELETE FROM articles WHERE url_key = $1", a.URLKey)
 	return err
 }

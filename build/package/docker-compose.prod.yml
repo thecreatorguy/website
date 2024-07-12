@@ -4,15 +4,17 @@ services:
   website:
     image: thecreatorguy/website
     environment:
-      HTTPS: "1"
-      SSL_CERT_PATH: /certs/live/itstimjohnson.com/fullchain.pem
-      SSL_KEYFILE_PATH: /certs/live/itstimjohnson.com/privkey.pem
+      SQLITE_DB_FILE: /sqlite/website.db
     volumes:
-      - "/etc/letsencrypt:/certs"
+      - "./sqlite:/sqlite"
+  
+  nginx:
+    depends_on:
+      - website
+    image: nginx
+    volumes:
+      ../../configs/nginx.conf:/usr/share/nginx/html:ro
+      /etc/letsencrypt:/etc/letsencrypt:ro
     ports:
-      - "443:8676"
-    mem_limit: 300m
-
-  httpsredirect:
-    image: thecreatorguy/httpsredirect
-    restart: always
+      - "80:80"
+      - "433:433"

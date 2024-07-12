@@ -1,12 +1,12 @@
 package article
 
 import (
+	"database/sql"
 	"encoding/json"
 	"net/http"
 	"website/internal/app/response"
 
 	"github.com/gorilla/mux"
-	"github.com/jackc/pgx"
 	"github.com/sirupsen/logrus"
 )
 
@@ -26,7 +26,7 @@ func getArticlesEndpoint(w http.ResponseWriter, r *http.Request) {
 func getArticleEndpoint(w http.ResponseWriter, r *http.Request) {
 	a, err := GetArticle(mux.Vars(r)["article"])
 	if err != nil {
-		if err == pgx.ErrNoRows {
+		if err == sql.ErrNoRows {
 			response.Write404(w)
 			return
 		}
@@ -83,7 +83,7 @@ func createArticleEndpoint(w http.ResponseWriter, r *http.Request) {
 func updateArticleEndpoint(w http.ResponseWriter, r *http.Request) {
 	a, err := GetArticle(mux.Vars(r)["article"])
 	if err != nil {
-		if err == pgx.ErrNoRows {
+		if err == sql.ErrNoRows {
 			response.Write404(w)
 			return
 		}
@@ -113,7 +113,7 @@ func updateArticleEndpoint(w http.ResponseWriter, r *http.Request) {
 func deleteArticleEndpoint(w http.ResponseWriter, r *http.Request) {
 	a, err := GetArticle(mux.Vars(r)["article"])
 	if err != nil {
-		if err == pgx.ErrNoRows {
+		if err == sql.ErrNoRows {
 			response.Write404(w)
 			return
 		}

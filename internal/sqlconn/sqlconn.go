@@ -1,32 +1,38 @@
 package sqlconn
 
 import (
-	"context"
+	"database/sql"
 	"os"
+	"strings"
 
-	"github.com/jackc/pgx"
+	_ "github.com/ncruces/go-sqlite3"
 )
 
-var Pool *pgx.ConnPool
+var DB *sql.DB
 
 func init() {
-	conf, err := pgx.ParseConnectionString(os.Getenv("POSTGRES_URI"))
-	if err != nil {
-		panic(err)
-	}
-	Pool, err = pgx.NewConnPool(pgx.ConnPoolConfig{ConnConfig: conf})
+	var err error
+	DB, err = sql.Open("sqlite3", os.Getenv("SQLITE_DB_FILE"))
 	if err != nil {
 		panic(err)
 	}
 
-	conn, err := Pool.Acquire()
+	err = DB.Ping()
 	if err != nil {
 		panic(err)
 	}
-	defer conn.Close()
 
-	err = conn.Ping(context.Background())
+	initFile, err := os.ReadFile(os.Getenv("SQLITE_INIT_FILE"))
 	if err != nil {
 		panic(err)
+	}
+
+	statements := strings.Split(string(initFile), ";\n")
+
+	for _, statement := range statements {
+		_, err = DB.Exec(statement)
+		if err != nil {
+			panic(err)
+		}
 	}
 }

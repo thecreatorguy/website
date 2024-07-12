@@ -8,7 +8,6 @@ initmodules:
 	
 build:
 	docker build -t itstimjohnson-website -f ./build/package/website.Dockerfile .
-	docker build -t itstimjohnson-httpsredirect -f ./build/package/httpsredirect.Dockerfile .
 
 run: build
 	docker-compose -p itstimjohnson-website \
@@ -19,8 +18,6 @@ run: build
 push: build
 	docker tag itstimjohnson-website thecreatorguy/website
 	docker push thecreatorguy/website
-	docker tag itstimjohnson-httpsredirect thecreatorguy/httpsredirect
-	docker push thecreatorguy/httpsredirect
 
 logs:
 	docker-compose -p itstimjohnson-website \

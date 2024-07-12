@@ -1,25 +1,15 @@
 version: '3.8'
 
 services:
-  db:
-    image: postgres:13
-    restart: always
-    environment:
-      POSTGRES_PASSWORD: verysecretpassword
-    ports:
-      - "5432:5432"
-    volumes:
-      - "~/docker-volumes/website-postgres:/var/lib/postgresql/data"
-
   website:
     restart: always
-    environment:
-      POSTGRES_URI: postgres://postgres:verysecretpassword@db/postgres
     env_file: .env
+    env:
+      SQLITE_INIT_FILE: /scripts/init.sql
     volumes:
-      - "../../assets:/assets"
-      - "../../data:/data"
-      - "../../views:/views"
-    depends_on: 
-      - db
+      - "../../assets:/assets:ro"
+      - "../../data:/data:ro"
+      - "../../views:/views:ro"
+      - "../../scripts:/scripts:ro"
+    mem_limit: 300m
     
