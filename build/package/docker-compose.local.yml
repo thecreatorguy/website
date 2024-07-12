@@ -7,5 +7,3 @@ services:
       SQLITE_DB_FILE: /sqlite/website.db
     volumes:
       - "../../testsqlite:/sqlite"
-    ports:
-      - "8675:8675"

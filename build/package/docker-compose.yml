@@ -11,5 +11,6 @@ services:
       - "../../data:/data:ro"
       - "../../views:/views:ro"
       - "../../scripts:/scripts:ro"
+    network_mode: host
     mem_limit: 300m
     
