@@ -9,3 +9,5 @@ data/completeworks_shakespeare.txt
 
 # Terraform
 .terraform*
+
+testsqlite
