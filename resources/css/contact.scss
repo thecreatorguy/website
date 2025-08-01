@@ -4,10 +4,10 @@
     display: flex;
     flex-direction: row;
     padding-top: 2em;
-    @media only screen and (max-width: $content-width) {
-        align-items: center;
-        flex-direction: column;
-    }
+    // @media only screen and (max-width: $content-width) {
+    align-items: center;
+    flex-direction: column;
+    // }
     @media only screen and (max-width: $narrow-width) {
         font-size: 0.8em;
     }
